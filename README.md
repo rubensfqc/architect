@@ -36,9 +36,11 @@ Comecar o projeto novo
 Depois cd para a pasta do projeto e criar o app
 
 ```python manage.py startapp quotation_app
+```
 
 Create the PDF Generation Page
 Install reportlab for PDF Generation:
+
 ```
 pip install reportlab
 ```
