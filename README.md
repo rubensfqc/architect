@@ -31,12 +31,11 @@ or to deactivate it is simply: `deactivate`
 
 Comecar o projeto novo
 
-```django-admin startproject quotation_prj
+`django-admin startproject quotation_prj`
 
 Depois cd para a pasta do projeto e criar o app
 
-```python manage.py startapp quotation_app
-```
+`python manage.py startapp quotation_app`
 
 Create the PDF Generation Page
 Install reportlab for PDF Generation:
