@@ -20,6 +20,8 @@ Para acessar o projeto no [local server](http://127.0.0.1:8000/)
 
 ### Tips and tricks
 
+Iniciando um projeto novo, eh preciso ter um VENV (copiar pasta) ou setar um novo
+
 Activate the venv
 ```
 source venv/bin/activate
@@ -27,6 +29,6 @@ source venv/bin/activate
 
 or to deactivate it is simply: `deactivate`
 
--templates/registration/- is where Django auth looks by default for user auth templates.
+Comecar o projeto novo
 
-[Tutorial used on branch 1](https://learndjango.com/tutorials/django-login-and-logout-tutorial)
+```django-admin startproject quotation_prj
