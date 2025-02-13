@@ -2,15 +2,19 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from reportlab.pdfgen import canvas
 from io import BytesIO
+from .models import Client  # Import the Client model
+from .forms import ClientForm
 
 def landing_page(request):
     if request.method == 'POST':
-        # Save user details in session
-        request.session['name'] = request.POST.get('name')
-        request.session['email'] = request.POST.get('email')
-        request.session['whatsapp'] = request.POST.get('whatsapp')
-        return redirect('quotation_page')
-    return render(request, "quotation_app/landing_page.html")
+        # Get form data
+        form = ClientForm(request.POST)
+        if form.is_valid():
+            client = form.save #Save client to DB
+            return redirect('quotation_page', client_id = client.id)# Redirect to the quotation page
+    else:
+        form = ClientForm()
+    return render(request, "quotation_app/landing_page.html", {'form':form})
 
 def quotation_page(request):
     if not request.session.get('name'):
