@@ -25,7 +25,9 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
-quotation_prj/venv_q/
+quotation_prj/venv/
+quotation_prj/quotation_app/migrations/*
+!quotation_prj/quotation_app/migrations/__init__.py
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
