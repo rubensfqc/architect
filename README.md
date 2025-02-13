@@ -43,3 +43,9 @@ Install reportlab for PDF Generation:
 ```
 pip install reportlab
 ```
+
+For the record, superuser created `admin:abc123`
+
+```
+python manage.py createsuperuser
+```
