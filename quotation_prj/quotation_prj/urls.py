@@ -22,6 +22,6 @@ from quotation_app import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.landing_page, name='landing_page'),
-    path('quotation/', views.quotation_page, name='quotation_page'),
-    path('generate-pdf/', views.generate_pdf, name='generate_pdf'),
+    path('quotation/<int:client_id>/', views.quotation_page, name='quotation_page'),
+    path('generate-pdf/<int:quotation_id>/', views.generate_pdf, name='generate_pdf'),
 ]

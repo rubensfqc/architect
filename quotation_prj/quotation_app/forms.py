@@ -1,5 +1,5 @@
 from django import forms
-from .models import Client
+from .models import Client, Quotation
 
 class ClientForm(forms.ModelForm):
     class Meta:
@@ -12,3 +12,8 @@ class ClientForm(forms.ModelForm):
         if len(phone) != 11:
             raise forms.ValidationError("Enter a valid Brazilian phone number (e.g., 11 91234-5678)")
         return phone  # Store only digits
+    
+class QuotationForm(forms.ModelForm):
+    class Meta:
+        model = Quotation
+        fields = ['product_name', 'quantity', 'price']
