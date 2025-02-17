@@ -2,6 +2,10 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from reportlab.pdfgen import canvas
 from reportlab.lib.pagesizes import letter
+from reportlab.lib.utils import ImageReader
+from reportlab.lib import colors
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.platypus import Table, TableStyle, Paragraph, Spacer, Image
 from io import BytesIO
 from .models import Client, Quotation # Import models
 from .forms import ClientForm, QuotationForm
@@ -34,30 +38,67 @@ def generate_pdf(request, quotation_id):
     quotation = get_object_or_404(Quotation, id=quotation_id)
     client = quotation.client
 
-    # Create a PDF
+    # Create a buffer for the PDF
     buffer = BytesIO()
+
+    # Create the PDF object
     p = canvas.Canvas(buffer, pagesize=letter)
-    p.drawString(100, 750, f"RFQ for {client.name}")
-    p.drawString(100, 730, f"Email: {client.email}")
-    p.drawString(100, 710, f"WhatsApp: {client.whatsapp}")
-    p.drawString(100, 680, "Products:")
+    width, height = letter
 
-    y = 660
-    p.drawString(100, y, "Product Name")
-    p.drawString(250, y, "Quantity")
-    p.drawString(350, y, "Price")
-    p.drawString(450, y, "Total Price")
-    y -= 20
+    # Add company logo
+    logo_path = 'quotation_app/static/logo-example.png'  # Path to your logo
+    logo = ImageReader(logo_path)
+    p.drawImage(logo, 50, height - 100, width=100, height=50, preserveAspectRatio=True)
 
-    p.drawString(100, y, quotation.product_name)
-    p.drawString(250, y, str(quotation.quantity))
-    p.drawString(350, y, str(quotation.price))
-    p.drawString(450, y, str(quotation.total_price()))
-    y -= 20
+    # Add company information
+    p.setFont("Helvetica-Bold", 16)
+    p.drawString(160, height - 80, "My Company Name")
+    p.setFont("Helvetica", 12)
+    p.drawString(160, height - 100, "123 Business Street")
+    p.drawString(160, height - 120, "City, State, ZIP Code")
+    p.drawString(160, height - 140, "Phone: (123) 456-7890")
+    p.drawString(160, height - 160, "Email: info@mycompany.com")
 
+    # Add RFQ title
+    p.setFont("Helvetica-Bold", 18)
+    p.drawString(50, height - 200, "Request for Quotation (RFQ)")
+
+    # Add client information
+    p.setFont("Helvetica", 12)
+    p.drawString(50, height - 240, f"Client Name: {client.name}")
+    p.drawString(50, height - 260, f"Email: {client.email}")
+    p.drawString(50, height - 280, f"WhatsApp: {client.whatsapp}")
+
+    # Add product table
+    data = [
+        ["Product Name", "Quantity", "Unit Price", "Total Price"],
+        [quotation.product_name, str(quotation.quantity), f"${quotation.price:.2f}", f"${quotation.total_price():.2f}"]
+    ]
+
+    table = Table(data, colWidths=[200, 100, 100, 100])
+    table.setStyle(TableStyle([
+        ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+        ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+        ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+        ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+        ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+        ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+        ('GRID', (0, 0), (-1, -1), 1, colors.black),
+    ]))
+
+    # Draw the table on the PDF
+    table.wrapOn(p, width - 100, height)
+    table.drawOn(p, 50, height - 400)
+
+    # Add a thank-you message
+    p.setFont("Helvetica", 12)
+    p.drawString(50, height - 450, "Thank you for your request. We will get back to you shortly.")
+
+    # Close the PDF object
     p.showPage()
     p.save()
 
+    # File response
     buffer.seek(0)
     response = HttpResponse(buffer, content_type='application/pdf')
     response['Content-Disposition'] = f'attachment; filename=RFQ_{client.name}.pdf'
