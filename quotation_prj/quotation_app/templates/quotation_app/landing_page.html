@@ -1,14 +1,24 @@
-<!DOCTYPE html>
-<html>
-<head>
+{% extends 'quotation_app/base.html' %}
+{% load static %}
+
+<!--<head>
     <title>Landing Page</title>
 </head>
-<body>
+<body>-->
+
+
+
+{% block title %}Landing Page{% endblock %}
+    
+    {% block content %}
+
     <h1>Welcome to the Landing Page</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Proceed to Quotation</button>
     </form>
-</body>
-</html>
+
+{% endblock %}
+<!--</body>
+</html>-->
