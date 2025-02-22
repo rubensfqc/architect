@@ -1,14 +1,21 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Quotation Page</title>
-</head>
-<body>
+
+
+{% extends 'quotation_app/base.html' %}
+{% load static %}
+
+
+{% block title %}Quotation Page{% endblock %}
+
+{% block content %}
+
+
+
     <h1>Quotation for {{ client_id.name }}</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <button type="submit">Submit</button>
     </form>
-</body>
-</html>
+
+
+{% endblock %}
