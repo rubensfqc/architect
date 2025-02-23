@@ -49,3 +49,7 @@ For the record, superuser created `admin:abc123`
 ```
 python manage.py createsuperuser
 ```
+
+### For security and obfuscation of tokens
+
+`pip install python-decouple`
