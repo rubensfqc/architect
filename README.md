@@ -53,3 +53,6 @@ python manage.py createsuperuser
 ### For security and obfuscation of tokens
 
 `pip install python-decouple`
+
+### Websire benchmark
+https://www.offri.nl/
