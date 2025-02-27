@@ -7,8 +7,8 @@ from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import Table, TableStyle, Paragraph, Spacer, Image
 from io import BytesIO
-from .models import Client, Quotation # Import models
-from .forms import ClientForm, QuotationForm
+from .models import Client, Quotation, Product, QuotationProduct # Import models
+from .forms import ClientForm, QuotationForm, ProductForm, QuotationProductForm
 
 def landing_page(request):
     if request.method == 'POST':
@@ -23,16 +23,50 @@ def landing_page(request):
 
 def quotation_page(request, client_id):
     client = get_object_or_404(Client, id=client_id)
+
     if request.method == 'POST':
         form = QuotationForm(request.POST)
         if form.is_valid():
-            quotation = form.save(commit=False)
-            quotation.client = client
+            # Process the form data
+            selected_products = []
+            total_price = 0
+
+            for product in Product.objects.all():
+                quantity = form.cleaned_data.get(f'product_{product.id}', 0)
+                if quantity > 0:
+                    selected_products.append({
+                        'name': product.name,
+                        'price': product.price,
+                        'quantity': quantity,
+                        'subtotal': product.price * quantity
+                    })
+                    total_price += product.price * quantity
+            
+            # Store the selected products and total price in the session
+            request.session['selected_products'] = selected_products
+            request.session['total_price'] = total_price
+            
             quotation.save()
-            return redirect('generate_pdf', quotation_id=quotation.id)
+
+            # Redirect to the Generate_PDF_page
+            return  redirect('generate_pdf', quotation_id=quotation.id)
     else:
         form = QuotationForm()
+   
     return render(request, 'quotation_app/quotation_page.html', {'form': form, 'client': client})
+
+def add_product(request):#Product Dashboard
+    if request.method == 'POST':
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            product = form.save(commit=False)
+            #product.seller = seller
+            product.save()
+            return redirect('landing_page')
+    else:
+        form = ProductForm()
+    return render(request, 'quotation_app/add_product_page.html', {'form': form})#, 'client': client}) #replace by seller
+
 
 def generate_pdf(request, quotation_id):
     quotation = get_object_or_404(Quotation, id=quotation_id)
@@ -72,7 +106,7 @@ def generate_pdf(request, quotation_id):
     # Add product table
     data = [
         ["Product Name", "Quantity", "Unit Price", "Total Price"],
-        [quotation.product_name, str(quotation.quantity), f"${quotation.price:.2f}", f"${quotation.total_price():.2f}"]
+        [quotation.Product.name, str(quotation.QuotationProduct.quantity), f"${quotation.Product.price:.2f}", f"${quotation.total_amount:.2f}"]
     ]
 
     table = Table(data, colWidths=[200, 100, 100, 100])
