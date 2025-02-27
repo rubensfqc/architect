@@ -4,17 +4,17 @@
 {% load static %}
 
 
-{% block title %}Quotation Page{% endblock %}
+{% block title %}Add Product Page{% endblock %}
 
 {% block content %}
 
 
 
-    <h1>Quotation for client:{{ client_id.name }}</h1>
+    <h1>Add your product <!-- for {{ client_id.name }} --> </h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Generate Quotation</button>
+        <button type="submit">Submit</button>
     </form>
 
 

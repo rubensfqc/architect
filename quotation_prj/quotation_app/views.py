@@ -23,33 +23,24 @@ def landing_page(request):
 
 def quotation_page(request, client_id):
     client = get_object_or_404(Client, id=client_id)
+    products = Product.objects.all()
 
     if request.method == 'POST':
         form = QuotationForm(request.POST)
         if form.is_valid():
-            # Process the form data
-            selected_products = []
-            total_price = 0
-
-            for product in Product.objects.all():
-                quantity = form.cleaned_data.get(f'product_{product.id}', 0)
-                if quantity > 0:
-                    selected_products.append({
-                        'name': product.name,
-                        'price': product.price,
-                        'quantity': quantity,
-                        'subtotal': product.price * quantity
-                    })
-                    total_price += product.price * quantity
-            
-            # Store the selected products and total price in the session
-            request.session['selected_products'] = selected_products
-            request.session['total_price'] = total_price
-            
-            quotation.save()
-
-            # Redirect to the Generate_PDF_page
-            return  redirect('generate_pdf', quotation_id=quotation.id)
+            quotation = Quotation.objects.create(client=client)
+            total_amount = 0
+            for product in products:
+                quantity = form.cleaned_data.get(f'quantity_{product.id}', 0)
+                if quantity and quantity > 0:
+                    quotation.products.add(product, through_defaults={'quantity': quantity})
+                    print(f"DEBUG BEFORE {quantity} units of {product.name} at {product.price}to the quotation")
+                    total_amount += product.price * quantity
+                    print(f"DEBUG Added {quantity} units of {product.name} at {product.price} and to the quotation")
+            quotation.total_amount = total_amount
+            print(f"DEBUG Total amount: {total_amount}")
+            quotation.save() # Save quotation to DB        
+            return redirect('generate_pdf', quotation_id=quotation.id)
     else:
         form = QuotationForm()
    
@@ -105,9 +96,19 @@ def generate_pdf(request, quotation_id):
 
     # Add product table
     data = [
-        ["Product Name", "Quantity", "Unit Price", "Total Price"],
-        [quotation.Product.name, str(quotation.QuotationProduct.quantity), f"${quotation.Product.price:.2f}", f"${quotation.total_amount:.2f}"]
+        ["Product Name", "Quantity", "Unit Price", "Total Price"],   
     ]
+    # Loop through only products with quantity > 0
+    quotation_items = quotation.quotationproduct_set.filter(quantity__gt=0)
+ 
+    for item in quotation_items:
+        data.append([
+            item.product.name, 
+            str(item.quantity), 
+            f"${item.product.price:.2f}", 
+            f"${item.quantity * item.product.price:.2f}"
+        ])
+    data.append(["", "", "Total Amount", f"${quotation.total_amount:.2f}"])
 
     table = Table(data, colWidths=[200, 100, 100, 100])
     table.setStyle(TableStyle([
