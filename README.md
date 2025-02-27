@@ -26,8 +26,11 @@ Activate the venv
 ```
 source venv/bin/activate
 ```
-
-or to deactivate it is simply: `deactivate`
+or in Bash
+```
+C:\LocalData\quotation\quotation_prj>.\venv\Scripts\activate
+````
+and finally, to deactivate it is simply: `deactivate`
 
 Comecar o projeto novo
 
