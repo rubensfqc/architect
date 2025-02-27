@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'quotation_app',
+    'email_app',
 ]
 
 MIDDLEWARE = [
@@ -122,3 +124,19 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Email settings
+# for testing purposes
+# EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+#for production
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Replace with your SMTP server
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')  # Read from .env  # Replace with your email
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')  # Read from .env  # Replace with your email password, https://support.google.com/accounts/answer/185833?hl=en https://myaccount.google.com/apppasswords
+
+# Other settings
+SECRET_KEY = config('SECRET_KEY')
+DEBUG = config('DEBUG', cast=bool)
