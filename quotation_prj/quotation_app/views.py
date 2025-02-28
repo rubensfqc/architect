@@ -93,7 +93,7 @@ def generate_pdf(request, quotation_id):
     p.drawString(50, height - 240, f"Client Name: {client.name}")
     p.drawString(50, height - 260, f"Email: {client.email}")
     p.drawString(50, height - 280, f"WhatsApp: {client.whatsapp}")
-
+    p.drawString(50, height - 280, f" ")
     # Add product table
     data = [
         ["Product Name", "Quantity", "Unit Price", "Total Price"],   
