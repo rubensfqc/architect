@@ -3,6 +3,12 @@ App to Request for Quotation
 
 Pasta principal do projeto eh a **agendME**, que contem o *settings.py* 
 
+### Versions used
+
+`>> python -c "import django; print(django.get_version())" >> 5.1.6`
+
+`>python --version >> Python 3.13.2`
+
 Pra rodar  
 ```
 python manage.py runserver
