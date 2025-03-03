@@ -17,6 +17,17 @@ class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = ['name', 'price', 'description']
+    
+    def __init__(self, *args, **kwargs):
+        self.seller = kwargs.pop('seller', None)  # Get seller from view
+        super(ProductForm, self).__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        product = super().save(commit=False)
+        product.seller = self.seller  # Assign the seller before saving
+        if commit:
+            product.save()
+        return product
 
 class QuotationProductForm(forms.ModelForm):
     product = forms.ModelChoiceField(queryset=Product.objects.all(), empty_label="Select a product")

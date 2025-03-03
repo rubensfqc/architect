@@ -141,3 +141,7 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')  # Read from .env  # Replace
 # Other settings
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', cast=bool)
+
+# Adding my custom user model
+AUTH_USER_MODEL = 'seller_app.Seller'
+

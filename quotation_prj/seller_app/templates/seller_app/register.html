@@ -1,0 +1,22 @@
+
+{% extends "quotation_app/base.html" %}
+{% load static %}
+
+{% block title %}Login Seller {% endblock %} 
+
+
+{% block content %}
+
+<!-- templates/registration/login.html -->
+<h1>Register</h1>
+    
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Register</button>
+</form>
+
+
+
+
+{% endblock %}
