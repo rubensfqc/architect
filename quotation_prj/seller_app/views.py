@@ -2,12 +2,12 @@ from django.shortcuts import render, redirect, get_object_or_404
 from quotation_app.models import Product
 from quotation_app.forms import ProductForm
 # accounts/views.py
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import login, authenticate
 from django.contrib import messages
 from seller_app.models import Seller
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
-from django.contrib.auth import login
 from .forms import CustomUserCreationForm
 
 def seller_dashboard(request):
@@ -59,3 +59,13 @@ def register(request):
 
 
 
+def custom_login(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            return redirect('landing_page')  # Change 'home' to your actual homepage URL name
+    else:
+        form = AuthenticationForm()
+    return render(request, 'registration/login.html', {'form': form})

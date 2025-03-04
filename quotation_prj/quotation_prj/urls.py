@@ -28,7 +28,7 @@ urlpatterns = [
     path('generate-pdf/<int:quotation_id>/', views.generate_pdf, name='generate_pdf'),
     path('email/', include('email_app.urls')),
     path('seller/', include('seller_app.urls')),
-    path('accounts/', include('django.contrib.auth.urls')),
+    path('seller/', include('django.contrib.auth.urls')),
     #path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     #path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
 ]
