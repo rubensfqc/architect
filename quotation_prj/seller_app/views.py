@@ -3,7 +3,7 @@ from quotation_app.models import Product
 from quotation_app.forms import ProductForm
 # accounts/views.py
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from seller_app.models import Seller
 from django.urls import reverse_lazy
@@ -57,8 +57,6 @@ def register(request):
         form = CustomUserCreationForm()
     return render(request, 'seller_app/register.html', {'form': form})
 
-
-
 def custom_login(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
@@ -69,3 +67,8 @@ def custom_login(request):
     else:
         form = AuthenticationForm()
     return render(request, 'registration/login.html', {'form': form})
+
+def custom_logout(request):
+    logout(request)  # Logs out the user
+    messages.info(request, "Logged out successfully!")
+    return redirect('landing_page')  # Redirect to the home page or any page you want
