@@ -65,3 +65,27 @@ python manage.py createsuperuser
 
 ### Websire benchmark
 https://www.offri.nl/
+
+### Built-in Authorization functionalitites
+
+Using the URLconf defined in quotation_prj.urls, Django tried these URL patterns, in this order:
+
+```
+admin/
+[name='landing_page']
+quotation/<int:client_id>/ [name='quotation_page']
+add-product/ [name='add_product_page']
+generate-pdf/<int:quotation_id>/ [name='generate_pdf']
+email/
+seller/
+accounts login/ [name='login']
+accounts logout/ [name='logout']
+accounts password_change/ [name='password_change']
+accounts password_change/done/ [name='password_change_done']
+accounts password_reset/ [name='password_reset']
+accounts password_reset/done/ [name='password_reset_done']
+accounts reset/<uidb64>/<token>/ [name='password_reset_confirm']
+accounts reset/done/ [name='password_reset_complete']
+The current path, accounts, didn’t match any of these.
+```
+The current path, accounts, didn’t match any of these.
