@@ -27,9 +27,21 @@
                         <a class="nav-link" href="/">Home</a>
                     </li>
                     {% if user.is_authenticated %}
-                    <li class="nav-item"><a href="{% url 'logout' %}">Logout</a></li>
+                    <li class="nav-item">
+                        
+                         <nav>
+                            <form action="{% url 'logout' %}" method="POST" style="display: inline;">
+                                {% csrf_token %}
+                                <input type="hidden" name="some_data" value="value"> <!-- Optional -->
+                                <button type="submit" style="border: none; background: none; color: blue; cursor: pointer;">
+                                    Logout
+                                </button>
+                            </form>
+                        </nav>
+                    
+                    </li>
                     {% else %}
-                    <li class="nav-item"><a href="{% url 'login' %}">Login</a></li>
+                    <li class="nav-item"><a href="{% url 'login' %}" style="color: blue;">Login</a></li>
                     {% endif %}
                 </ul>
             </div>

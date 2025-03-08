@@ -3,7 +3,7 @@ from django.contrib.auth.models import User, AbstractUser
 
 class Seller(AbstractUser): #models.Model):
     #user = models.OneToOneField(User, on_delete=models.CASCADE)  # Links Seller to a Django user
-    email = models.EmailField(unique=True, default="default@example.com")
+    email = models.EmailField(unique=True)#, default="default@example.com")
     name = models.CharField(max_length=100, default="defaultname")
     phone_number = models.CharField(max_length=15, blank=True, null=True)
     profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
@@ -12,8 +12,8 @@ class Seller(AbstractUser): #models.Model):
     #self.set_password(password)  # Hash the password
     #self.save()  # Save the user
 
-    USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    #USERNAME_FIELD = 'email'
+    #REQUIRED_FIELDS = ['username']
 
     def __str__(self):
         return self.email

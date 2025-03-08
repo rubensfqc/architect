@@ -56,19 +56,3 @@ def register(request):
     else:
         form = CustomUserCreationForm()
     return render(request, 'seller_app/register.html', {'form': form})
-
-def custom_login(request):
-    if request.method == 'POST':
-        form = AuthenticationForm(request, data=request.POST)
-        if form.is_valid():
-            user = form.get_user()
-            login(request, user)
-            return redirect('landing_page')  # Change 'home' to your actual homepage URL name
-    else:
-        form = AuthenticationForm()
-    return render(request, 'registration/login.html', {'form': form})
-
-def custom_logout(request):
-    logout(request)  # Logs out the user
-    messages.info(request, "Logged out successfully!")
-    return redirect('landing_page')  # Redirect to the home page or any page you want

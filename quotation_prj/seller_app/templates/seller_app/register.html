@@ -1,5 +1,5 @@
 
-{% extends "quotation_app/base.html" %}
+{% extends "quotation_app/base_auth.html" %}
 {% load static %}
 
 {% block title %}Login Seller {% endblock %} 
@@ -10,6 +10,11 @@
 <!-- templates/registration/login.html -->
 <h1>Register</h1>
     
+<style>
+    .form-container {
+        text-align: left; /* Aligns text inside the form */
+    }
+</style>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
