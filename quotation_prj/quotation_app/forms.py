@@ -30,7 +30,20 @@ class ProductForm(forms.ModelForm):
         return product
 
 class QuotationProductForm(forms.ModelForm):
-    product = forms.ModelChoiceField(queryset=Product.objects.all(), empty_label="Select a product")
+    product = forms.ModelChoiceField(queryset=Product.objects.none(), empty_label="Select a product")
+    
+    def __init__(self, *args, **kwargs):
+        seller = kwargs.pop('seller', None)  # Get the seller_id from kwargs
+        print(f"DEBUGform seller: {seller.username} kwargs: {kwargs} ")
+        super().__init__(*args, **kwargs)
+        
+        # Filter products by seller_id
+        if seller:
+            self.fields['product'].queryset = Product.objects.filter(seller=seller)
+        else:
+            self.fields['product'].queryset = Product.objects.none()  # Default to no products
+
+    
 
     class Meta:
         model = QuotationProduct
