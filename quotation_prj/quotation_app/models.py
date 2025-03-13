@@ -16,8 +16,8 @@ class Product(models.Model):
     seller = models.ForeignKey(Seller, on_delete=models.CASCADE, related_name="products")  # Relate product to a seller
 
     def __str__(self):
-        return self.name
-        #return f"{self.name} - ${self.price} (Seller: {self.seller.name})"
+        #return self.name
+        return f"{self.name} - ${self.price} (Seller: {self.seller.name})"
 
 
     def save(self, *args, **kwargs):
@@ -30,6 +30,7 @@ class Client(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
     whatsapp = models.CharField(max_length=11)
+    seller = models.ForeignKey(Seller, on_delete=models.CASCADE, related_name="clients")  # Relate client to a seller
 
     def __str__(self):
         return self.name

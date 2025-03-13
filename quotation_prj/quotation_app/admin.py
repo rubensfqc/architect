@@ -3,14 +3,14 @@ from .models import Client, Product, Quotation, QuotationProduct
 
 @admin.register(Client)
 class ClientAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'email', 'whatsapp')  # Fields to display in the list view
+    list_display = ('id', 'name', 'email', 'seller')  # Fields to display in the list view
     search_fields = ('name', 'email')  # Fields to enable searching
     list_filter = ('name',)  # Fields to enable filtering
 
 #admin.site.register(Product)
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'price')
+    list_display = ('name', 'price', 'seller')  # Fields to display in the list view
     search_fields = ('name', 'description')
     list_filter = ('name',)
 
