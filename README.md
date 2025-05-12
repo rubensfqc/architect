@@ -9,10 +9,24 @@ Pasta principal do projeto eh a **agendME**, que contem o *settings.py*
 
 `>python --version >> Python 3.13.2`
 
-Pra rodar  
+### Pra rodar  
 ```
 python manage.py runserver
 ```
+### Para atualizar o banco de dados
+
+Caso vc se depare com o erro no navegador
+`Exception Value:	no such table: seller_app_seller`
+
+É provavel que o banco de dados local db.sqlite3 esteja desatualizado. Para atualizar o DB rode os seguintes comandos:
+```
+python manage.py makemigrations
+```
+Em seguida
+```
+python manage.py migrate
+```
+
 
 Para acessar o projeto no [local server](http://127.0.0.1:8000/)
 
