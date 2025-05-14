@@ -5,7 +5,7 @@ from .models import Seller
 @admin.register(Seller)
 class SellerAdmin(UserAdmin):
     model = Seller
-    list_display = ('email', 'username', 'name', 'is_staff', 'is_active')
+    list_display = ('email', 'username', 'name', 'slug', 'is_staff', 'is_active')
     list_filter = ('is_staff', 'is_active', 'groups')
 
     fieldsets = (

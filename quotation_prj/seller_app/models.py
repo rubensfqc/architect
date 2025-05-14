@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User, AbstractUser, Group, Permission
+from django.utils.text import slugify
+
 
 class Seller(AbstractUser): #models.Model):
     #user = models.OneToOneField(User, on_delete=models.CASCADE)  # Links Seller to a Django user
@@ -7,6 +9,7 @@ class Seller(AbstractUser): #models.Model):
     name = models.CharField(max_length=100, default="defaultname")
     phone_number = models.CharField(max_length=15, blank=True, null=True)
     profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
+    slug = models.SlugField(unique=True, blank=True)
 
     groups = models.ManyToManyField(
         Group,
@@ -32,3 +35,9 @@ class Seller(AbstractUser): #models.Model):
 
     def __str__(self):
         return self.email
+    
+    
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)

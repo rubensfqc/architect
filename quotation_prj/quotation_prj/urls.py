@@ -26,4 +26,5 @@ urlpatterns = [
     path('add-product/', views.add_product, name='add_product_page'),
     path('generate-pdf/<int:quotation_id>/', views.generate_pdf, name='generate_pdf'),
     path('email/', include('email_app.urls')),
+    path('seller/<slug:slug>/', views.landing_page_per_seller, name='landing_page_per_seller')
 ]
