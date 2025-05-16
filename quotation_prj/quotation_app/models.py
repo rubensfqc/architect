@@ -1,6 +1,7 @@
 from django.db import models
 from django.core.validators import RegexValidator
 from django.utils.text import slugify
+from seller_app.models import Seller
 
 # Validator for numbers in the format "+11 91234-5678" or "11 91234-5678"
 brazilian_phone_validator = RegexValidator(
@@ -12,9 +13,11 @@ class Product(models.Model):
     name = models.CharField(max_length=255)
     description = models.TextField(blank=True, null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
+    seller = models.ForeignKey(Seller, on_delete=models.CASCADE, related_name="products", default=1)  # Relate product to a seller
 
     def __str__(self):
-        return self.name
+        #return self.name
+        return f"{self.name} - ${self.price} (Seller: {self.seller.name})"
     
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
@@ -27,6 +30,7 @@ class Client(models.Model):
     email = models.EmailField()
     # Telephone field (Ensures only digits and + sign)
     whatsapp = models.CharField(max_length=11)
+    seller = models.ForeignKey(Seller, on_delete=models.CASCADE, related_name="clients", default=1)  # Relate client to a seller
     #     max_length=11,  # 2-digit area code + 9-digit number 
     #     validators=[brazilian_phone_validator], 
     #     help_text="Format: +11 91234-5678 or 11 91234-5678"
@@ -38,7 +42,8 @@ class Client(models.Model):
     #     super().save(*args, **kwargs)
 
     def __str__(self):
-        return self.name
+        #return self.name
+        return f"{self.name} - {self.whatsapp} (Seller: {self.seller.name})"
 
 class Quotation(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)

@@ -1,0 +1,17 @@
+{% extends 'quotation_app/base.html' %}
+{% load static %}
+
+{% block title %}Landing Page per seller{% endblock %}
+    
+    {% block content %}
+
+    <h1>Welcome to the Landing Page of: {{ seller.name }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Proceed to Quotation</button>
+    </form>
+
+{% endblock %}
+<!--</body>
+</html>-->

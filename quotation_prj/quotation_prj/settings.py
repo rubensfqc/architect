@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'quotation_app',
     'email_app',
+    'seller_app',
 ]
 
 MIDDLEWARE = [
