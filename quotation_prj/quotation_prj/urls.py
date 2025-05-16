@@ -21,10 +21,12 @@ from quotation_app import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.landing_page, name='landing_page'),
+    path('', views.home_view, name='home'),  # Set this as the home view
+    path('lp', views.landing_page, name='landing_page'),
     path('quotation/<int:client_id>/', views.quotation_page, name='quotation_page'),
     path('add-product/', views.add_product, name='add_product_page'),
     path('generate-pdf/<int:quotation_id>/', views.generate_pdf, name='generate_pdf'),
     path('email/', include('email_app.urls')),
-    path('seller/<slug:slug>/', views.landing_page_per_seller, name='landing_page_per_seller')
+    path('seller/<slug:slug>/', views.landing_page_per_seller, name='landing_page_per_seller'),
+    path('seller/<slug:slug>/<int:client_id>', views.quotation_page_per_seller, name='quotation_page_per_seller')
 ]

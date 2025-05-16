@@ -1,0 +1,21 @@
+{% extends 'quotation_app/base.html' %}
+{% load static %}
+
+
+{% block title %}Quotation Page per seller{% endblock %}
+
+{% block content %}
+
+
+
+    <h1>Quotation for client:{{ client_id.name }}</h1>
+
+    <h2>Products from Seller: {{ seller.email }}</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Generate Quotation</button>
+    </form>
+
+
+{% endblock %}
