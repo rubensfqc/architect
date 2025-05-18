@@ -52,11 +52,8 @@ def quotation_page(request, client_id):
                 quantity = form.cleaned_data.get(f'quantity_{product.id}', 0)
                 if quantity and quantity > 0:
                     quotation.products.add(product, through_defaults={'quantity': quantity})
-                    print(f"DEBUG BEFORE {quantity} units of {product.name} at {product.price}to the quotation")
                     total_amount += product.price * quantity
-                    print(f"DEBUG Added {quantity} units of {product.name} at {product.price} and to the quotation")
             quotation.total_amount = total_amount
-            print(f"DEBUG Total amount: {total_amount}")
             quotation.save() # Save quotation to DB        
             return redirect('generate_pdf', quotation_id=quotation.id)
     else:
@@ -70,9 +67,7 @@ def quotation_page_per_seller(request, slug, client_id):
     products = Product.objects.filter(seller=seller)
     
     if request.method == 'POST':
-        print(f"seller2: {seller}")
         form = QuotatioFormPerSeller(request.POST, seller=seller)  # Pass the seller to the form
-        print(f"DEBUG Form data: {form.data}")
         if form.is_valid():
             quotation = Quotation.objects.create(client=client)
             total_amount = 0

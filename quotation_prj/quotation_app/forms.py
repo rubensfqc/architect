@@ -35,7 +35,6 @@ class QuotationProductForm(forms.ModelForm):
     
     def __init__(self, *args, **kwargs):
         seller = kwargs.pop('seller', None)  # Get the seller_id from kwargs
-        print(f"DEBUGform seller: {seller.username} kwargs: {kwargs} ")
         super().__init__(*args, **kwargs)
         
         # Filter products by seller_id
@@ -82,11 +81,7 @@ class QuotatioFormPerSeller(forms.Form):
     def __init__(self, *args, **kwargs):
         seller = kwargs.pop('seller')  # Extract seller from kwargs
         super(QuotatioFormPerSeller , self).__init__(*args, **kwargs)
-        print(f"FORM DEBUG seller: {seller}")
-        print(f"FORM DEBUG kwargs: {kwargs}")
-        print(f"FORM DEBUG products: {Product.objects.filter(seller=seller)}")
         products = Product.objects.filter(seller=seller)
-        print(f"FORM DEBUG products: {products}")
         for product in products:
             self.fields[f'quantity_{product.id}'] = forms.IntegerField(
                 label=f"{product.name}",  # you can include product.price here too
