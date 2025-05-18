@@ -1,5 +1,6 @@
 from django import forms
 from .models import Client, Quotation, Product, QuotationProduct
+from seller_app.models import Seller  # Adjust the import based on your app name
 
 class ClientForm(forms.ModelForm):
     class Meta:
@@ -77,3 +78,18 @@ class QuotationForm(forms.Form):
     #             widget=forms.NumberInput(attrs={'class': 'form-control'})
     #         )
 
+class QuotatioFormPerSeller(forms.Form):
+    def __init__(self, *args, **kwargs):
+        seller = kwargs.pop('seller')  # Extract seller from kwargs
+        super(QuotatioFormPerSeller , self).__init__(*args, **kwargs)
+        print(f"FORM DEBUG seller: {seller}")
+        print(f"FORM DEBUG kwargs: {kwargs}")
+        print(f"FORM DEBUG products: {Product.objects.filter(seller=seller)}")
+        products = Product.objects.filter(seller=seller)
+        print(f"FORM DEBUG products: {products}")
+        for product in products:
+            self.fields[f'quantity_{product.id}'] = forms.IntegerField(
+                label=f"{product.name}",  # you can include product.price here too
+                min_value=0,
+                required=False
+            )
