@@ -33,6 +33,7 @@ def landing_page_per_seller(request, slug):
         # Get form data
         form = ClientForm(request.POST)
         if form.is_valid():
+            form.instance.seller = seller  # Set the seller for the client
             form.save() #Save client to DB
             return redirect('quotation_page_per_seller', slug=seller.slug, client_id = form.instance.id)# Redirect to the quotation page
     else:
