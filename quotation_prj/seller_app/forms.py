@@ -13,5 +13,7 @@ class ProductForm(forms.ModelForm):
         model = Product
         fields = ['name', 'description', 'price']
         widgets = {
-            'description': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
+        'name': forms.TextInput(attrs={'class': 'w-full p-2 border rounded'}),
+        'description': forms.Textarea(attrs={'class': 'w-full p-2 border rounded', 'rows': 4}),
+        'price': forms.NumberInput(attrs={'class': 'w-full p-2 border rounded'}),
         }

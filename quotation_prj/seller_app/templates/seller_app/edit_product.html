@@ -1,7 +1,7 @@
 {% extends 'quotation_app/base.html' %}
 {% load static %}
 
-{% block title %}Add product{% endblock %}
+{% block title %}Edit product{% endblock %}
     
 {% block content %}
 {% load widget_tweaks %}
@@ -20,7 +20,7 @@
         <label>Price</label>
         {% render_field form.price class="form-control" %}
     </div>
-    <button type="submit" class="btn btn-success">Save</button>
+    <button type="submit" class="btn btn-success">Edit Product</button>
 </form>
- 
+
 {% endblock %}

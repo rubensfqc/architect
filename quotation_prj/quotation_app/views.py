@@ -83,7 +83,7 @@ def quotation_page_per_seller(request, slug, client_id):
     else:
         form = QuotatioFormPerSeller(request.POST, seller=seller)  # Pass the seller to the form
    
-    return render(request, 'quotation_app/quotation_page.html', {'form': form, 'client': client})
+    return render(request, 'quotation_app/quotation_page_per_seller.html', {'form': form, 'client': client, 'seller':seller})
 
 def generate_pdf(request, quotation_id):
     quotation = get_object_or_404(Quotation, id=quotation_id)

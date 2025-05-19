@@ -1,16 +1,41 @@
 {% extends 'quotation_app/base.html' %}
 {% load static %}
+{% load widget_tweaks %}
 
 {% block title %}Landing Page per seller{% endblock %}
     
     {% block content %}
 
     <h1>Welcome to the Landing Page of: {{ seller.name }}</h1>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Proceed to Quotation</button>
-    </form>
+<form method="post" class="p-4 bg-light rounded shadow-sm">
+    {% csrf_token %}
+
+    <div class="mb-3">
+        <label for="{{ form.name.id_for_label }}" class="form-label">Name</label>
+        {% render_field form.name class="form-control" %}
+        {% for error in form.name.errors %}
+            <div class="text-danger small">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="mb-3">
+        <label for="{{ form.email.id_for_label }}" class="form-label">Email</label>
+        {% render_field form.email class="form-control" %}
+        {% for error in form.email.errors %}
+            <div class="text-danger small">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    <div class="mb-3">
+        <label for="{{ form.whatsapp.id_for_label }}" class="form-label">WhatsApp</label>
+        {% render_field form.whatsapp class="form-control" %}
+        {% for error in form.whatsapp.errors %}
+            <div class="text-danger small">{{ error }}</div>
+        {% endfor %}
+    </div>
+
+    <button type="submit" class="btn btn-primary">Proceed to Quotation</button>
+</form>
 
 {% endblock %}
 <!--</body>

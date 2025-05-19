@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'quotation_app',
     'email_app',
     'seller_app',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
