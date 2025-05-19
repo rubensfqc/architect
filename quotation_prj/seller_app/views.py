@@ -19,8 +19,22 @@ def seller_dashboard(request):
 
     return render(request, 'seller_app/seller_dashboard.html', {'products': products})
 
+@login_required
+def add_product(request):#Product Dashboard
+    if request.method == 'POST':
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            product = form.save(commit=False)
+            product.seller = request.user  # Set the seller to the logged-in user
+            product.save()
+            return redirect('seller_dashboard')  # Redirect to the seller dashboard after saving
+    else:
+        form = ProductForm()
+    return render(request, 'seller_app/add_product.html', {'form': form})#, 'client': client}) #replace by seller
+
+
 def delete_product(request, product_id):
-    product = get_object_or_404(Product, id=product_id, seller__user=request.user)  # Restrict deletion to seller's products
+    product = get_object_or_404(Product, id=product_id, seller=request.user)  # Restrict deletion to seller's products
     product.delete()
     return redirect('seller_dashboard')  # Reload page after deleting
 

@@ -25,7 +25,6 @@ urlpatterns = [
     path('', views.home_view, name='home'),  # Set this as the home view
     path('lp', views.landing_page, name='landing_page'),
     path('quotation/<int:client_id>/', views.quotation_page, name='quotation_page'),
-    path('add-product/', views.add_product, name='add_product_page'),
     path('generate-pdf/<int:quotation_id>/', views.generate_pdf, name='generate_pdf'),
     path('email/', include('email_app.urls')),
     path('seller/', include('seller_app.urls')),

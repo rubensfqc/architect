@@ -85,19 +85,6 @@ def quotation_page_per_seller(request, slug, client_id):
    
     return render(request, 'quotation_app/quotation_page.html', {'form': form, 'client': client})
 
-def add_product(request):#Product Dashboard
-    if request.method == 'POST':
-        form = ProductForm(request.POST)
-        if form.is_valid():
-            product = form.save(commit=False)
-            #product.seller = seller
-            product.save()
-            return redirect('landing_page')
-    else:
-        form = ProductForm()
-    return render(request, 'quotation_app/add_product_page.html', {'form': form})#, 'client': client}) #replace by seller
-
-
 def generate_pdf(request, quotation_id):
     quotation = get_object_or_404(Quotation, id=quotation_id)
     client = quotation.client
