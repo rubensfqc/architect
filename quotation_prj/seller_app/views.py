@@ -32,11 +32,28 @@ def add_product(request):#Product Dashboard
         form = ProductForm()
     return render(request, 'seller_app/add_product.html', {'form': form})#, 'client': client}) #replace by seller
 
-
+@login_required
 def delete_product(request, product_id):
     product = get_object_or_404(Product, id=product_id, seller=request.user)  # Restrict deletion to seller's products
     product.delete()
     return redirect('seller_dashboard')  # Reload page after deleting
+
+@login_required
+def edit_product(request, product_id):
+    # Fetch the product, ensuring the logged-in user is the seller
+    product = get_object_or_404(Product, id=product_id, seller=request.user)
+
+    if request.method == 'POST':
+        form = ProductForm(request.POST, instance=product)
+        if form.is_valid():
+            form.seller = request.user  # Ensure the seller is set to the logged-in user
+            form.save()  # Save the updated product
+            return redirect('seller_dashboard')  # Redirect back to the seller's dashboard
+    else:
+        form = ProductForm(instance=product)  # Populate the form with the current product data
+
+    return render(request, 'seller_app/edit_product.html', {'form': form, 'product': product})
+
 
 class SignUpView(CreateView):
     form_class = UserCreationForm
