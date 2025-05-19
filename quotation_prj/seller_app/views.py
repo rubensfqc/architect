@@ -9,27 +9,20 @@ from seller_app.models import Seller
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from .forms import CustomUserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseForbidden
 
+@login_required
 def seller_dashboard(request):
-    seller = get_object_or_404(Seller, user=request.user)  # Get logged-in seller
-    products = Product.objects.filter(seller=seller)  # Filter only seller's products
+    # Get products for this seller
+    products = Product.objects.filter(seller=request.user)
 
-    if request.method == "POST":
-        form = ProductForm(request.POST, seller=seller)  # Pass seller to form
-        if form.is_valid():
-            form.save()
-            return redirect('seller_dashboard')  # Reload page after adding a product
-    else:
-        form = ProductForm()
-
-    return render(request, 'seller_app/seller_dashboard.html', {'products': products, 'form': form})
-
+    return render(request, 'seller_app/seller_dashboard.html', {'products': products})
 
 def delete_product(request, product_id):
     product = get_object_or_404(Product, id=product_id, seller__user=request.user)  # Restrict deletion to seller's products
     product.delete()
     return redirect('seller_dashboard')  # Reload page after deleting
-
 
 class SignUpView(CreateView):
     form_class = UserCreationForm
