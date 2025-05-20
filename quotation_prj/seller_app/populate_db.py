@@ -6,17 +6,17 @@ from quotation_app.models import Product, Client, Quotation, QuotationProduct  #
 
 # Create the Seller instance
 seller = Seller.objects.create_user(
-    username='test_seller1',
+    username='seller1',
     email='seller1@example.com',
     password='securepassword123',  # this is hashed automatically
-    name='tst_seller1',
+    name='seller1',
     phone_number='1234567890'
 )
 seller = Seller.objects.create_user(
-    username='test_seller2',
+    username='seller2',
     email='seller2@example.com',
     password='securepassword123',  # this is hashed automatically
-    name='tst_seller2',
+    name='seller2',
     phone_number='1234567890'
 )
 print(f"Created seller: {seller} ---Seller ID: {seller.id}")
@@ -52,6 +52,20 @@ product = Product.objects.create(
     name='Test Product C',
     description='This is a sample product.',
     price=9.99,
+    seller=seller
+)
+
+product = Product.objects.create(
+    name='Test Product D',
+    description='This is a sample product.',
+    price=99.99,
+    seller=seller
+)
+
+product = Product.objects.create(
+    name='Test Product E',
+    description='This is a sample product.',
+    price=1.99,
     seller=seller
 )
 print(f"Created product: {product} --- Product ID: {product.id}")
