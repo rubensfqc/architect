@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from quotation_app.models import Product
+from quotation_app.models import Product, Quotation
 from quotation_app.forms import ProductForm
 # accounts/views.py
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
@@ -54,6 +54,21 @@ def edit_product(request, product_id):
 
     return render(request, 'seller_app/edit_product.html', {'form': form, 'product': product})
 
+@login_required
+def seller_quotations(request):
+    try:
+        seller = request.user
+
+        # Get all clients of this seller
+        client_ids = seller.clients.values_list('id', flat=True)
+
+        # Get quotations for those clients
+        quotations = Quotation.objects.filter(client_id__in=client_ids).prefetch_related('products', 'client')
+        #quotations = Quotation.objects.filter(seller=seller).select_related('client').order_by('-date_created')
+    except Seller.DoesNotExist:
+        quotations = []  # Or redirect / raise error
+
+    return render(request, 'seller_app/seller_quotations.html', {'quotations': quotations})
 
 class SignUpView(CreateView):
     form_class = UserCreationForm
