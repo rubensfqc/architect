@@ -77,6 +77,10 @@ python manage.py createsuperuser
 
 `pip install python-decouple`
 
+### For beatier forms
+
+`pip install django-widget-tweaks`
+
 ### Websire benchmark
 https://www.offri.nl/
 
