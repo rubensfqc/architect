@@ -31,6 +31,6 @@ urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')), # o logout da base.html estah sendo achado por aqui
     #path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     #path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
-    path('seller/<slug:slug>/', views.landing_page_per_seller, name='landing_page_per_seller'),
-    path('seller/<slug:slug>/<int:client_id>', views.quotation_page_per_seller, name='quotation_page_per_seller')
+    path('pro/<slug:slug>/', views.landing_page_per_seller, name='landing_page_per_seller'),
+    path('pro/<slug:slug>/<int:client_id>', views.quotation_page_per_seller, name='quotation_page_per_seller')
 ]
