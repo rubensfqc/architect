@@ -98,20 +98,18 @@ def generate_pdf(request, slug, quotation_id):
     width, height = letter
 
     # Add company logo
-    logo_path = seller.profile_picture.path if seller.profile_picture else 'quotation_app/static/logo-example.png'  # Path to your logo
-    #logo_path = seller.logo.path if seller.logo else 'quotation_app/static/logo-example.png'  # Path to your logo
-    #logo_path = 'quotation_app/static/logo-example.png'  # Path to your logo
+    logo_path = seller.profile_picture.path if seller.profile_picture else 'media/profile_pics/logoU_0.25.png'  # Path to your logo
     logo = ImageReader(logo_path)
-    p.drawImage(logo, 50, height - 100, width=100, height=50, preserveAspectRatio=True)
+    p.drawImage(logo, 50, height - 150, width=200, height=100, preserveAspectRatio=True)
 
     # Add company information
     p.setFont("Helvetica-Bold", 16)
-    p.drawString(160, height - 80, "My Company Name")
+    p.drawString(260, height - 80, "My Company Name")
     p.setFont("Helvetica", 12)
-    p.drawString(160, height - 100, "123 Business Street")
-    p.drawString(160, height - 120, "City, State, ZIP Code")
-    p.drawString(160, height - 140, "Phone: (123) 456-7890")
-    p.drawString(160, height - 160, "Email: info@mycompany.com")
+    p.drawString(260, height - 100, "123 Business Street")
+    p.drawString(260, height - 120, "City, State, ZIP Code")
+    p.drawString(260, height - 140, "Phone: (123) 456-7890")
+    p.drawString(260, height - 160, "Email: info@mycompany.com")
 
     # Add RFQ title
     p.setFont("Helvetica-Bold", 18)
