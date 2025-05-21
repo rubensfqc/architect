@@ -1,0 +1,40 @@
+{% extends "quotation_app/base_auth.html" %}
+{% load static %}
+
+{% block title %}Login Seller {% endblock %} 
+
+
+{% block content %}
+
+
+    
+{% if request.user.is_authenticated %}
+    <h2>Hi {{request.user.username}}!</h2>
+    <p>You are already logged in. Press the button below in case you want to logout.</p>
+
+    <form method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button type="submit">Logout</button>
+        <p> </p>
+        <a href="{% url 'password_change' %}"><p class="small-text"></p>Change Password</p></a>
+    </form>
+   
+{% else %}
+    <h1>Login</h1>
+    <p>Please login below:</p>
+
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+        <p>    </p>
+        <p>Don't have an account? <a href="{% url 'register' %}">Register</a></p>
+        
+        <a href="{% url 'password_reset' %}">Forgot Password</a>
+
+        <a href="{% url 'landing_page' %}">Back to home page</a>
+    </form>
+
+{% endif %}
+
+{% endblock %}

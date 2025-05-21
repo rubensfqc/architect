@@ -9,6 +9,7 @@ class Seller(AbstractUser): #models.Model):
     name = models.CharField(max_length=100, default="defaultname")
     phone_number = models.CharField(max_length=15, blank=True, null=True)
     profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
+    address = models.CharField(max_length=255, blank=True, null=True)
     slug = models.SlugField(unique=True, blank=True)
 
     groups = models.ManyToManyField(
@@ -39,5 +40,5 @@ class Seller(AbstractUser): #models.Model):
     
     def save(self, *args, **kwargs):
         if not self.slug:
-            self.slug = slugify(self.name)
+            self.slug = slugify(self.username)
         super().save(*args, **kwargs)

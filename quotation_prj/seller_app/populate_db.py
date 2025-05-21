@@ -6,18 +6,28 @@ from quotation_app.models import Product, Client, Quotation, QuotationProduct  #
 
 # Create the Seller instance
 seller = Seller.objects.create_user(
-    username='test_seller1',
-    email='seller1@example.com',
+    username='ana',
+    email='ana@example.com',
     password='securepassword123',  # this is hashed automatically
-    name='tst_seller1',
-    phone_number='1234567890'
-)
+    name='Ana Silva',
+    phone_number='1234567890',
+    address='123 Av Vieira Souto, Rio de Janeiro, RJ, 22420-002',
+) 
 seller = Seller.objects.create_user(
-    username='test_seller2',
-    email='seller2@example.com',
+    username='beto',
+    email='beto@example.com',
     password='securepassword123',  # this is hashed automatically
-    name='tst_seller2',
-    phone_number='1234567890'
+    name='Beto Carreiro',
+    phone_number='1234567890',
+    address='23 Av Delfim Moreira, Rio de Janeiro, RJ, 21420-002',
+)	
+seller = Seller.objects.create_user(
+    username='caio',
+    email='caio@example.com',
+    password='securepassword123',  # this is hashed automatically
+    name='Caio Pereira',
+    phone_number='1234567890',
+    address='12 Av Paulista, São Paulo, SP, 01311-000',
 )
 print(f"Created seller: {seller} ---Seller ID: {seller.id}")
 
@@ -35,7 +45,7 @@ product = Product.objects.create(
     seller=seller
 )
 
-seller = Seller.objects.get(id=2) 
+seller = Seller.objects.get(id=3) 
 product = Product.objects.create(
     name='Test Product A',
     description='This is a sample product.',
@@ -54,4 +64,18 @@ product = Product.objects.create(
     price=9.99,
     seller=seller
 )
-print(f"Created product: {product} --- Product ID: {product.id}")
+
+product = Product.objects.create(
+    name='Test Product D',
+    description='This is a sample product.',
+    price=99.99,
+    seller=seller
+)
+
+product = Product.objects.create(
+    name='Test Product E',
+    description='This is a sample product.',
+    price=1.99,
+    seller=seller
+)
+print(f"Created product: {product} --- Product ID: {product.id}") 

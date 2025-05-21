@@ -18,9 +18,32 @@ class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = ['name', 'price', 'description']
+    
+    def __init__(self, *args, **kwargs):
+        self.seller = kwargs.pop('seller', None)  # Get seller from view
+        super(ProductForm, self).__init__(*args, **kwargs)
+
+    def save(self, commit=True):
+        product = super().save(commit=False)
+        product.seller = self.seller  # Assign the seller before saving
+        if commit:
+            product.save()
+        return product
 
 class QuotationProductForm(forms.ModelForm):
-    product = forms.ModelChoiceField(queryset=Product.objects.all(), empty_label="Select a product")
+    product = forms.ModelChoiceField(queryset=Product.objects.none(), empty_label="Select a product")
+    
+    def __init__(self, *args, **kwargs):
+        seller = kwargs.pop('seller', None)  # Get the seller_id from kwargs
+        super().__init__(*args, **kwargs)
+        
+        # Filter products by seller_id
+        if seller:
+            self.fields['product'].queryset = Product.objects.filter(seller=seller)
+        else:
+            self.fields['product'].queryset = Product.objects.none()  # Default to no products
+
+    
 
     class Meta:
         model = QuotationProduct
@@ -58,11 +81,7 @@ class QuotatioFormPerSeller(forms.Form):
     def __init__(self, *args, **kwargs):
         seller = kwargs.pop('seller')  # Extract seller from kwargs
         super(QuotatioFormPerSeller , self).__init__(*args, **kwargs)
-        print(f"FORM DEBUG seller: {seller}")
-        print(f"FORM DEBUG kwargs: {kwargs}")
-        print(f"FORM DEBUG products: {Product.objects.filter(seller=seller)}")
         products = Product.objects.filter(seller=seller)
-        print(f"FORM DEBUG products: {products}")
         for product in products:
             self.fields[f'quantity_{product.id}'] = forms.IntegerField(
                 label=f"{product.name}",  # you can include product.price here too

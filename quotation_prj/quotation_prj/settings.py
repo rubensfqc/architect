@@ -28,6 +28,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_REDIRECT_URL = 'seller_dashboard'
+LOGOUT_REDIRECT_URL = 'login'
 
 # Application definition
 
@@ -41,6 +43,7 @@ INSTALLED_APPS = [
     'quotation_app',
     'email_app',
     'seller_app',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -58,7 +61,7 @@ ROOT_URLCONF = 'quotation_prj.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [ BASE_DIR / 'templates' ],  # Add this line to point to the templates folder
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -131,6 +134,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 #for production
+""" EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'  # Replace with your SMTP server
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')  # Read from .env  # Replace with your email
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')  # Read from .env  # Replace with your email password, https://support.google.com/accounts/answer/185833?hl=en https://myaccount.google.com/apppasswords
+ """
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'  # Replace with your SMTP server
 EMAIL_PORT = 587
@@ -141,3 +151,11 @@ EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')  # Read from .env  # Replace
 # Other settings
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', cast=bool)
+
+# Adding my custom user model
+AUTH_USER_MODEL = 'seller_app.Seller'
+
+
+# Where the pictures shall be stored
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'media'

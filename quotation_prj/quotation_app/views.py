@@ -10,7 +10,8 @@ from io import BytesIO
 from .models import Client, Quotation, Product, QuotationProduct, Seller # Import models
 from .forms import ClientForm, QuotationForm, ProductForm, QuotationProductForm, QuotatioFormPerSeller
 from django.urls import reverse
-from .utils import list_all_urls
+from .utils import list_all_urls, format_brazilian_phone
+from textwrap import wrap
 
 def home_view(request):
     urls = list_all_urls()
@@ -33,6 +34,7 @@ def landing_page_per_seller(request, slug):
         # Get form data
         form = ClientForm(request.POST)
         if form.is_valid():
+            form.instance.seller = seller  # Set the seller for the client
             form.save() #Save client to DB
             return redirect('quotation_page_per_seller', slug=seller.slug, client_id = form.instance.id)# Redirect to the quotation page
     else:
@@ -52,11 +54,8 @@ def quotation_page(request, client_id):
                 quantity = form.cleaned_data.get(f'quantity_{product.id}', 0)
                 if quantity and quantity > 0:
                     quotation.products.add(product, through_defaults={'quantity': quantity})
-                    print(f"DEBUG BEFORE {quantity} units of {product.name} at {product.price}to the quotation")
                     total_amount += product.price * quantity
-                    print(f"DEBUG Added {quantity} units of {product.name} at {product.price} and to the quotation")
             quotation.total_amount = total_amount
-            print(f"DEBUG Total amount: {total_amount}")
             quotation.save() # Save quotation to DB        
             return redirect('generate_pdf', quotation_id=quotation.id)
     else:
@@ -70,9 +69,7 @@ def quotation_page_per_seller(request, slug, client_id):
     products = Product.objects.filter(seller=seller)
     
     if request.method == 'POST':
-        print(f"seller2: {seller}")
         form = QuotatioFormPerSeller(request.POST, seller=seller)  # Pass the seller to the form
-        print(f"DEBUG Form data: {form.data}")
         if form.is_valid():
             quotation = Quotation.objects.create(client=client)
             total_amount = 0
@@ -83,26 +80,14 @@ def quotation_page_per_seller(request, slug, client_id):
                     total_amount += product.price * quantity
             quotation.total_amount = total_amount
             quotation.save() # Save quotation to DB        
-            return redirect('generate_pdf', quotation_id=quotation.id)
+            return redirect('generate_pdf', slug=slug, quotation_id=quotation.id)
     else:
         form = QuotatioFormPerSeller(request.POST, seller=seller)  # Pass the seller to the form
    
-    return render(request, 'quotation_app/quotation_page.html', {'form': form, 'client': client})
+    return render(request, 'quotation_app/quotation_page_per_seller.html', {'form': form, 'client': client, 'seller':seller})
 
-def add_product(request):#Product Dashboard
-    if request.method == 'POST':
-        form = ProductForm(request.POST)
-        if form.is_valid():
-            product = form.save(commit=False)
-            #product.seller = seller
-            product.save()
-            return redirect('landing_page')
-    else:
-        form = ProductForm()
-    return render(request, 'quotation_app/add_product_page.html', {'form': form})#, 'client': client}) #replace by seller
-
-
-def generate_pdf(request, quotation_id):
+def generate_pdf(request, slug, quotation_id):
+    seller = get_object_or_404(Seller, slug=slug)
     quotation = get_object_or_404(Quotation, id=quotation_id)
     client = quotation.client
 
@@ -114,22 +99,28 @@ def generate_pdf(request, quotation_id):
     width, height = letter
 
     # Add company logo
-    logo_path = 'quotation_app/static/logo-example.png'  # Path to your logo
+    logo_path = seller.profile_picture.path if seller.profile_picture else 'media/profile_pics/logoU_0.25.png'  # Path to your logo
     logo = ImageReader(logo_path)
-    p.drawImage(logo, 50, height - 100, width=100, height=50, preserveAspectRatio=True)
+    p.drawImage(logo, 50, height - 150, width=200, height=100, preserveAspectRatio=True)
 
     # Add company information
     p.setFont("Helvetica-Bold", 16)
-    p.drawString(160, height - 80, "My Company Name")
+    p.drawString(260, height - 80, seller.name)
     p.setFont("Helvetica", 12)
-    p.drawString(160, height - 100, "123 Business Street")
-    p.drawString(160, height - 120, "City, State, ZIP Code")
-    p.drawString(160, height - 140, "Phone: (123) 456-7890")
-    p.drawString(160, height - 160, "Email: info@mycompany.com")
+    p.drawString(260, height - 100, "phone: " + format_brazilian_phone(seller.phone_number))
+    p.drawString(260, height - 120, "e-mail: "+ seller.email)
+    #p.drawString(260, height - 140, seller.address)
+    #p.drawString(260, height - 160, "")
+    if seller.address:
+        text_object = p.beginText(260, height - 140)
+        text_object.textLines(wrap(seller.address, width=50))
+        p.drawText(text_object)
+    else:
+        p.drawString(260, height - 140, "")
 
     # Add RFQ title
     p.setFont("Helvetica-Bold", 18)
-    p.drawString(50, height - 200, "Request for Quotation (RFQ)")
+    p.drawString(50, height - 200, "Request for Quotation #" + str(quotation.id))
 
     # Add client information
     p.setFont("Helvetica", 12)
@@ -164,14 +155,30 @@ def generate_pdf(request, quotation_id):
         ('GRID', (0, 0), (-1, -1), 1, colors.black),
     ]))
 
+    current_y = height - 300  # Adjust this based on how much content is before the table
+    table_width, table_height = table.wrap(0, 0)
+    # Ensure enough space exists
+    if current_y - table_height < 50:  # Avoid drawing off the page
+        p.showPage()
+        current_y = height - 50  # Start fresh on a new page
+
     # Draw the table on the PDF
     table.wrapOn(p, width - 100, height)
-    table.drawOn(p, 50, height - 400)
+    #table.drawOn(p, 50, height - 400)
+    table.drawOn(p, 50, current_y - table_height)
+
+    # Calculate where to draw the thank-you message (below table)
+    thank_you_y = current_y - table_height - 30  # 30px space below table
+
+    # Check if there's space; if not, add new page
+    if thank_you_y < 50:
+        p.showPage()
+        thank_you_y = height - 100  # new page start
 
     # Add a thank-you message
     p.setFont("Helvetica", 12)
-    p.drawString(50, height - 450, "Thank you for your request. We will get back to you shortly.")
-
+    p.drawString(50, thank_you_y, "Thank you for your request. We will get back to you shortly.")
+    
     # Close the PDF object
     p.showPage()
     p.save()

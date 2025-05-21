@@ -5,17 +5,34 @@
 {% block title %}Quotation Page per seller{% endblock %}
 
 {% block content %}
+{% load widget_tweaks %}
 
 
+    <h1>Quotation for client: {{ client.name }}</h1>
 
-    <h1>Quotation for client:{{ client_id.name }}</h1>
+    <h2>Products from Seller: {{ seller.name }}</h2>
+    
+ <form method="post" class="mt-4">
+    {% csrf_token %}
 
-    <h2>Products from Seller: {{ seller.email }}</h2>
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="btn btn-primary">Generate Quotation</button>
-    </form>
+    <table class="table table-bordered table-striped table-hover">
+        <thead class="thead-dark">
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for field in form %}
+                <tr>
+                    <td>{{ field.label }}</td>
+                    <td>{% render_field field class="form-control" %}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 
+    <button type="submit" class="btn btn-success">Generate Quotation</button>
+</form>
 
 {% endblock %}

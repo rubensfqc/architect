@@ -10,7 +10,7 @@ class ClientAdmin(admin.ModelAdmin):
 #admin.site.register(Product)
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'price', 'seller')  # Fields to display in the list view
+    list_display = ('id', 'name', 'price', 'seller')  # Fields to display in the list view
     search_fields = ('name', 'description')
     list_filter = ('name',)
 

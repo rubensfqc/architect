@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import RegexValidator
 from django.utils.text import slugify
 from seller_app.models import Seller
+from django.utils import timezone
 
 # Validator for numbers in the format "+11 91234-5678" or "11 91234-5678"
 brazilian_phone_validator = RegexValidator(
@@ -28,7 +29,6 @@ class Product(models.Model):
 class Client(models.Model):
     name = models.CharField(max_length=100)
     email = models.EmailField()
-    # Telephone field (Ensures only digits and + sign)
     whatsapp = models.CharField(max_length=11)
     seller = models.ForeignKey(Seller, on_delete=models.CASCADE, related_name="clients", default=1)  # Relate client to a seller
     #     max_length=11,  # 2-digit area code + 9-digit number 
@@ -49,13 +49,7 @@ class Quotation(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     products = models.ManyToManyField(Product, through='QuotationProduct')
     total_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
-
-"""     def calculate_total_amount(self):
-        total = self.quotationproduct_set.aggregate(
-            total=Sum(models.F('quantity') * models.F('price'))
-        )['total'] or 0
-        self.total_amount = total
-        self.save() """
+    date_created = models.DateTimeField(default=timezone.now) # Automatically set on creation
 
 class QuotationProduct(models.Model):
     quotation = models.ForeignKey(Quotation, on_delete=models.CASCADE)
@@ -70,18 +64,3 @@ class QuotationProduct(models.Model):
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
         self.quotation.calculate_total_amount()
-
-
-
-
-""" class Seller(models.Model):
-    name = models.CharField(max_length=100)
-    slug = models.SlugField(unique=True, blank=True)
-
-    def save(self, *args, **kwargs):
-        # Generate a slug from the name if it doesn't exist
-        if not self.slug:
-            self.slug = slugify(self.name)
-
-        # Call the parent class's save() method
-        super().save(*args, **kwargs) """
