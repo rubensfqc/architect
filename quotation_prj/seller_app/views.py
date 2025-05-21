@@ -16,8 +16,9 @@ from django.http import HttpResponseForbidden
 def seller_dashboard(request):
     # Get products for this seller
     products = Product.objects.filter(seller=request.user)
+    seller = request.user
 
-    return render(request, 'seller_app/seller_dashboard.html', {'products': products})
+    return render(request, 'seller_app/seller_dashboard.html', {'products': products, 'seller': seller})
 
 @login_required
 def add_product(request):#Product Dashboard
@@ -100,11 +101,14 @@ def register(request):
 
 @login_required
 def update_seller(request):
+    seller = request.user
     if request.method == 'POST':
         form = SellerUpdateForm(request.POST, request.FILES, instance=request.user)
         if form.is_valid():
             form.save()
-            return redirect('seller_app/seller_dashboard.html')  # Redirect to a profile page or any other page
+            # if successful:
+            messages.success(request, 'Your profile was successfully updated!')
+            return redirect('update_seller')
     else:
         form = SellerUpdateForm(instance=request.user)
-    return render(request, 'seller_app/update_seller.html', {'form': form})
+    return render(request, 'seller_app/update_seller.html', {'form': form, 'seller':seller})

@@ -40,6 +40,14 @@
 </script>
 
 
+{% if seller.profile_picture %}
+  <div class="mb-3">
+   <img src="{{ seller.profile_picture.url }}" alt="Profile Picture" class="img-thumbnail" style="width: 150px; height: 150px; object-fit: cover;">
+  </div>
+{% else %}
+  <p>No profile picture uploaded.</p>
+{% endif %}
+
 
 <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
@@ -66,7 +74,7 @@
         <img id="profile-picture-preview" src="#" alt="Image Preview" style="display:none; max-height: 200px; margin-top: 10px;" />
     </div>
 <div><br></div>
-    <button type="submit" class="btn btn-primary">Update</button>
+    <button type="submit" class="btn btn-success">Update</button>
 </form>
 
 <script>
@@ -83,7 +91,8 @@ document.getElementById('{{ form.profile_picture.id_for_label }}').addEventListe
 </script>
 
  <!-- Add Product Form -->
-       <h4>Options</h4>
+       <br>
+        <h4>Options</h4>
        <a href="{% url 'seller_dashboard' %}" class="btn btn-primary">Back to dashboard</a> &nbsp;
        <a href="{% url 'seller_quotations' %}" class="btn btn-primary">My Quotations</a> &nbsp;
 
