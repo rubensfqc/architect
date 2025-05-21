@@ -10,7 +10,7 @@ from io import BytesIO
 from .models import Client, Quotation, Product, QuotationProduct, Seller # Import models
 from .forms import ClientForm, QuotationForm, ProductForm, QuotationProductForm, QuotatioFormPerSeller
 from django.urls import reverse
-from .utils import list_all_urls
+from .utils import list_all_urls, format_brazilian_phone
 
 def home_view(request):
     urls = list_all_urls()
@@ -104,12 +104,12 @@ def generate_pdf(request, slug, quotation_id):
 
     # Add company information
     p.setFont("Helvetica-Bold", 16)
-    p.drawString(260, height - 80, "My Company Name")
+    p.drawString(260, height - 80, seller.name)
     p.setFont("Helvetica", 12)
     p.drawString(260, height - 100, "123 Business Street")
     p.drawString(260, height - 120, "City, State, ZIP Code")
-    p.drawString(260, height - 140, "Phone: (123) 456-7890")
-    p.drawString(260, height - 160, "Email: info@mycompany.com")
+    p.drawString(260, height - 140, "phone: " + format_brazilian_phone(seller.phone_number))
+    p.drawString(260, height - 160, "e-mail: "+ seller.email)
 
     # Add RFQ title
     p.setFont("Helvetica-Bold", 18)

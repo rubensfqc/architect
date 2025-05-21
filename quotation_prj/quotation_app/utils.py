@@ -33,3 +33,14 @@ def list_all_urls():
 
     extract_urls(url_patterns)
     return url_list
+
+def format_brazilian_phone(phone):
+    # Remove non-digit characters
+    digits = ''.join(filter(str.isdigit, phone))
+
+    if len(digits) == 10:  # landline
+        return f"({digits[:2]}) {digits[2:6]}-{digits[6:]}"
+    elif len(digits) == 11:  # mobile
+        return f"({digits[:2]}) {digits[2:7]}-{digits[7:]}"
+    else:
+        return phone  # return as is if length doesn't match
