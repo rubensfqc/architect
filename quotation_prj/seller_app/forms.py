@@ -21,5 +21,5 @@ class ProductForm(forms.ModelForm):
 class SellerUpdateForm(forms.ModelForm):
     class Meta:
         model = Seller
-        fields = ['email', 'name', 'phone_number', 'profile_picture']
+        fields = ['email', 'name', 'phone_number', 'profile_picture', 'address']
 
