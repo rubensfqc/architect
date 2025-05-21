@@ -57,6 +57,7 @@ def edit_product(request, product_id):
 
 @login_required
 def seller_quotations(request):
+    slug = request.user.slug
     try:
         seller = request.user
 
@@ -71,7 +72,7 @@ def seller_quotations(request):
     except Seller.DoesNotExist:
         quotations = []  # Or redirect / raise error
 
-    return render(request, 'seller_app/seller_quotations.html', {'quotations': quotations})
+    return render(request, 'seller_app/seller_quotations.html', {'slug':slug ,'quotations': quotations})
 
 class SignUpView(CreateView):
     form_class = UserCreationForm

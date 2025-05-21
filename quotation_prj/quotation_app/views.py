@@ -79,13 +79,14 @@ def quotation_page_per_seller(request, slug, client_id):
                     total_amount += product.price * quantity
             quotation.total_amount = total_amount
             quotation.save() # Save quotation to DB        
-            return redirect('generate_pdf', quotation_id=quotation.id)
+            return redirect('generate_pdf', slug=slug, quotation_id=quotation.id)
     else:
         form = QuotatioFormPerSeller(request.POST, seller=seller)  # Pass the seller to the form
    
     return render(request, 'quotation_app/quotation_page_per_seller.html', {'form': form, 'client': client, 'seller':seller})
 
-def generate_pdf(request, quotation_id):
+def generate_pdf(request, slug, quotation_id):
+    seller = get_object_or_404(Seller, slug=slug)
     quotation = get_object_or_404(Quotation, id=quotation_id)
     client = quotation.client
 
@@ -97,7 +98,9 @@ def generate_pdf(request, quotation_id):
     width, height = letter
 
     # Add company logo
-    logo_path = 'quotation_app/static/logo-example.png'  # Path to your logo
+    logo_path = seller.profile_picture.path if seller.profile_picture else 'quotation_app/static/logo-example.png'  # Path to your logo
+    #logo_path = seller.logo.path if seller.logo else 'quotation_app/static/logo-example.png'  # Path to your logo
+    #logo_path = 'quotation_app/static/logo-example.png'  # Path to your logo
     logo = ImageReader(logo_path)
     p.drawImage(logo, 50, height - 100, width=100, height=50, preserveAspectRatio=True)
 

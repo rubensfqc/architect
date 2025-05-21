@@ -27,13 +27,14 @@ urlpatterns = [
     path('', views.home_view, name='home'),  # Set this as the home view
     path('lp', views.landing_page, name='landing_page'),
     path('quotation/<int:client_id>/', views.quotation_page, name='quotation_page'),
-    path('generate-pdf/<int:quotation_id>/', views.generate_pdf, name='generate_pdf'),
+    #path('generate-pdf/<int:quotation_id>/', views.generate_pdf, name='generate_pdf'),
     path('email/', include('email_app.urls')),
     path('pro/', include('seller_app.urls')),
     path('accounts/', include('django.contrib.auth.urls')), # o logout da base.html estah sendo achado por aqui
     #path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
     #path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
     path('pro/<slug:slug>/', views.landing_page_per_seller, name='landing_page_per_seller'),
-    path('pro/<slug:slug>/<int:client_id>', views.quotation_page_per_seller, name='quotation_page_per_seller')
+    path('pro/<slug:slug>/<int:client_id>', views.quotation_page_per_seller, name='quotation_page_per_seller'),
+    path('pro/<slug:slug>/<int:quotation_id>/', views.generate_pdf, name='generate_pdf')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

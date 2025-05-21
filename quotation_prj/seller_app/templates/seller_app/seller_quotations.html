@@ -27,7 +27,7 @@
       <!-- <td>{{ q.products }}</td> -->
       <td>${{ q.total_amount }}</td>
       <td>{{ q.date_created|date:"Y-m-d" }}</td>
-      <td><a href="{% url 'generate_pdf' quotation_id=q.id %}" class="btn btn-light">
+      <td><a href="{% url 'generate_pdf' slug=slug quotation_id=q.id %}" class="btn btn-light">
       Quote #{{ q.id }}</td>
     </tr>
     {% empty %}
