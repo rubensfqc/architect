@@ -10,21 +10,24 @@ seller = Seller.objects.create_user(
     email='ana@example.com',
     password='securepassword123',  # this is hashed automatically
     name='Ana Silva',
-    phone_number='1234567890'
-)
+    phone_number='1234567890',
+    address='123 Av Vieira Souto, Rio de Janeiro, RJ, 22420-002',
+) 
 seller = Seller.objects.create_user(
-    username='bia',
-    email='bia@example.com',
+    username='beto',
+    email='beto@example.com',
     password='securepassword123',  # this is hashed automatically
-    name='Bia Antunes',
-    phone_number='1234567890'
-)
+    name='Beto Carreiro',
+    phone_number='1234567890',
+    address='23 Av Delfim Moreira, Rio de Janeiro, RJ, 21420-002',
+)	
 seller = Seller.objects.create_user(
     username='caio',
     email='caio@example.com',
     password='securepassword123',  # this is hashed automatically
     name='Caio Pereira',
-    phone_number='1234567890'
+    phone_number='1234567890',
+    address='12 Av Paulista, São Paulo, SP, 01311-000',
 )
 print(f"Created seller: {seller} ---Seller ID: {seller.id}")
 
@@ -42,7 +45,7 @@ product = Product.objects.create(
     seller=seller
 )
 
-seller = Seller.objects.get(id=2) 
+seller = Seller.objects.get(id=3) 
 product = Product.objects.create(
     name='Test Product A',
     description='This is a sample product.',
@@ -75,4 +78,4 @@ product = Product.objects.create(
     price=1.99,
     seller=seller
 )
-print(f"Created product: {product} --- Product ID: {product.id}")
+print(f"Created product: {product} --- Product ID: {product.id}") 

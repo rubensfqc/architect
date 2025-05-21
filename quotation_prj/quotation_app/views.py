@@ -11,6 +11,7 @@ from .models import Client, Quotation, Product, QuotationProduct, Seller # Impor
 from .forms import ClientForm, QuotationForm, ProductForm, QuotationProductForm, QuotatioFormPerSeller
 from django.urls import reverse
 from .utils import list_all_urls, format_brazilian_phone
+from textwrap import wrap
 
 def home_view(request):
     urls = list_all_urls()
@@ -106,14 +107,17 @@ def generate_pdf(request, slug, quotation_id):
     p.setFont("Helvetica-Bold", 16)
     p.drawString(260, height - 80, seller.name)
     p.setFont("Helvetica", 12)
-    p.drawString(260, height - 100, "123 Business Street")
-    p.drawString(260, height - 120, "City, State, ZIP Code")
-    p.drawString(260, height - 140, "phone: " + format_brazilian_phone(seller.phone_number))
-    p.drawString(260, height - 160, "e-mail: "+ seller.email)
+    p.drawString(260, height - 100, "phone: " + format_brazilian_phone(seller.phone_number))
+    p.drawString(260, height - 120, "e-mail: "+ seller.email)
+    #p.drawString(260, height - 140, seller.address)
+    #p.drawString(260, height - 160, "")
+    text_object = p.beginText(260, height - 140)
+    text_object.textLines(wrap(seller.address, width=50))
+    p.drawText(text_object)
 
     # Add RFQ title
     p.setFont("Helvetica-Bold", 18)
-    p.drawString(50, height - 200, "Request for Quotation (RFQ)")
+    p.drawString(50, height - 200, "Request for Quotation #" + str(quotation.id))
 
     # Add client information
     p.setFont("Helvetica", 12)
