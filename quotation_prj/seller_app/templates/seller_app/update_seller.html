@@ -17,31 +17,48 @@
  <button type="submit">Update</button> -->
  
 
+{% load widget_tweaks %}
+
 <form method="post" enctype="multipart/form-data">
- {% csrf_token %}
+    {% csrf_token %}
 
- <div class="form-group">
- <label for="{{ form.email.id_for_label }}">Email</label>
- {{ form.email|add_class:"form-control"|attr:"placeholder:Enter your email" }}
- </div>
+    <div class="form-group">
+        <label for="{{ form.email.id_for_label }}">Email</label>
+        {{ form.email|add_class:"form-control"|attr:"placeholder:Enter your email" }}
+    </div>
 
- <div class="form-group">
- <label for="{{ form.name.id_for_label }}">Name</label>
- {{ form.name|add_class:"form-control"|attr:"placeholder:Enter your name" }}
- </div>
+    <div class="form-group">
+        <label for="{{ form.name.id_for_label }}">Name</label>
+        {{ form.name|add_class:"form-control"|attr:"placeholder:Enter your name" }}
+    </div>
 
- <div class="form-group">
- <label for="{{ form.phone_number.id_for_label }}">Phone Number</label>
- {{ form.phone_number|add_class:"form-control"|attr:"placeholder:Enter your phone number" }}
- </div>
-
- <div class="form-group">
- <label for="{{ form.profile_picture.id_for_label }}">Profile Picture</label>
- {{ form.profile_picture|add_class:"form-control-file" }}
- </div>
-
- <button type="submit" class="btn btn-primary">Update</button>
+    <div class="form-group">
+        <label for="{{ form.phone_number.id_for_label }}">Phone Number</label>
+        {{ form.phone_number|add_class:"form-control"|attr:"placeholder:Enter your phone number" }}
+    </div>
+<div><br></div>
+    <div class="form-group">
+        <label for="{{ form.profile_picture.id_for_label }}">Profile Picture</label>
+        {{ form.profile_picture|add_class:"form-control-file" }}
+        <br>
+        <img id="profile-picture-preview" src="#" alt="Image Preview" style="display:none; max-height: 200px; margin-top: 10px;" />
+    </div>
+<div><br></div>
+    <button type="submit" class="btn btn-primary">Update</button>
 </form>
+
+<script>
+document.getElementById('{{ form.profile_picture.id_for_label }}').addEventListener('change', function(event) {
+    const [file] = event.target.files;
+    const preview = document.getElementById('profile-picture-preview');
+    if (file) {
+        preview.src = URL.createObjectURL(file);
+        preview.style.display = 'block';
+    } else {
+        preview.style.display = 'none';
+    }
+});
+</script>
 
 
 
