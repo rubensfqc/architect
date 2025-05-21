@@ -2,6 +2,7 @@ from django.db import models
 from django.core.validators import RegexValidator
 from django.utils.text import slugify
 from seller_app.models import Seller
+from django.utils import timezone
 
 # Validator for numbers in the format "+11 91234-5678" or "11 91234-5678"
 brazilian_phone_validator = RegexValidator(
@@ -48,6 +49,7 @@ class Quotation(models.Model):
     client = models.ForeignKey(Client, on_delete=models.CASCADE)
     products = models.ManyToManyField(Product, through='QuotationProduct')
     total_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    date_created = models.DateTimeField(default=timezone.now) # Automatically set on creation
 
 class QuotationProduct(models.Model):
     quotation = models.ForeignKey(Quotation, on_delete=models.CASCADE)

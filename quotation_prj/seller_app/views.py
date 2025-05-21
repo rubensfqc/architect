@@ -66,6 +66,8 @@ def seller_quotations(request):
         # Get quotations for those clients
         quotations = Quotation.objects.filter(client_id__in=client_ids).prefetch_related('products', 'client')
         #quotations = Quotation.objects.filter(seller=seller).select_related('client').order_by('-date_created')
+        print(f"DEBUG quotations: {quotations} details")
+        
     except Seller.DoesNotExist:
         quotations = []  # Or redirect / raise error
 

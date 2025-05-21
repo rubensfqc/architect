@@ -14,18 +14,21 @@
   <thead>
     <tr>
       <th>Client</th>
-      <th>Product</th>
+      <!-- <th>Product</th> -->
       <th>Amount</th>
       <th>Date</th>
+      <th>Quote</th>
     </tr>
   </thead>
   <tbody>
     {% for q in quotations %}
     <tr>
       <td>{{ q.client.name }}</td>
-      <td>{{ q.product }}</td>
-      <td>${{ q.amount }}</td>
+      <!-- <td>{{ q.products }}</td> -->
+      <td>${{ q.total_amount }}</td>
       <td>{{ q.date_created|date:"Y-m-d" }}</td>
+      <td><a href="{% url 'generate_pdf' quotation_id=q.id %}" class="btn btn-light">
+      Quote #{{ q.id }}</td>
     </tr>
     {% empty %}
     <tr>

@@ -18,6 +18,8 @@ from django.contrib import admin
 from django.urls import path, include
 from quotation_app import views
 from django.contrib.auth import views as auth_views
+from django.conf.urls.static import static
+from quotation_prj import settings
 #from email_app import views
 
 urlpatterns = [
@@ -33,4 +35,5 @@ urlpatterns = [
     #path('logout/', auth_views.LogoutView.as_view(next_page='login'), name='logout'),
     path('pro/<slug:slug>/', views.landing_page_per_seller, name='landing_page_per_seller'),
     path('pro/<slug:slug>/<int:client_id>', views.quotation_page_per_seller, name='quotation_page_per_seller')
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
