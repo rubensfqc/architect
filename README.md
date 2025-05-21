@@ -1,5 +1,6 @@
 pla4uDev
 vps58902.publiccloud.com.br (191.252.93.137)
+ssh root@191.252.93.137
 
 # quotation
 App to Request for Quotation
