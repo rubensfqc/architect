@@ -111,9 +111,12 @@ def generate_pdf(request, slug, quotation_id):
     p.drawString(260, height - 120, "e-mail: "+ seller.email)
     #p.drawString(260, height - 140, seller.address)
     #p.drawString(260, height - 160, "")
-    text_object = p.beginText(260, height - 140)
-    text_object.textLines(wrap(seller.address, width=50))
-    p.drawText(text_object)
+    if seller.address:
+        text_object = p.beginText(260, height - 140)
+        text_object.textLines(wrap(seller.address, width=50))
+        p.drawText(text_object)
+    else:
+        p.drawString(260, height - 140, "")
 
     # Add RFQ title
     p.setFont("Helvetica-Bold", 18)
