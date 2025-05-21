@@ -155,14 +155,30 @@ def generate_pdf(request, slug, quotation_id):
         ('GRID', (0, 0), (-1, -1), 1, colors.black),
     ]))
 
+    current_y = height - 300  # Adjust this based on how much content is before the table
+    table_width, table_height = table.wrap(0, 0)
+    # Ensure enough space exists
+    if current_y - table_height < 50:  # Avoid drawing off the page
+        p.showPage()
+        current_y = height - 50  # Start fresh on a new page
+
     # Draw the table on the PDF
     table.wrapOn(p, width - 100, height)
-    table.drawOn(p, 50, height - 400)
+    #table.drawOn(p, 50, height - 400)
+    table.drawOn(p, 50, current_y - table_height)
+
+    # Calculate where to draw the thank-you message (below table)
+    thank_you_y = current_y - table_height - 30  # 30px space below table
+
+    # Check if there's space; if not, add new page
+    if thank_you_y < 50:
+        p.showPage()
+        thank_you_y = height - 100  # new page start
 
     # Add a thank-you message
     p.setFont("Helvetica", 12)
-    p.drawString(50, height - 450, "Thank you for your request. We will get back to you shortly.")
-
+    p.drawString(50, thank_you_y, "Thank you for your request. We will get back to you shortly.")
+    
     # Close the PDF object
     p.showPage()
     p.save()
