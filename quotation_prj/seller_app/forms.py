@@ -17,3 +17,9 @@ class ProductForm(forms.ModelForm):
         'description': forms.Textarea(attrs={'class': 'w-full p-2 border rounded', 'rows': 4}),
         'price': forms.NumberInput(attrs={'class': 'w-full p-2 border rounded'}),
         }
+
+class SellerUpdateForm(forms.ModelForm):
+    class Meta:
+        model = Seller
+        fields = ['email', 'name', 'phone_number', 'profile_picture']
+

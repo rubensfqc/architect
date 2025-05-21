@@ -8,7 +8,7 @@ from django.contrib import messages
 from seller_app.models import Seller
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, SellerUpdateForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
 
@@ -95,3 +95,16 @@ def register(request):
     else:
         form = CustomUserCreationForm()
     return render(request, 'seller_app/register.html', {'form': form})
+
+
+
+@login_required
+def update_seller(request):
+    if request.method == 'POST':
+        form = SellerUpdateForm(request.POST, request.FILES, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('seller_app/seller_dashboard.html')  # Redirect to a profile page or any other page
+    else:
+        form = SellerUpdateForm(instance=request.user)
+    return render(request, 'seller_app/update_seller.html', {'form': form})
