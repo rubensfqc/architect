@@ -17,6 +17,8 @@ Local PC
 
 Dev Server
 
+`Successfully installed gunicorn-23.0.0 packaging-25.0`
+
 `(venv) [root@vps58902 quotation_prj]# django-admin --version`
 
 `4.2.21`
