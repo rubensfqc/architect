@@ -2,17 +2,54 @@ pla4uDev
 vps58902.publiccloud.com.br (191.252.93.137)
 ssh root@191.252.93.137
 
-# quotation
+# QuotationAPP
 App to Request for Quotation
 
 Pasta principal do projeto eh a **agendME**, que contem o *settings.py* 
 
 ### Versions used
 
+Local PC
+
 `>> python -c "import django; print(django.get_version())" >> 5.1.6`
 
 `>python --version >> Python 3.13.2`
 
+Dev Server
+
+`(venv) [root@vps58902 quotation_prj]# django-admin --version`
+
+`4.2.21`
+
+`(venv) [root@vps58902 quotation_prj]# python -c "import django; print(django.get_version())"`
+
+`4.2.21`
+
+`(venv) [root@vps58902 quotation_prj]# python --version`
+
+`Python 3.9.21`
+
+---
+# Installed Packages
+
+### Create the PDF Generation Page
+Install reportlab for PDF Generation:
+```
+pip install reportlab
+```
+### For security and obfuscation of tokens
+
+```
+pip install python-decouple
+```
+
+### For more betifull forms
+
+```
+pip install django-widget-tweaks
+```
+---
+---
 ### Pra rodar  
 ```
 python manage.py runserver
@@ -64,26 +101,12 @@ Depois cd para a pasta do projeto e criar o app
 
 `python manage.py startapp quotation_app`
 
-Create the PDF Generation Page
-Install reportlab for PDF Generation:
-
-```
-pip install reportlab
-```
 
 For the record, superuser created `admin:abc123`
 
 ```
 python manage.py createsuperuser
 ```
-
-### For security and obfuscation of tokens
-
-`pip install python-decouple`
-
-### For beatier forms
-
-`pip install django-widget-tweaks`
 
 ### Websire benchmark
 https://www.offri.nl/
