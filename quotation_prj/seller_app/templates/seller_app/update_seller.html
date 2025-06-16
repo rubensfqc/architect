@@ -7,6 +7,13 @@
 {% block content %}
 {% load widget_tweaks %}
 
+
+ <br>
+       <a href="{% url 'seller_dashboard' %}" class="btn btn-secondary">Dashboard</a> &nbsp;
+       <a href="{% url 'seller_quotations' %}" class="btn btn-secondary">My Quotations</a> &nbsp;
+       <a href="{% url 'update_seller' %}" class="btn btn-primary">Update my profile</a>
+
+<br><br>
 <title>Update Seller Information</title>
 </head>
 <body>
@@ -96,10 +103,5 @@ document.getElementById('{{ form.profile_picture.id_for_label }}').addEventListe
 });
 </script>
 
- <!-- Add Product Form -->
-       <br>
-        <h4>Options</h4>
-       <a href="{% url 'seller_dashboard' %}" class="btn btn-secondary">Back to dashboard</a> &nbsp;
-       <a href="{% url 'seller_quotations' %}" class="btn btn-secondary">My Quotations</a> &nbsp;
 
 {% endblock %}
