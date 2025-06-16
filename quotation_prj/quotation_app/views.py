@@ -12,6 +12,22 @@ from .forms import ClientForm, QuotationForm, ProductForm, QuotationProductForm,
 from django.urls import reverse
 from .utils import list_all_urls, format_brazilian_phone
 from textwrap import wrap
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+from reportlab.lib.pagesizes import A4
+import os
+from django.conf import settings
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
+
+
+# Full path to the font file
+font_path = os.path.join(settings.BASE_DIR, 'quotation_app', 'static', 'fonts', 'DejaVuSans.ttf')
+
+# Register font
+pdfmetrics.registerFont(TTFont('DejaVuSans', font_path))
+# Register the UTF-8 compatible font
+#pdfmetrics.registerFont(TTFont('DejaVuSans', 'static/fonts/DejaVuSans.ttf'))
 
 def home_view(request):
     urls = list_all_urls()
@@ -95,8 +111,8 @@ def generate_pdf(request, slug, quotation_id):
     buffer = BytesIO()
 
     # Create the PDF object
-    p = canvas.Canvas(buffer, pagesize=letter)
-    width, height = letter
+    p = canvas.Canvas(buffer, pagesize=A4)
+    width, height = A4
 
     # Add company logo
     logo_path = seller.profile_picture.path if seller.profile_picture else 'media/profile_pics/logoU_0.25.png'  # Path to your logo
@@ -104,16 +120,19 @@ def generate_pdf(request, slug, quotation_id):
     p.drawImage(logo, 50, height - 150, width=200, height=100, preserveAspectRatio=True)
 
     # Add company information
-    p.setFont("Helvetica-Bold", 16)
+    p.setFont("DejaVuSans", 16)
     p.drawString(260, height - 80, seller.name)
-    p.setFont("Helvetica", 12)
+
+    p.setFont("DejaVuSans", 12)
     p.drawString(260, height - 100, "phone: " + format_brazilian_phone(seller.phone_number))
-    p.drawString(260, height - 120, "e-mail: "+ seller.email)
-    #p.drawString(260, height - 140, seller.address)
-    #p.drawString(260, height - 160, "")
+    p.drawString(260, height - 120, "e-mail: " + seller.email)
+
     if seller.address:
         text_object = p.beginText(260, height - 140)
-        text_object.textLines(wrap(seller.address, width=50))
+        # Make sure address is a string and in UTF-8 (should be by default in Python 3)
+        wrapped_lines = wrap(seller.address, width=50)
+        text_object.setFont("DejaVuSans", 12)
+        text_object.textLines(wrapped_lines)
         p.drawText(text_object)
     else:
         p.drawString(260, height - 140, "")
