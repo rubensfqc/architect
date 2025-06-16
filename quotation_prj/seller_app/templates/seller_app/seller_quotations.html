@@ -5,9 +5,12 @@
     
     {% block content %}
 
- 
+       <br>
+       <a href="{% url 'seller_dashboard' %}" class="btn btn-secondary">Dashboard</a> &nbsp;
+       <a href="{% url 'seller_quotations' %}" class="btn btn-primary">My Quotations</a> &nbsp;
+       <a href="{% url 'update_seller' %}" class="btn btn-secondary">Update my profile</a>
 
-
+<br><br>
 <h2>Your Client Quotations</h2>
 
 <table class="table table-striped table-hover">
@@ -39,8 +42,5 @@
 </table>
 
        <!-- Add Product Form -->
-       <h4>Options</h4>
-       <a href="{% url 'seller_dashboard' %}" class="btn btn-secondary">Back to dashboard</a> &nbsp;
-       <a href="{% url 'update_seller' %}" class="btn btn-secondary">Update my profile</a>
 
 {% endblock %}

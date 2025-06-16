@@ -2,11 +2,30 @@
 {% load static %}
 
 {% block title %}Seller Dashboard{% endblock %}
-    
-    {% block content %}
+      {% block content %}
 
-    
-    <br>
+     <br>
+       
+       <a href="{% url 'seller_dashboard' %}" class="btn btn-primary">Dashboard</a> &nbsp;
+       <a href="{% url 'seller_quotations' %}" class="btn btn-secondary">My Quotations</a> &nbsp;
+       <a href="{% url 'update_seller' %}" class="btn btn-secondary">Update my profile</a>
+  
+             <br><br> 
+      <h5>Share the link below with your clients to start automating your quotes:</h5> 
+<p>
+  Your public page URL: 
+  <a href="{{ request.scheme }}://{{ request.get_host }}{% url 'landing_page_per_seller' slug=seller.slug %}">
+   {{ request.scheme }}://{{ request.get_host }}{% url 'landing_page_per_seller' slug=seller.slug %}
+  </a>
+
+  &nbsp;&nbsp;
+      <a href="{% url 'landing_page_per_seller' slug=seller.slug %}" class="btn btn-info">
+      Go to My Public Page
+      </a>
+      </p>
+
+
+
     <!-- Product List -->
     <h2>Product List</h2>
   
@@ -47,22 +66,5 @@
        <h4>Add Product</h4>
        <a href="{% url 'add_product' %}" class="btn btn-success">Add New Product</a> &nbsp;
 
-       <br><br>
-        <h4>Options</h4>
-       <a href="{% url 'seller_quotations' %}" class="btn btn-secondary">My Quotations</a> &nbsp;
-       <a href="{% url 'update_seller' %}" class="btn btn-secondary">Update my profile</a>
 
-      <br><br> 
-      <h5>Share the link below with your clients to start automating your quotes:</h5> 
-<p>
-  Your public page URL: 
-  <a href="{{ request.scheme }}://{{ request.get_host }}{% url 'landing_page_per_seller' slug=seller.slug %}">
-   {{ request.scheme }}://{{ request.get_host }}{% url 'landing_page_per_seller' slug=seller.slug %}
-  </a>
-
-  &nbsp;&nbsp;
-      <a href="{% url 'landing_page_per_seller' slug=seller.slug %}" class="btn btn-info">
-      Go to My Public Page
-      </a>
-      </p>
 {% endblock %}
