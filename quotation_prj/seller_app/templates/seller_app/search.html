@@ -1,17 +1,41 @@
 {% extends 'quotation_app/base.html' %}
 {% load static %}
+{% load widget_tweaks %}
 
-{% block title %}Search Page{% endblock %}
+{% block title %}Search Seller{% endblock %}
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
       {% block content %}
 
-      <h2>Search for a Seller by Slug</h2>
-<form method="get" action="{% url 'slug_search' %}">
-    <input type="text" name="q" placeholder="Enter seller slug" required>
-    <button type="submit">Search</button>
-</form>
+<body class="bg-light">
 
-{% if error %}
-    <p style="color: red;">{{ error }}</p>
-{% endif %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow rounded-4">
+                <div class="card-body">
+                    <h4 class="card-title text-center mb-4">Search Seller by Slug</h4>
+                    
+                    <form method="get" action="{% url 'slug_search' %}">
+                        <div class="mb-3">
+                            {% with request.GET.q as current_query %}
+                                <input type="text" name="q" value="{{ current_query }}" class="form-control form-control-lg rounded-pill" placeholder="e.g. john-doe" required>
+                            {% endwith %}
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg rounded-pill">Search</button>
+                        </div>
+                    </form>
+
+                    {% if error %}
+                        <div class="alert alert-danger mt-3 rounded-pill text-center">
+                            {{ error }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
