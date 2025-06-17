@@ -115,3 +115,28 @@ def update_seller(request):
     else:
         form = SellerUpdateForm(instance=request.user)
     return render(request, 'seller_app/update_seller.html', {'form': form, 'seller':seller})
+
+
+def slug_search(request):
+    """
+    Search for a seller by slug.
+    If the slug exists, redirect to the landing page for that seller.
+    If not, return an error message.
+    """
+    if request.method == 'GET' and 'q' in request.GET:
+        query = request.GET['q']
+        try:
+            seller = get_object_or_404(Seller, slug=query)
+            return redirect('landing_page_per_seller', slug=seller.slug)
+        except Seller.DoesNotExist:
+            return render(request, 'seller_app/search.html', {'error': 'Seller not found.'})
+    
+    # If no query is provided, just render the search page
+    return render(request, 'seller_app/search.html')
+
+    """     query = request.GET.get('q', '')
+    if query:
+        # Validate existence
+        get_object_or_404(Seller, slug=query)
+        return redirect('slug_search', slug=query)
+    return render(request, 'seller_app/search.html') """
