@@ -121,22 +121,17 @@ def slug_search(request):
     """
     Search for a seller by slug.
     If the slug exists, redirect to the landing page for that seller.
-    If not, return an error message.
+    If not, show a popup error message.
     """
     if request.method == 'GET' and 'q' in request.GET:
-        query = request.GET['q']
+        query = request.GET['q'].strip()
         try:
-            seller = get_object_or_404(Seller, slug=query)
+            seller = Seller.objects.get(slug=query)
             return redirect('landing_page_per_seller', slug=seller.slug)
         except Seller.DoesNotExist:
-            return render(request, 'seller_app/search.html', {'error': 'Seller not found.'})
-    
-    # If no query is provided, just render the search page
-    return render(request, 'seller_app/search.html')
+            return render(request, 'seller_app/search.html', {
+                'error': 'Seller not found.',
+                'query': query
+            })
 
-    """     query = request.GET.get('q', '')
-    if query:
-        # Validate existence
-        get_object_or_404(Seller, slug=query)
-        return redirect('slug_search', slug=query)
-    return render(request, 'seller_app/search.html') """
+    return render(request, 'seller_app/search.html')
