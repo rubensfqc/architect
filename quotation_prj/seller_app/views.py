@@ -10,7 +10,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView
 from .forms import CustomUserCreationForm, SellerUpdateForm
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden, JsonResponse
 
 @login_required
 def seller_dashboard(request):
@@ -135,3 +135,11 @@ def slug_search(request):
             })
 
     return render(request, 'seller_app/search.html')
+
+
+def slug_autocomplete(request):
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':
+        query = request.GET.get('term', '')
+        slugs = list(Seller.objects.filter(slug__icontains=query).values_list('slug', flat=True)[:10])
+        return JsonResponse(slugs, safe=False)
+    return JsonResponse([], safe=False)

@@ -12,6 +12,9 @@
             padding-top: 60px; /* Adjust for fixed navbar */
         }
     </style>
+        <!-- 🎯 Add this block so child templates can insert head content -->
+    {% block extra_head %}
+    {% endblock %}
 </head>
 <body>
     <!-- Navigation Bar (optional) -->
