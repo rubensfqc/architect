@@ -115,7 +115,9 @@ def generate_pdf(request, slug, quotation_id):
     width, height = A4
 
     # Add company logo
-    logo_path = seller.profile_picture.path if seller.profile_picture else 'media/profile_pics/logoU_0.25.png'  # Path to your logo
+    #print("Debug: MEDIA_ROOT:", settings.MEDIA_ROOT)
+    #print("Debug: MEDIA_ROOTcompleto :", settings.MEDIA_ROOT / 'profile_pics' / 'logoU_0.25.png')
+    logo_path = seller.profile_picture.path if seller.profile_picture else settings.MEDIA_ROOT / 'profile_pics' / 'logoU_0.25.png'  # Path to your logo
     logo = ImageReader(logo_path)
     p.drawImage(logo, 50, height - 150, width=200, height=100, preserveAspectRatio=True)
 
