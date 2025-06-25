@@ -50,7 +50,6 @@ pip install python-decouple
 ```
 pip install django-widget-tweaks
 ```
-
 ### Needed for translation
 
 🔧 Ubuntu/Debian (Linux)
@@ -63,6 +62,14 @@ sudo apt update
 sudo apt install gettext
 ```
 ---
+## Help Pages used to proper configure the Python Anywhere
+
+https://help.pythonanywhere.com/pages/VirtualEnvForWebsites
+
+https://help.pythonanywhere.com/pages/DjangoAdminCSSNotWorking
+
+https://help.pythonanywhere.com/pages/AccessingMySQLFromOutsidePythonAnywhere/
+
 ---
 ### Pra rodar  
 ```
