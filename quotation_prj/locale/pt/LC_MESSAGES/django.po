@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-17 21:06+0200\n"
+"POT-Creation-Date: 2025-06-25 07:29+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,13 +18,63 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
+#: .\email_app\forms.py:10
+msgid "Name"
+msgstr "Nome"
+
+#: .\email_app\forms.py:11
+msgid "Email"
+msgstr "Email"
+
+#: .\email_app\templates\email_app\email_page.html:5
+#: .\email_app\templates\email_app\email_page.html:9
+msgid "Contact Us"
+msgstr "Entre em contato"
+
+#: .\email_app\templates\email_app\email_page.html:13
+msgid "Submit"
+msgstr "Enviar"
+
+#: .\email_app\templates\email_app\email_success.html:5
+msgid "Success"
+msgstr "Sucesso"
+
 #: .\email_app\templates\email_app\email_success.html:8
 msgid "Thank you!"
 msgstr "Obrigado!"
 
+#: .\email_app\templates\email_app\email_success.html:9
+msgid "Your message has been sent successfully."
+msgstr "Sua mensagem foi enviada com sucesso."
+
 #: .\email_app\views.py:15
 msgid "Thank you for contacting us!"
 msgstr "Obrigado por entrar em contato conosco"
+
+#: .\email_app\views.py:17
+#, python-brace-format
+msgid ""
+"Hello {name},\n"
+"\n"
+"Thank you for reaching out. We will get back to you soon.\n"
+"\n"
+"Best regards,\n"
+"My Team"
+msgstr ""
+"Olá {name},\n"
+"\n"
+"Obrigado por entrar em contato. Retornaremos em breve.\n"
+"\n"
+"Cordialmente,\n"
+"Time Plat4U"
+
+#: .\quotation_app\templates\quotation_app\base.html:25
+msgid "Request for Quotation App"
+msgstr "App de cotação"
+
+#: .\quotation_app\templates\quotation_app\base.html:69
+msgid "visit"
+msgstr "acesse"
 
 #: .\quotation_prj\settings.py:124
 msgid "English"
@@ -52,26 +102,26 @@ msgstr ""
 
 #: .\venv\Lib\site-packages\click\core.py:1140
 msgid "Options"
-msgstr ""
+msgstr "Opções"
 
 #: .\venv\Lib\site-packages\click\core.py:1202
 #, python-brace-format
 msgid "Got unexpected extra argument ({args})"
 msgid_plural "Got unexpected extra arguments ({args})"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Recebemos um argumento a mais que o esperado ({args})"
+msgstr[1] "Recebemos mais argumentos que o esperado ({args})"
 
 #: .\venv\Lib\site-packages\click\core.py:1221
 msgid "DeprecationWarning: The command {name!r} is deprecated.{extra_message}"
-msgstr ""
+msgstr "DeprecationWarning: O comando {name!r} é obsoleto.{extra_message}"
 
 #: .\venv\Lib\site-packages\click\core.py:1405
 msgid "Aborted!"
-msgstr ""
+msgstr "Abortado!"
 
 #: .\venv\Lib\site-packages\click\core.py:1779
 msgid "Commands"
-msgstr ""
+msgstr "Comandos"
 
 #: .\venv\Lib\site-packages\click\core.py:1810
 msgid "Missing command."

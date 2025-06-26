@@ -2,10 +2,10 @@
 {% load static %}
 {% load i18n %}
 
-{% block title %}Success{% endblock %}
+{% block title %}{% trans "Success" %}{% endblock %}
     
     {% block content %}
     <h1>{% trans "Thank you!" %}</h1>
-    <p>Your message has been sent successfully.</p>
+    <p>{% trans "Your message has been sent successfully." %}</p>
 
 {% endblock %}

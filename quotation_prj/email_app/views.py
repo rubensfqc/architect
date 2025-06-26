@@ -13,7 +13,8 @@ def email_page(request):
 
             # Send a custom email
             subject = _('Thank you for contacting us!')
-            message = f'Hello {user_message.name},\n\nThank you for reaching out. We will get back to you soon.\n\nBest regards,\nMy Team'
+            #message = f'Hello {user_message.name},\n\nThank you for reaching out. We will get back to you soon.\n\nBest regards,\nMy Team'
+            message = _('Hello {name},\n\nThank you for reaching out. We will get back to you soon.\n\nBest regards,\nMy Team').format(name=user_message.name)
             from_email = 'contact.plat4u@gmail.com'  # Replace with your email
             recipient_list = [user_message.email]
 
