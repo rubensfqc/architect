@@ -1,16 +1,17 @@
 {% extends 'quotation_app/base.html' %}
 {% load static %}
+{% load i18n %}
 
 {% block title %}Home page - Available pages in the APP{% endblock %}
     
     {% block content %}
 
-    <h1>Available Pages</h1>
+    <h1>{% trans "Available Pages" %}</h1>
     <ul>
         {% for name, url in urls %}
             <li><a href="{{ url }}">{{ name }}</a></li>
         {% empty %}
-            <li>No pages found.</li>
+            <li>{% trans "No pages found." %}</li>
         {% endfor %}
     </ul>
 

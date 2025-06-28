@@ -1,16 +1,24 @@
 {% extends 'quotation_app/base.html' %}
 {% load static %}
+{% load i18n %}
 
-
-{% block title %}Quotation Page per seller{% endblock %}
+{% block title %}{% trans "Quotation Page per seller" %}{% endblock %}
 
 {% block content %}
 {% load widget_tweaks %}
 
 
-    <h1>Quotation for client: {{ client.name }}</h1>
+<h2>
+  {% blocktrans with client_name=client.name %}
+    Quotation for client: {{ client_name }}
+  {% endblocktrans %}
+</h2>
 
-    <h2>Products from Seller: {{ seller.name }}</h2>
+<h2>
+  {% blocktrans with seller_name=seller.name %}
+    Products from Seller: {{ seller_name }}
+  {% endblocktrans %}
+</h2>
     
  <form method="post" class="mt-4">
     {% csrf_token %}
@@ -18,8 +26,8 @@
     <table class="table table-bordered table-striped table-hover">
         <thead class="thead-dark">
             <tr>
-                <th>Product</th>
-                <th>Quantity</th>
+                <th>{% trans "Product" %}</th>
+                <th>{% trans "Quantity" %}</th>
             </tr>
         </thead>
         <tbody>
@@ -32,7 +40,7 @@
         </tbody>
     </table>
 
-    <button type="submit" class="btn btn-success">Generate Quotation</button>
+    <button type="submit" class="btn btn-success">{% trans "Generate Quotation" %}</button>
 </form>
 
 {% endblock %}

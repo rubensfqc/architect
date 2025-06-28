@@ -1,23 +1,36 @@
 from django import forms
 from .models import Client, Quotation, Product, QuotationProduct
-from seller_app.models import Seller  # Adjust the import based on your app name
+from seller_app.models import Seller
+from django.utils.translation import gettext_lazy as _
 
 class ClientForm(forms.ModelForm):
     class Meta:
         model = Client
         fields = ['name', 'email', 'whatsapp']
+        labels = {
+            'name': _('Name'),
+            'email': _('Email'),
+            'whatsapp': _('WhatsApp'),
+        }
 
     def clean_whatsapp(self):
         phone = self.cleaned_data['whatsapp']
         phone = ''.join(filter(str.isdigit, phone))  # Remove non-numeric characters
         if len(phone) != 11:
-            raise forms.ValidationError("Enter a valid Brazilian phone number (e.g., 11 91234-5678)")
+            raise forms.ValidationError(
+                _("Enter a valid Brazilian phone number (e.g., 11 91234-5678)")
+            )
         return phone  # Store only digits
     
 class ProductForm(forms.ModelForm):
     class Meta:
         model = Product
         fields = ['name', 'price', 'description']
+        labels = {
+            'name': _('Product Name'),
+            'price': _('Price'),
+            'description': _('Description'),
+        }
     
     def __init__(self, *args, **kwargs):
         self.seller = kwargs.pop('seller', None)  # Get seller from view
@@ -31,7 +44,8 @@ class ProductForm(forms.ModelForm):
         return product
 
 class QuotationProductForm(forms.ModelForm):
-    product = forms.ModelChoiceField(queryset=Product.objects.none(), empty_label="Select a product")
+    product = forms.ModelChoiceField(queryset=Product.objects.none(), empty_label=_("Select a product"),
+        label=_("Product"))
     
     def __init__(self, *args, **kwargs):
         seller = kwargs.pop('seller', None)  # Get the seller_id from kwargs
@@ -48,6 +62,10 @@ class QuotationProductForm(forms.ModelForm):
     class Meta:
         model = QuotationProduct
         fields = ['product', 'quantity']
+        labels = {
+            'product': _('Product'),
+            'quantity': _('Quantity'),
+        }
 
 
 class QuotationForm(forms.Form):
@@ -84,7 +102,7 @@ class QuotatioFormPerSeller(forms.Form):
         products = Product.objects.filter(seller=seller)
         for product in products:
             self.fields[f'quantity_{product.id}'] = forms.IntegerField(
-                label=f"{product.name}",  # you can include product.price here too
+                label=_("{name}").format(name=product.name),  # you can include product.price here too
                 min_value=0,
                 required=False
             )
