@@ -1,14 +1,15 @@
 
 {% extends "quotation_app/base_auth.html" %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Login Seller {% endblock %} 
+{% block title %}{% trans "Register Seller" %}{% endblock %} 
 
 
 {% block content %}
 
 <!-- templates/registration/login.html -->
-<h1>Register</h1>
+<h1>{% trans "Register" %}</h1>
     
 <style>
     .form-container {
@@ -18,7 +19,7 @@
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Register</button>
+    <button type="submit">{% trans "Register" %}</button>
 </form>
 
 

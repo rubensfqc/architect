@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-28 08:07+0200\n"
+"POT-Creation-Date: 2025-06-28 19:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,10 +20,14 @@ msgstr ""
 
 #: .\email_app\forms.py:10 .\quotation_app\forms.py:11
 #: .\quotation_app\templates\quotation_app\landing_page_per_seller.html:17
+#: .\seller_app\models.py:9
+#: .\seller_app\templates\seller_app\add_product.html:13
+#: .\seller_app\templates\seller_app\edit_product.html:13
 msgid "Name"
 msgstr "Nome"
 
-#: .\email_app\forms.py:11 .\quotation_app\forms.py:12
+#: .\email_app\forms.py:11 .\quotation_app\forms.py:12 .\seller_app\forms.py:13
+#: .\seller_app\forms.py:39 .\seller_app\models.py:8
 msgid "Email"
 msgstr "Email"
 
@@ -78,15 +82,19 @@ msgstr "WhatsApp"
 msgid "Enter a valid Brazilian phone number (e.g., 11 91234-5678)"
 msgstr "Digite um numero de telefone válido  (ex., 11 91234-5678)"
 
-#: .\quotation_app\forms.py:30
+#: .\quotation_app\forms.py:30 .\seller_app\forms.py:24
 msgid "Product Name"
 msgstr "Nome do produto"
 
-#: .\quotation_app\forms.py:31
+#: .\quotation_app\forms.py:31 .\seller_app\forms.py:26
+#: .\seller_app\templates\seller_app\add_product.html:21
+#: .\seller_app\templates\seller_app\edit_product.html:21
 msgid "Price"
 msgstr "Preço"
 
-#: .\quotation_app\forms.py:32
+#: .\quotation_app\forms.py:32 .\seller_app\forms.py:25
+#: .\seller_app\templates\seller_app\add_product.html:17
+#: .\seller_app\templates\seller_app\edit_product.html:17
 msgid "Description"
 msgstr "Descrição"
 
@@ -123,8 +131,8 @@ msgid "visit"
 msgstr "acesse"
 
 #: .\quotation_app\templates\quotation_app\base_auth.html:7
-msgid "Password Reset"
-msgstr "Redefinir senha"
+msgid "Authentication"
+msgstr "Autenticação usuário"
 
 #: .\quotation_app\templates\quotation_app\home.html:9
 msgid "Available Pages"
@@ -150,6 +158,7 @@ msgid "Quotation Page per seller"
 msgstr "Página de catálogo"
 
 #: .\quotation_app\templates\quotation_app\quotation_page_per_seller.html:12
+#, python-format
 msgid ""
 "\n"
 "    Quotation for client: %(client_name)s\n"
@@ -190,15 +199,88 @@ msgstr "Inglês"
 msgid "Portuguese"
 msgstr "Português"
 
+#: .\seller_app\forms.py:12
+msgid "Username"
+msgstr "Nome de usuário"
+
+#: .\seller_app\forms.py:14 .\seller_app\forms.py:41 .\seller_app\models.py:10
+msgid "Phone Number"
+msgstr "Número de Celular"
+
+#: .\seller_app\forms.py:15
+msgid "Password"
+msgstr "Senha"
+
+#: .\seller_app\forms.py:16
+msgid "Password confirmation"
+msgstr "Confirmação de senha"
+
+#: .\seller_app\forms.py:40
+msgid "Full Name"
+msgstr "Nome completo ou da empresa"
+
+#: .\seller_app\forms.py:42 .\seller_app\models.py:11
+msgid "Profile Picture"
+msgstr "Foto de perfil"
+
+#: .\seller_app\forms.py:43 .\seller_app\models.py:12
+msgid "Address"
+msgstr "Endereço"
+
+#: .\seller_app\templates\seller_app\add_product.html:5
+#| msgid "Add Product Page"
+msgid "Add product"
+msgstr "Adicionar produto"
+
+#: .\seller_app\templates\seller_app\add_product.html:24
+msgid "Save"
+msgstr "Salvar"
+
+#: .\seller_app\templates\seller_app\add_product.html:25
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: .\seller_app\templates\seller_app\confirm_delete.html:6
+#: .\seller_app\templates\seller_app\confirm_delete.html:10
+msgid "Confirm delete"
+msgstr "Confirma deletar"
+
+#: .\seller_app\templates\seller_app\confirm_delete.html:11
+#, python-format
+msgid "Are2 you sure you want to delete \"%(product.name)s\"?"
+msgstr "Está certo que deseja deletar \"%(product.name)s\"?"
+
+#: .\seller_app\templates\seller_app\confirm_delete.html:14
+msgid "Yes, delete"
+msgstr "Sim, deletar"
+
+#: .\seller_app\templates\seller_app\edit_product.html:5
+#| msgid "Add Product Page"
+msgid "Edit product"
+msgstr "Adicionar produto"
+
+#: .\seller_app\templates\seller_app\edit_product.html:24
+msgid "Edit Product"
+msgstr "Editar Produto"
+
+#: .\seller_app\templates\seller_app\register.html:6
+msgid "Register Seller"
+msgstr "Registrat vendedor"
+
+#: .\seller_app\templates\seller_app\register.html:12
+#: .\seller_app\templates\seller_app\register.html:22
+msgid "Register"
+msgstr "Registrar"
+
 #: .\venv\Lib\site-packages\click\_termui_impl.py:600
 #, python-brace-format
 msgid "{editor}: Editing failed"
-msgstr ""
+msgstr "{editor}: Edição falhou"
 
 #: .\venv\Lib\site-packages\click\_termui_impl.py:604
 #, python-brace-format
 msgid "{editor}: Editing failed: {e}"
-msgstr ""
+msgstr "{editor}: Edição falhou: {e}"
 
 #: .\venv\Lib\site-packages\click\core.py:1084
 #: .\venv\Lib\site-packages\click\core.py:1121
@@ -231,15 +313,15 @@ msgstr "Comandos"
 
 #: .\venv\Lib\site-packages\click\core.py:1810
 msgid "Missing command."
-msgstr ""
+msgstr "Comando não encontrado"
 
 #: .\venv\Lib\site-packages\click\core.py:1888
 msgid "No such command {name!r}."
-msgstr ""
+msgstr "Não existe o comando {name!r}."
 
 #: .\venv\Lib\site-packages\click\core.py:2303
 msgid "Value must be an iterable."
-msgstr ""
+msgstr "Deve ser possível iterar este valor"
 
 #: .\venv\Lib\site-packages\click\core.py:2324
 #, python-brace-format
@@ -1702,3 +1784,8 @@ msgstr ""
 #: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:236
 msgid "Connect, get help, or contribute"
 msgstr "Conecte-se, peça ajuda ou contribua"
+
+#, fuzzy
+#~| msgid "Delete"
+#~ msgid "Confirm Delete"
+#~ msgstr "Deletar"
