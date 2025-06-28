@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-25 07:29+0200\n"
+"POT-Creation-Date: 2025-06-28 06:57+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -47,11 +47,11 @@ msgstr "Obrigado!"
 msgid "Your message has been sent successfully."
 msgstr "Sua mensagem foi enviada com sucesso."
 
-#: .\email_app\views.py:15
+#: .\email_app\views.py:16
 msgid "Thank you for contacting us!"
 msgstr "Obrigado por entrar em contato conosco"
 
-#: .\email_app\views.py:17
+#: .\email_app\views.py:18
 #, python-brace-format
 msgid ""
 "Hello {name},\n"
@@ -75,6 +75,14 @@ msgstr "App de cotação"
 #: .\quotation_app\templates\quotation_app\base.html:69
 msgid "visit"
 msgstr "acesse"
+
+#: .\quotation_app\views.py:202
+msgid ""
+"Thank you for your request. Your quotation is valid for 7 days,\n"
+" if you accept it we will send the payment link."
+msgstr ""
+"Obrigado pela sua solicitação, esta proposta é valida por 7 dias.\n"
+"Favor confirmar para enviarmos o link de pagamento."
 
 #: .\quotation_prj\settings.py:124
 msgid "English"
@@ -1590,3 +1598,15 @@ msgstr ""
 #: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:236
 msgid "Connect, get help, or contribute"
 msgstr ""
+
+#~ msgid "Thank you for your request."
+#~ msgstr "Obrigado por entrar em contato conosco"
+
+#, fuzzy
+#~ msgid ""
+#~ "Thank you for your request.\n"
+#~ "Your quotation is valid for 7 days.\n"
+#~ "If you accept it, we will send the payment link."
+#~ msgstr ""
+#~ "Obrigado pela sua solicitação, esta proposta é valida por 7 dias. Favor "
+#~ "confirmar para enviarmos o link de pagamento."
