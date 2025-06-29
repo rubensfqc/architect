@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-#i$oz!grazcw*6kj!upr50=5#0a(5rxjnvd_g7@el+mwi*^8&7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['plat4user.pythonanywhere.com']
+ALLOWED_HOSTS = ['www.plat4u.app.br']
 
 LOGIN_REDIRECT_URL = 'seller_dashboard'
 LOGOUT_REDIRECT_URL = 'login'
@@ -84,8 +84,12 @@ WSGI_APPLICATION = 'quotation_prj.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'plat4user$default',
+        'USER': 'plat4user',
+        'PASSWORD': '377ES!A.M8Wf7nW',
+        'HOST': 'plat4user.mysql.pythonanywhere-services.com',
+        'PORT': '3306',
     }
 }
 
