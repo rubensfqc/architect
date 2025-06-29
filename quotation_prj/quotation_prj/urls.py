@@ -25,7 +25,7 @@ from seller_app import views as seller_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('pages', views.home_view, name='home'),  # Set this as the home view
+    path('pages', views.home_view, name='pages'),  # Set this as the home view
     path('', seller_views.slug_search, name='slug_search'),  # Search by slug
     path('autocomplete/', seller_views.slug_autocomplete, name='slug_autocomplete'), 
     path('lp', views.landing_page, name='landing_page'),
