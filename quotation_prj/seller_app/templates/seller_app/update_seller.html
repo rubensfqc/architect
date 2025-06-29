@@ -1,23 +1,24 @@
-
 {% extends 'quotation_app/base.html' %}
-{% load static %}
 
-{% block title %}Update Seller Information{% endblock %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Update Seller Information" %}{% endblock %}
     
 {% block content %}
 {% load widget_tweaks %}
 
 
  <br>
-       <a href="{% url 'seller_dashboard' %}" class="btn btn-secondary">Dashboard</a> &nbsp;
-       <a href="{% url 'seller_quotations' %}" class="btn btn-secondary">My Quotations</a> &nbsp;
-       <a href="{% url 'update_seller' %}" class="btn btn-primary">Update my profile</a>
+       <a href="{% url 'seller_dashboard' %}" class="btn btn-secondary">{% trans "Dashboard" %}</a> &nbsp;
+       <a href="{% url 'seller_quotations' %}" class="btn btn-secondary">{% trans "Quotations" %}</a> &nbsp;
+       <a href="{% url 'update_seller' %}" class="btn btn-primary">{% trans "Profile" %}</a>
 
 <br><br>
-<title>Update Seller Information</title>
+<title>{% trans "Update Seller Information" %}</title>
 </head>
 <body>
- <h1>Update Your Information</h1>
+ <h1>{% trans "Update Your Information" %}</h1>
 <!--  <form method="post" enctype="multipart/form-data">
  {% csrf_token %}
  {{ form.as_p }}
@@ -52,7 +53,7 @@
    <img src="{{ seller.profile_picture.url }}" alt="Profile Picture" class="img-thumbnail" style="width: 150px; height: 150px; object-fit: cover;">
   </div>
 {% else %}
-  <p>No profile picture uploaded.</p>
+  <p>{% trans "No profile picture uploaded." %}</p>
 {% endif %}
 
 
@@ -65,29 +66,29 @@
     </div>
 
     <div class="form-group">
-        <label for="{{ form.name.id_for_label }}">Name</label>
+        <label for="{{ form.name.id_for_label }}">{% trans "Name" %}</label>
         {{ form.name|add_class:"form-control"|attr:"placeholder:Enter your name" }}
     </div>
 
     <div class="form-group">
-        <label for="{{ form.phone_number.id_for_label }}">Phone Number</label>
+        <label for="{{ form.phone_number.id_for_label }}">{% trans "Phone Number" %}</label>
         {{ form.phone_number|add_class:"form-control"|attr:"placeholder:Enter your phone number" }}
     </div>
 
     <div class="form-group">
-        <label for="{{ form.address.id_for_label }}">Address</label>
+        <label for="{{ form.address.id_for_label }}">{% trans "Address" %}</label>
         {{ form.address|add_class:"form-control"|attr:"placeholder:Enter your address" }}
     </div>
 
 <div><br></div>
-    <div class="form-group">
-        <label for="{{ form.profile_picture.id_for_label }}">Profile Picture</label>
+        <div class="form-group">
+        <label for="{{ form.profile_picture.id_for_label }}">{% trans "Upload Profile Picture" %}</label>
         {{ form.profile_picture|add_class:"form-control-file" }}
         <br>
         <img id="profile-picture-preview" src="#" alt="Image Preview" style="display:none; max-height: 200px; margin-top: 10px;" />
     </div>
 <div><br></div>
-    <button type="submit" class="btn btn-success">Update</button>
+    <button type="submit" class="btn btn-success">{% trans "Update" %}</button>
 </form>
 
 <script>

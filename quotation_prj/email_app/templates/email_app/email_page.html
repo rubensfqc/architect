@@ -1,14 +1,15 @@
 {% extends 'quotation_app/base.html' %}
 {% load static %}
+{% load i18n %}
 
-{% block title %}Contact Us{% endblock %}
+{% block title %}{% trans "Contact Us" %}{% endblock %}
     
     {% block content %}
 
-    <h1>Contact Us</h1>
+    <h1>{% trans "Contact Us" %}</h1>
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Submit</button>
+        <button type="submit">{% trans "Submit" %}</button>
     </form>
 {% endblock %}

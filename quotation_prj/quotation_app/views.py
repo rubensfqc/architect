@@ -19,7 +19,7 @@ import os
 from django.conf import settings
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
-
+from django.utils.translation import gettext as _
 
 # Full path to the font file
 font_path = os.path.join(settings.BASE_DIR, 'quotation_app', 'static', 'fonts', 'DejaVuSans.ttf')
@@ -115,7 +115,9 @@ def generate_pdf(request, slug, quotation_id):
     width, height = A4
 
     # Add company logo
-    logo_path = seller.profile_picture.path if seller.profile_picture else 'media/profile_pics/logoU_0.25.png'  # Path to your logo
+    #print("Debug: MEDIA_ROOT:", settings.MEDIA_ROOT)
+    #print("Debug: MEDIA_ROOTcompleto :", settings.MEDIA_ROOT / 'profile_pics' / 'logoU_0.25.png')
+    logo_path = seller.profile_picture.path if seller.profile_picture else settings.MEDIA_ROOT / 'profile_pics' / 'logoU_0.25.png'  # Path to your logo
     logo = ImageReader(logo_path)
     p.drawImage(logo, 50, height - 150, width=200, height=100, preserveAspectRatio=True)
 
@@ -194,10 +196,18 @@ def generate_pdf(request, slug, quotation_id):
         p.showPage()
         thank_you_y = height - 100  # new page start
 
-    # Add a thank-you message
+    # Add thank you message
     p.setFont("Helvetica", 12)
-    p.drawString(50, thank_you_y, "Thank you for your request. We will get back to you shortly.")
+    message = _("Thank you for your request. Your quotation is valid for 7 days,\n if you accept it we will send the payment link.")
+    lines = message.split('\n') 
+    y = thank_you_y
+    line_height = 15
+    for line in lines:
+        p.drawString(50, y, line.strip())
+        y -= line_height
+    #p.drawString(50, thank_you_y, _("Thank you for your request. Your quotation is valid for 7 days, if you accept it we will send the payment link."))
     
+
     # Close the PDF object
     p.showPage()
     p.save()

@@ -50,7 +50,26 @@ pip install python-decouple
 ```
 pip install django-widget-tweaks
 ```
+### Needed for translation
+
+🔧 Ubuntu/Debian (Linux)
+Install gettext:
+“Can't find msguniq” on your system
+Depending on your OS, follow the appropriate steps below:
+
+```
+sudo apt update
+sudo apt install gettext
+```
 ---
+## Help Pages used to proper configure the Python Anywhere
+
+https://help.pythonanywhere.com/pages/VirtualEnvForWebsites
+
+https://help.pythonanywhere.com/pages/DjangoAdminCSSNotWorking
+
+https://help.pythonanywhere.com/pages/AccessingMySQLFromOutsidePythonAnywhere/
+
 ---
 ### Pra rodar  
 ```

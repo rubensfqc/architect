@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.core.mail import send_mail
 from .forms import UserMessageForm
 from quotation_app.models import Client
+from django.utils.translation import gettext_lazy as _
 
 def email_page(request):
     if request.method == 'POST':
@@ -11,8 +12,9 @@ def email_page(request):
             user_message = form.save()
 
             # Send a custom email
-            subject = 'Thank you for contacting us!'
-            message = f'Hello {user_message.name},\n\nThank you for reaching out. We will get back to you soon.\n\nBest regards,\nMy Team'
+            subject = _('Thank you for contacting us!')
+            #message = f'Hello {user_message.name},\n\nThank you for reaching out. We will get back to you soon.\n\nBest regards,\nMy Team'
+            message = _('Hello {name},\n\nThank you for reaching out. We will get back to you soon.\n\nBest regards,\nMy Team').format(name=user_message.name)
             from_email = 'contact.plat4u@gmail.com'  # Replace with your email
             recipient_list = [user_message.email]
 

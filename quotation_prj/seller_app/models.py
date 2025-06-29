@@ -1,15 +1,15 @@
 from django.db import models
 from django.contrib.auth.models import User, AbstractUser, Group, Permission
 from django.utils.text import slugify
-
+from django.utils.translation import gettext_lazy as _
 
 class Seller(AbstractUser): #models.Model):
     #user = models.OneToOneField(User, on_delete=models.CASCADE)  # Links Seller to a Django user
-    email = models.EmailField(unique=True, default="default@example.com")
-    name = models.CharField(max_length=100, default="defaultname")
-    phone_number = models.CharField(max_length=15, blank=True, null=True)
-    profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True)
-    address = models.CharField(max_length=255, blank=True, null=True)
+    email = models.EmailField(unique=True, default="default@example.com", verbose_name=_("Email"))
+    name = models.CharField(max_length=100, default="defaultname", verbose_name=_("Name"))
+    phone_number = models.CharField(max_length=15, blank=True, null=True, verbose_name=_("Phone Number"))
+    profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True, verbose_name=_("Profile Picture"))
+    address = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("Address"))
     slug = models.SlugField(unique=True, blank=True)
 
     groups = models.ManyToManyField(
