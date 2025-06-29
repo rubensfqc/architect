@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-28 22:07+0200\n"
+"POT-Creation-Date: 2025-06-29 09:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: .\email_app\forms.py:10 .\quotation_app\forms.py:11
-#: .\quotation_app\templates\quotation_app\landing_page_per_seller.html:17
+#: .\quotation_app\templates\quotation_app\landing_page_per_seller.html:20
 #: .\seller_app\models.py:9
 #: .\seller_app\templates\seller_app\add_product.html:13
 #: .\seller_app\templates\seller_app\edit_product.html:13
@@ -128,6 +128,13 @@ msgstr "Adicione novo produto"
 msgid "Request for Quotation App"
 msgstr "Peça sua cotação"
 
+#: .\quotation_app\templates\quotation_app\base.html:33
+#: .\seller_app\templates\seller_app\seller_dashboard.html:10
+#: .\seller_app\templates\seller_app\seller_quotations.html:10
+#: .\seller_app\templates\seller_app\update_seller.html:13
+msgid "Dashboard"
+msgstr "Portal"
+
 #: .\quotation_app\templates\quotation_app\base.html:69
 #: .\quotation_app\templates\quotation_app\base_auth.html:59
 msgid "visit"
@@ -145,14 +152,22 @@ msgstr "Páginas disponíveis"
 msgid "No pages found."
 msgstr "Nenhuma página encontrada."
 
-#: .\quotation_app\templates\quotation_app\landing_page_per_seller.html:10
+#: .\quotation_app\templates\quotation_app\landing_page_per_seller.html:5
+msgid "Landing Page per seller"
+msgstr "Página de catálogo"
+
+#: .\quotation_app\templates\quotation_app\landing_page_per_seller.html:11
 #, python-format
 msgid ""
 "\n"
-"Welcome to the Landing Page of: %(seller_name)s\n"
-msgstr "Bem-vindo ao catálogo de %(seller_name)s\n"
+"        Welcome to the Landing Page of: %(seller_name)s\n"
+"    "
+msgstr ""
+"\n"
+"    Bem-vindo ao catálogo de %(seller_name)s\n"
+"  "
 
-#: .\quotation_app\templates\quotation_app\landing_page_per_seller.html:40
+#: .\quotation_app\templates\quotation_app\landing_page_per_seller.html:43
 msgid "Proceed to Quotation"
 msgstr "Peça sua cotação"
 
@@ -224,8 +239,6 @@ msgid "Full Name"
 msgstr "Nome completo ou da empresa"
 
 #: .\seller_app\forms.py:42 .\seller_app\models.py:11
-#: .\seller_app\templates\seller_app\update_seller.html:85
-#: .\seller_app\templates\seller_app\update_seller.html:97
 msgid "Profile Picture"
 msgstr "Foto de perfil"
 
@@ -290,12 +303,6 @@ msgstr "Procurar"
 #: .\seller_app\templates\seller_app\seller_quotations.html:5
 msgid "Seller Dashboard"
 msgstr "Portal do vendedor"
-
-#: .\seller_app\templates\seller_app\seller_dashboard.html:10
-#: .\seller_app\templates\seller_app\seller_quotations.html:10
-#: .\seller_app\templates\seller_app\update_seller.html:13
-msgid "Dashboard"
-msgstr "Portal"
 
 #: .\seller_app\templates\seller_app\seller_dashboard.html:11
 #: .\seller_app\templates\seller_app\seller_quotations.html:11
@@ -374,8 +381,6 @@ msgid "Quote"
 msgstr "Cotação"
 
 #: .\seller_app\templates\seller_app\seller_quotations.html:39
-#, fuzzy
-#| msgid "No pages found."
 msgid "No quotations found."
 msgstr "Nenhuma página encontrada."
 
@@ -392,17 +397,139 @@ msgstr "Atualize seus dados"
 msgid "No profile picture uploaded."
 msgstr "Nenhuma imagem de perfil foi enviada ainda."
 
-#: .\seller_app\templates\seller_app\update_seller.html:88
-msgid "Choose file"
-msgstr "Escolha uma imagem"
+#: .\seller_app\templates\seller_app\update_seller.html:85
+msgid "Upload Profile Picture"
+msgstr "Envie sua foto de perfil"
 
-#: .\seller_app\templates\seller_app\update_seller.html:94
-msgid "Image Preview"
-msgstr "Pré-visualização da imagem"
-
-#: .\seller_app\templates\seller_app\update_seller.html:103
+#: .\seller_app\templates\seller_app\update_seller.html:91
 msgid "Update"
 msgstr "Atualizar"
+
+#: .\templates\registration\login.html:5
+msgid "Login Seller"
+msgstr "Login (entrar)"
+
+#: .\templates\registration\login.html:13
+msgid "Hi"
+msgstr "Olá"
+
+#: .\templates\registration\login.html:14
+msgid ""
+"You are already logged in. Press the button below in case you want to logout."
+msgstr "Você já está logado no app. Aperte o botão abaixo para fazer logout."
+
+#: .\templates\registration\login.html:18
+msgid "Logout"
+msgstr "Logout (sair)"
+
+#: .\templates\registration\login.html:20
+#: .\templates\registration\password_change_form.html:9
+#: .\templates\registration\password_change_form.html:15
+msgid "Change Password"
+msgstr "Trocar Senha"
+
+#: .\templates\registration\login.html:25
+msgid "Please login below:"
+msgstr "Por favor, faça o login abaixo:"
+
+#: .\templates\registration\login.html:32
+msgid "Forgot Password"
+msgstr "Esqueci minha senha"
+
+#: .\templates\registration\login.html:34
+msgid "Back to home page"
+msgstr "De volta a página inicial"
+
+#: .\templates\registration\password_change_done.html:5
+#: .\templates\registration\password_change_done.html:9
+msgid "Password Changed Successfully"
+msgstr "Senha trocada com sucesso"
+
+#: .\templates\registration\password_change_done.html:10
+msgid "Your password has been updated."
+msgstr "Sua senha foi atualizada"
+
+#: .\templates\registration\password_change_done.html:12
+#: .\templates\registration\password_reset_form.html:19
+msgid "Login Again"
+msgstr "Voltar ao Login"
+
+#: .\templates\registration\password_change_form.html:10
+msgid "Use the form below to change your password."
+msgstr "Use os campos abaixo para trocar sua senha."
+
+#: .\templates\registration\password_change_form.html:18
+msgid "Go to Success Page"
+msgstr "Acessar minha página pública"
+
+#: .\templates\registration\password_reset_complete.html:5
+#: .\templates\registration\password_reset_complete.html:8
+msgid "Password reset complete"
+msgstr "Senha resetada com sucesso"
+
+#: .\templates\registration\password_reset_complete.html:9
+msgid "Your new password has been set."
+msgstr "Sua senha foi atualizada"
+
+#: .\templates\registration\password_reset_complete.html:10
+msgid "You can log in now on the"
+msgstr "Você pode fazer login agora na "
+
+#: .\templates\registration\password_reset_complete.html:11
+msgid "Log In page"
+msgstr "página de Login"
+
+#: .\templates\registration\password_reset_confirm.html:6
+msgid "Enter new password"
+msgstr "Insira uma nova senha"
+
+#: .\templates\registration\password_reset_confirm.html:9
+msgid "Set a new password!"
+msgstr "Defina uma nova senha!"
+
+#: .\templates\registration\password_reset_done.html:6
+msgid "Email Sent"
+msgstr "Email enviado"
+
+#: .\templates\registration\password_reset_done.html:9
+msgid "Check your inbox."
+msgstr "Confira sua caixa de entrada no email"
+
+#: .\templates\registration\password_reset_done.html:10
+msgid ""
+"We've emailed you instructions for setting your password.You should receive "
+"the email shortly!"
+msgstr ""
+"Enviamos as instruções para redefinir sua senha. Você deve receber um "
+"email em breve!"
+
+#: .\templates\registration\password_reset_done.html:12
+msgid "Didn't receive the email? Check your spam folder, or go back to "
+msgstr "Ainda não recebeu um email? Confira sua caixa de spam, ou volte para a "
+
+#: .\templates\registration\password_reset_done.html:12
+msgid " Log In page"
+msgstr "página de Login"
+
+#: .\templates\registration\password_reset_form.html:5
+msgid "Reset you password"
+msgstr "Resetar senha"
+
+#: .\templates\registration\password_reset_form.html:9
+msgid "Forgot your password?"
+msgstr "Esqueceu sua senha?"
+
+#: .\templates\registration\password_reset_form.html:11
+msgid ""
+"Enter your email to receive a password reset link, and follow the "
+"instructions."
+msgstr ""
+"Insira seu email para receber o link para resetar sua senha, e siga as "
+"instruções recebidas neste email."
+
+#: .\templates\registration\password_reset_form.html:15
+msgid "Send Reset Link"
+msgstr "Enviar link de reset de senha"
 
 #: .\venv\Lib\site-packages\click\_termui_impl.py:600
 #, python-brace-format
@@ -1912,6 +2039,20 @@ msgstr ""
 #: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:236
 msgid "Connect, get help, or contribute"
 msgstr "Conecte-se, peça ajuda ou contribua"
+
+#, fuzzy
+#~| msgid "Log In page"
+#~ msgid "Login page"
+#~ msgstr "página de Login"
+
+#~ msgid "initial page"
+#~ msgstr "página inicial"
+
+#~ msgid "Choose file"
+#~ msgstr "Escolha uma imagem"
+
+#~ msgid "Image Preview"
+#~ msgstr "Pré-visualização da imagem"
 
 #~ msgid "Search professional"
 #~ msgstr "Procure pelo Nome"

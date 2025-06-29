@@ -1,16 +1,19 @@
 {% extends 'quotation_app/base.html' %}
 {% load static %}
-{% load widget_tweaks %}
 {% load i18n %}
 
-{% block title %}Landing Page per seller{% endblock %}
+{% block title %}{% trans "Landing Page per seller" %}{% endblock %}
     
-    {% block content %}
+{% block content %}
+{% load widget_tweaks %}
 
-    <h1>{% blocktrans with seller_name=seller.name %}
-Welcome to the Landing Page of: {{ seller_name }}
-{% endblocktrans %}</h1>
-<form method="post" class="p-4 bg-light rounded shadow-sm">
+<h1>
+    {% blocktrans with seller_name=seller.name %}
+        Welcome to the Landing Page of: {{ seller_name }}
+    {% endblocktrans %}
+</h1>
+
+    <form method="post" class="p-4 bg-light rounded shadow-sm">
     {% csrf_token %}
 
     <div class="mb-3">
