@@ -6,7 +6,7 @@
 
 {% block content %}
 {% load widget_tweaks %}
-
+{% load custom_filters %}
 
 <h2>
   {% blocktrans with client_name=client.name %}
@@ -31,13 +31,37 @@
             </tr>
         </thead>
         <tbody>
-            {% for field in form %}
-                <tr>
-                    <td>{{ field.label }}</td>
-                    <td>{% render_field field class="form-control" %}</td>
-                </tr>
-            {% endfor %}
-        </tbody>
+        {% for field in form %}
+        <tr>
+            <td>
+                {% with product=form.product_map|dict_get:field.name %}
+                    <a href="#" data-bs-toggle="modal" data-bs-target="#productModal{{ product.id }}">
+                        {{ field.label }}
+                    </a>
+
+                    <!-- Modal HTML -->
+                    <div class="modal fade" id="productModal{{ product.id }}" tabindex="-1" aria-labelledby="productModalLabel{{ product.id }}" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="productModalLabel{{ product.id }}">{{ product.name }}</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    <p><strong>{% trans "Description:"%}</strong></p>
+                                    <p>{{ product.description }}</p>
+                                    <p><strong>{% trans "Price:" %}</strong> R$ {{ product.price }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endwith %}
+            </td>
+            <td>{% render_field field class="form-control" %}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+
     </table>
 
     <button type="submit" class="btn btn-success">{% trans "Generate Quotation" %}</button>
