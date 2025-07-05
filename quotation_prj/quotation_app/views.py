@@ -126,8 +126,8 @@ def generate_pdf(request, slug, quotation_id):
     p.drawString(260, height - 80, seller.name)
 
     p.setFont("DejaVuSans", 12)
-    p.drawString(260, height - 100, "phone: " + format_brazilian_phone(seller.phone_number))
-    p.drawString(260, height - 120, "e-mail: " + seller.email)
+    p.drawString(260,height - 100, _("Phone: %(phone)s") % {'phone': format_brazilian_phone(seller.phone_number)})
+    p.drawString(260, height - 120, "email: " + seller.email)
 
     if seller.address:
         text_object = p.beginText(260, height - 140)
@@ -145,8 +145,8 @@ def generate_pdf(request, slug, quotation_id):
 
     # Add client information
     p.setFont("Helvetica", 12)
-    p.drawString(50, height - 240, f"Client Name: {client.name}")
-    p.drawString(50, height - 260, f"Email: {client.email}")
+    p.drawString(50, height - 240, _("Client Name: %(name)s") % {'name': client.name})
+    p.drawString(50, height - 260, f"email: {client.email}")
     p.drawString(50, height - 280, f"WhatsApp: {client.whatsapp}")
     p.drawString(50, height - 280, f" ")
     # Add product table
@@ -160,12 +160,12 @@ def generate_pdf(request, slug, quotation_id):
         data.append([
             item.product.name, 
             str(item.quantity), 
-            f"${item.product.price:.2f}", 
-            f"${item.quantity * item.product.price:.2f}"
+            f"R${item.product.price:.2f}", 
+            f"R${item.quantity * item.product.price:.2f}"
         ])
-    data.append(["", "", _("Total Amount"), f"${quotation.total_amount:.2f}"])
+    data.append(["", "", _("Total Amount"), f"R${quotation.total_amount:.2f}"])
 
-    table = Table(data, colWidths=[200, 100, 100, 100])
+    table = Table(data, colWidths=[230, 70, 100, 100])
     table.setStyle(TableStyle([
         ('BACKGROUND', (0, 0), (-1, 0), colors.grey),
         ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),

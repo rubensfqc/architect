@@ -11,7 +11,7 @@ brazilian_phone_validator = RegexValidator(
 )
 
 class Product(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=40)
     description = models.TextField(blank=True, null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     seller = models.ForeignKey(Seller, on_delete=models.CASCADE, related_name="products", default=1)  # Relate product to a seller
