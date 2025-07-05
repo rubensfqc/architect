@@ -12,4 +12,5 @@ urlpatterns = [
     path('update/', views.update_seller, name='update_seller'),
     path("signup/", SignUpView.as_view(), name="signup"),
     path('register/', views.register, name='register'),
+    path('clients/', views.seller_clients, name='seller_clients'),
 ]

@@ -28,7 +28,7 @@ SECRET_KEY = 'django-insecure-#i$oz!grazcw*6kj!upr50=5#0a(5rxjnvd_g7@el+mwi*^8&7
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['www.plat4u.app.br']
+ALLOWED_HOSTS = ['plat4user.pythonanywhere.com']
 
 LOGIN_REDIRECT_URL = 'seller_dashboard'
 LOGOUT_REDIRECT_URL = 'login'

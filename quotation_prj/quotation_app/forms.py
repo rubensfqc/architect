@@ -95,14 +95,18 @@ class QuotationForm(forms.Form):
     #             widget=forms.NumberInput(attrs={'class': 'form-control'})
     #         )
 
-class QuotatioFormPerSeller(forms.Form):
+class QuotationFormPerSeller(forms.Form):
     def __init__(self, *args, **kwargs):
-        seller = kwargs.pop('seller')  # Extract seller from kwargs
-        super(QuotatioFormPerSeller , self).__init__(*args, **kwargs)
+        self.product_map = {}  # Store product info by field name
+        seller = kwargs.pop('seller')
+        super().__init__(*args, **kwargs)
+        
         products = Product.objects.filter(seller=seller)
         for product in products:
-            self.fields[f'quantity_{product.id}'] = forms.IntegerField(
-                label=_("{name}").format(name=product.name),  # you can include product.price here too
+            field_name = f'quantity_{product.id}'
+            self.fields[field_name] = forms.IntegerField(
+                label=_("{name}").format(name=product.name),
                 min_value=0,
                 required=False
             )
+            self.product_map[field_name] = product  # Store full product object

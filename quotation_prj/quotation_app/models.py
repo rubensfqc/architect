@@ -11,7 +11,7 @@ brazilian_phone_validator = RegexValidator(
 )
 
 class Product(models.Model):
-    name = models.CharField(max_length=255)
+    name = models.CharField(max_length=40)
     description = models.TextField(blank=True, null=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     seller = models.ForeignKey(Seller, on_delete=models.CASCADE, related_name="products", default=1)  # Relate product to a seller
@@ -31,6 +31,7 @@ class Client(models.Model):
     email = models.EmailField()
     whatsapp = models.CharField(max_length=11)
     seller = models.ForeignKey(Seller, on_delete=models.CASCADE, related_name="clients", default=1)  # Relate client to a seller
+    created_at = models.DateTimeField(default=timezone.now)  # ⬅️ Timestamp when client is created
     #     max_length=11,  # 2-digit area code + 9-digit number 
     #     validators=[brazilian_phone_validator], 
     #     help_text="Format: +11 91234-5678 or 11 91234-5678"

@@ -65,14 +65,30 @@ def seller_quotations(request):
         client_ids = seller.clients.values_list('id', flat=True)
 
         # Get quotations for those clients
-        quotations = Quotation.objects.filter(client_id__in=client_ids).prefetch_related('products', 'client')
-        #quotations = Quotation.objects.filter(seller=seller).select_related('client').order_by('-date_created')
+        quotations = Quotation.objects.filter(client_id__in=client_ids)\
+                    .prefetch_related('products', 'client')\
+                    .order_by('-date_created')
         print(f"DEBUG quotations: {quotations} details")
         
     except Seller.DoesNotExist:
         quotations = []  # Or redirect / raise error
 
-    return render(request, 'seller_app/seller_quotations.html', {'slug':slug ,'quotations': quotations})
+    return render(request, 'seller_app/seller_quotations.html', {
+        'slug':slug ,
+        'quotations': quotations,
+        'total_quotes': quotations.count(),
+        })
+
+@login_required
+def seller_clients(request):
+    seller = request.user  # seller is the logged-in user
+    clients = seller.clients.all().order_by('-created_at')
+
+    return render(request, 'seller_app/seller_clients.html', {
+        'seller': seller,
+        'clients': clients,
+        'total_clients': clients.count(),
+        })
 
 class SignUpView(CreateView):
     form_class = UserCreationForm
