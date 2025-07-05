@@ -9,10 +9,13 @@
        <br>
        <a href="{% url 'seller_dashboard' %}" class="btn btn-secondary">{% trans "Dashboard" %}</a> &nbsp;
        <a href="{% url 'seller_quotations' %}" class="btn btn-primary">{% trans "Quotations" %}</a> &nbsp;
+       <a href="{% url 'seller_clients' %}"class="btn btn-secondary">{% trans "Clients" %}</a> &nbsp;
        <a href="{% url 'update_seller' %}" class="btn btn-secondary">{% trans "Profile" %}</a>
+       
 
 <br><br>
 <h2>{% trans "Your Client Quotations" %}</h2>
+<p>{% trans "Total number of quotations: " %}<strong>{{ total_quotes }}</strong></p>
 
 <table class="table table-striped table-hover">
   <thead>

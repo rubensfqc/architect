@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-05 08:21+0200\n"
+"POT-Creation-Date: 2025-07-05 19:11+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -23,7 +23,8 @@ msgstr ""
 #: .\seller_app\models.py:9
 #: .\seller_app\templates\seller_app\add_product.html:13
 #: .\seller_app\templates\seller_app\edit_product.html:13
-#: .\seller_app\templates\seller_app\update_seller.html:69
+#: .\seller_app\templates\seller_app\seller_clients.html:25
+#: .\seller_app\templates\seller_app\update_seller.html:71
 msgid "Name"
 msgstr "Nome"
 
@@ -85,14 +86,14 @@ msgstr "Digite um numero de telefone válido  (ex., 11 91234-5678)"
 
 #: .\quotation_app\forms.py:30 .\quotation_app\views.py:154
 #: .\seller_app\forms.py:24
-#: .\seller_app\templates\seller_app\seller_dashboard.html:36
+#: .\seller_app\templates\seller_app\seller_dashboard.html:38
 msgid "Product Name"
 msgstr "Nome do produto"
 
 #: .\quotation_app\forms.py:31 .\seller_app\forms.py:26
 #: .\seller_app\templates\seller_app\add_product.html:21
 #: .\seller_app\templates\seller_app\edit_product.html:21
-#: .\seller_app\templates\seller_app\seller_dashboard.html:37
+#: .\seller_app\templates\seller_app\seller_dashboard.html:39
 msgid "Price"
 msgstr "Preço"
 
@@ -130,14 +131,15 @@ msgstr "Adicione novo produto"
 msgid "Request for Quotation App"
 msgstr "Peça sua cotação"
 
-#: .\quotation_app\templates\quotation_app\base.html:33
+#: .\quotation_app\templates\quotation_app\base.html:34
+#: .\seller_app\templates\seller_app\seller_clients.html:10
 #: .\seller_app\templates\seller_app\seller_dashboard.html:10
 #: .\seller_app\templates\seller_app\seller_quotations.html:10
 #: .\seller_app\templates\seller_app\update_seller.html:13
 msgid "Dashboard"
 msgstr "Portal"
 
-#: .\quotation_app\templates\quotation_app\base.html:69
+#: .\quotation_app\templates\quotation_app\base.html:72
 #: .\quotation_app\templates\quotation_app\base_auth.html:59
 msgid "visit"
 msgstr "acesse"
@@ -258,7 +260,7 @@ msgid "Username"
 msgstr "Nome de usuário"
 
 #: .\seller_app\forms.py:14 .\seller_app\forms.py:41 .\seller_app\models.py:10
-#: .\seller_app\templates\seller_app\update_seller.html:74
+#: .\seller_app\templates\seller_app\update_seller.html:76
 msgid "Phone Number"
 msgstr "Número de Celular"
 
@@ -279,7 +281,7 @@ msgid "Profile Picture"
 msgstr "Foto de perfil"
 
 #: .\seller_app\forms.py:43 .\seller_app\models.py:12
-#: .\seller_app\templates\seller_app\update_seller.html:79
+#: .\seller_app\templates\seller_app\update_seller.html:81
 msgid "Address"
 msgstr "Endereço"
 
@@ -335,109 +337,139 @@ msgstr "Procure pelo Nome"
 msgid "Search"
 msgstr "Procurar"
 
-#: .\seller_app\templates\seller_app\seller_dashboard.html:5
-#: .\seller_app\templates\seller_app\seller_quotations.html:5
-msgid "Seller Dashboard"
-msgstr "Portal do vendedor"
+#: .\seller_app\templates\seller_app\seller_clients.html:5
+msgid "My Leads"
+msgstr "Meus clientes em potencial"
 
+#: .\seller_app\templates\seller_app\seller_clients.html:11
 #: .\seller_app\templates\seller_app\seller_dashboard.html:11
 #: .\seller_app\templates\seller_app\seller_quotations.html:11
 #: .\seller_app\templates\seller_app\update_seller.html:14
 msgid "Quotations"
 msgstr "Cotações"
 
+#: .\seller_app\templates\seller_app\seller_clients.html:12
 #: .\seller_app\templates\seller_app\seller_dashboard.html:12
 #: .\seller_app\templates\seller_app\seller_quotations.html:12
 #: .\seller_app\templates\seller_app\update_seller.html:15
+msgid "Clients"
+msgstr "Clientes"
+
+#: .\seller_app\templates\seller_app\seller_clients.html:13
+#: .\seller_app\templates\seller_app\seller_dashboard.html:13
+#: .\seller_app\templates\seller_app\seller_quotations.html:13
+#: .\seller_app\templates\seller_app\update_seller.html:16
 msgid "Profile"
 msgstr "Meus dados"
 
-#: .\seller_app\templates\seller_app\seller_dashboard.html:15
+#: .\seller_app\templates\seller_app\seller_clients.html:17
+msgid "Leads captured"
+msgstr "Clientes em potencial capturados"
+
+#: .\seller_app\templates\seller_app\seller_clients.html:18
+msgid "Total number of clientes: "
+msgstr "Número total de clientes: "
+
+#: .\seller_app\templates\seller_app\seller_clients.html:28
+#: .\seller_app\templates\seller_app\seller_quotations.html:26
+msgid "Date"
+msgstr "Data"
+
+#: .\seller_app\templates\seller_app\seller_clients.html:42
+msgid "You still don't have any registred client."
+msgstr "Você ainda não possui nenhum cliente registrado."
+
+#: .\seller_app\templates\seller_app\seller_dashboard.html:5
+#: .\seller_app\templates\seller_app\seller_quotations.html:5
+msgid "Seller Dashboard"
+msgstr "Portal do vendedor"
+
+#: .\seller_app\templates\seller_app\seller_dashboard.html:17
 msgid "Share the link below with your clients to start automating your quotes:"
 msgstr ""
 "Compartilhe o link abaixo com seus clientes para começar a automatizar suas "
 "cotações:"
 
-#: .\seller_app\templates\seller_app\seller_dashboard.html:17
+#: .\seller_app\templates\seller_app\seller_dashboard.html:19
 msgid "Your public page URL: "
 msgstr "Endereço web da sua página pública: "
 
-#: .\seller_app\templates\seller_app\seller_dashboard.html:24
+#: .\seller_app\templates\seller_app\seller_dashboard.html:26
 msgid "Go to My Public Page"
 msgstr "Acessar minha página pública"
 
-#: .\seller_app\templates\seller_app\seller_dashboard.html:31
+#: .\seller_app\templates\seller_app\seller_dashboard.html:33
 msgid "Product List"
 msgstr "Lista de Produtos"
 
-#: .\seller_app\templates\seller_app\seller_dashboard.html:49
+#: .\seller_app\templates\seller_app\seller_dashboard.html:51
 msgid "Edit"
 msgstr "Editar"
 
-#: .\seller_app\templates\seller_app\seller_dashboard.html:51
+#: .\seller_app\templates\seller_app\seller_dashboard.html:53
 msgid "Are you sure you want to delete?"
 msgstr "Está certo que deseja deletar \"%(product.name)s\"?"
 
-#: .\seller_app\templates\seller_app\seller_dashboard.html:52
+#: .\seller_app\templates\seller_app\seller_dashboard.html:54
 #: .\venv\Lib\site-packages\django\forms\formsets.py:499
 msgid "Delete"
 msgstr "Deletar"
 
-#: .\seller_app\templates\seller_app\seller_dashboard.html:58
+#: .\seller_app\templates\seller_app\seller_dashboard.html:60
 msgid "No products found."
-msgstr "Nenhuma página encontrada."
+msgstr "Nenhum produto encontrado."
 
-#: .\seller_app\templates\seller_app\seller_dashboard.html:67
+#: .\seller_app\templates\seller_app\seller_dashboard.html:69
 msgid "Add Product"
 msgstr "Adicionar produto"
 
-#: .\seller_app\templates\seller_app\seller_dashboard.html:68
+#: .\seller_app\templates\seller_app\seller_dashboard.html:70
 msgid "Add New Product"
 msgstr "Adicionar novo produto"
 
-#: .\seller_app\templates\seller_app\seller_quotations.html:15
+#: .\seller_app\templates\seller_app\seller_quotations.html:17
 msgid "Your Client Quotations"
-msgstr "Cotaçõs dos seus clientes"
+msgstr "Cotações pedidas por clientes"
 
-#: .\seller_app\templates\seller_app\seller_quotations.html:20
+#: .\seller_app\templates\seller_app\seller_quotations.html:18
+msgid "Total number of quotations: "
+msgstr "Número total de cotações: "
+
+#: .\seller_app\templates\seller_app\seller_quotations.html:23
 msgid "Client"
 msgstr "Cliente"
 
-#: .\seller_app\templates\seller_app\seller_quotations.html:22
+#: .\seller_app\templates\seller_app\seller_quotations.html:25
 msgid "Amount"
 msgstr "Valor"
 
-#: .\seller_app\templates\seller_app\seller_quotations.html:23
-msgid "Date"
-msgstr "Data"
-
-#: .\seller_app\templates\seller_app\seller_quotations.html:24
-#: .\seller_app\templates\seller_app\seller_quotations.html:35
+#: .\seller_app\templates\seller_app\seller_quotations.html:27
+#: .\seller_app\templates\seller_app\seller_quotations.html:38
 msgid "Quote"
 msgstr "Cotação"
 
-#: .\seller_app\templates\seller_app\seller_quotations.html:39
+#: .\seller_app\templates\seller_app\seller_quotations.html:42
 msgid "No quotations found."
-msgstr "Nenhuma página encontrada."
+msgstr "Nenhuma cotação encontrada."
 
 #: .\seller_app\templates\seller_app\update_seller.html:6
-#: .\seller_app\templates\seller_app\update_seller.html:18
+#: .\seller_app\templates\seller_app\update_seller.html:20
 msgid "Update Seller Information"
 msgstr "Atualizar meus dados"
 
-#: .\seller_app\templates\seller_app\update_seller.html:21
+#: .\seller_app\templates\seller_app\update_seller.html:23
 msgid "Update Your Information"
 msgstr "Atualize seus dados"
 
-#: .\seller_app\templates\seller_app\update_seller.html:56
+#: .\seller_app\templates\seller_app\update_seller.html:58
 msgid "No profile picture uploaded."
 msgstr "Nenhuma imagem de perfil foi enviada ainda."
 
-#: .\seller_app\templates\seller_app\update_seller.html:85
+#: .\seller_app\templates\seller_app\update_seller.html:87
 msgid "Upload Profile Picture"
 msgstr "Envie sua foto de perfil"
 
-#: .\seller_app\templates\seller_app\update_seller.html:91
+#: .\seller_app\templates\seller_app\update_seller.html:93
 msgid "Update"
 msgstr "Atualizar"
 
