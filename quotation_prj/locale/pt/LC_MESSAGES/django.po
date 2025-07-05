@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-06-29 09:05+0200\n"
+"POT-Creation-Date: 2025-07-05 07:17+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -83,7 +83,8 @@ msgstr "WhatsApp"
 msgid "Enter a valid Brazilian phone number (e.g., 11 91234-5678)"
 msgstr "Digite um numero de telefone válido  (ex., 11 91234-5678)"
 
-#: .\quotation_app\forms.py:30 .\seller_app\forms.py:24
+#: .\quotation_app\forms.py:30 .\quotation_app\views.py:154
+#: .\seller_app\forms.py:24
 #: .\seller_app\templates\seller_app\seller_dashboard.html:36
 msgid "Product Name"
 msgstr "Nome do produto"
@@ -112,6 +113,7 @@ msgstr "Produto"
 
 #: .\quotation_app\forms.py:67
 #: .\quotation_app\templates\quotation_app\quotation_page_per_seller.html:30
+#: .\quotation_app\views.py:154
 msgid "Quantity"
 msgstr "Quantidade"
 
@@ -200,6 +202,22 @@ msgstr ""
 #: .\quotation_app\templates\quotation_app\quotation_page_per_seller.html:43
 msgid "Generate Quotation"
 msgstr "Gerar cotação"
+
+#: .\quotation_app\views.py:144
+msgid "Request for Quotation #"
+msgstr "Pedido de cotação #"
+
+#: .\quotation_app\views.py:154
+msgid "Unit Price"
+msgstr "Preço Unit."
+
+#: .\quotation_app\views.py:154
+msgid "Total Price"
+msgstr "Preço Total"
+
+#: .\quotation_app\views.py:166
+msgid "Total Amount"
+msgstr "Valor total"
 
 #: .\quotation_app\views.py:201
 msgid ""
@@ -500,12 +518,13 @@ msgid ""
 "We've emailed you instructions for setting your password.You should receive "
 "the email shortly!"
 msgstr ""
-"Enviamos as instruções para redefinir sua senha. Você deve receber um "
-"email em breve!"
+"Enviamos as instruções para redefinir sua senha. Você deve receber um email "
+"em breve!"
 
 #: .\templates\registration\password_reset_done.html:12
 msgid "Didn't receive the email? Check your spam folder, or go back to "
-msgstr "Ainda não recebeu um email? Confira sua caixa de spam, ou volte para a "
+msgstr ""
+"Ainda não recebeu um email? Confira sua caixa de spam, ou volte para a "
 
 #: .\templates\registration\password_reset_done.html:12
 msgid " Log In page"

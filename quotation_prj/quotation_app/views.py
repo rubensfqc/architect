@@ -141,7 +141,7 @@ def generate_pdf(request, slug, quotation_id):
 
     # Add RFQ title
     p.setFont("Helvetica-Bold", 18)
-    p.drawString(50, height - 200, "Request for Quotation #" + str(quotation.id))
+    p.drawString(50, height - 200, _("Request for Quotation #") + str(quotation.id))
 
     # Add client information
     p.setFont("Helvetica", 12)
@@ -151,7 +151,7 @@ def generate_pdf(request, slug, quotation_id):
     p.drawString(50, height - 280, f" ")
     # Add product table
     data = [
-        ["Product Name", "Quantity", "Unit Price", "Total Price"],   
+        [_("Product Name"), _("Quantity"), _("Unit Price"), _("Total Price")],   
     ]
     # Loop through only products with quantity > 0
     quotation_items = quotation.quotationproduct_set.filter(quantity__gt=0)
@@ -163,7 +163,7 @@ def generate_pdf(request, slug, quotation_id):
             f"${item.product.price:.2f}", 
             f"${item.quantity * item.product.price:.2f}"
         ])
-    data.append(["", "", "Total Amount", f"${quotation.total_amount:.2f}"])
+    data.append(["", "", _("Total Amount"), f"${quotation.total_amount:.2f}"])
 
     table = Table(data, colWidths=[200, 100, 100, 100])
     table.setStyle(TableStyle([
