@@ -8,7 +8,7 @@ from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import Table, TableStyle, Paragraph, Spacer, Image
 from io import BytesIO
 from .models import Client, Quotation, Product, QuotationProduct, Seller # Import models
-from .forms import ClientForm, QuotationForm, ProductForm, QuotationProductForm, QuotatioFormPerSeller
+from .forms import ClientForm, QuotationForm, ProductForm, QuotationProductForm, QuotationFormPerSeller
 from django.urls import reverse
 from .utils import list_all_urls, format_brazilian_phone
 from textwrap import wrap
@@ -85,7 +85,7 @@ def quotation_page_per_seller(request, slug, client_id):
     products = Product.objects.filter(seller=seller)
     
     if request.method == 'POST':
-        form = QuotatioFormPerSeller(request.POST, seller=seller)  # Pass the seller to the form
+        form = QuotationFormPerSeller(request.POST, seller=seller)  # Pass the seller to the form
         if form.is_valid():
             quotation = Quotation.objects.create(client=client)
             total_amount = 0
@@ -98,7 +98,7 @@ def quotation_page_per_seller(request, slug, client_id):
             quotation.save() # Save quotation to DB        
             return redirect('generate_pdf', slug=slug, quotation_id=quotation.id)
     else:
-        form = QuotatioFormPerSeller(request.POST, seller=seller)  # Pass the seller to the form
+        form = QuotationFormPerSeller(request.POST, seller=seller)  # Pass the seller to the form
    
     return render(request, 'quotation_app/quotation_page_per_seller.html', {'form': form, 'client': client, 'seller':seller})
 

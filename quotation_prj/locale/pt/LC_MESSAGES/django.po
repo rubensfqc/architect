@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-05 07:40+0200\n"
+"POT-Creation-Date: 2025-07-05 08:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -117,7 +117,7 @@ msgstr "Produto"
 msgid "Quantity"
 msgstr "Quantidade"
 
-#: .\quotation_app\forms.py:105
+#: .\quotation_app\forms.py:108
 #, python-brace-format
 msgid "{name}"
 msgstr "{name}"
@@ -199,7 +199,15 @@ msgstr ""
 "    com itens de %(seller_name)s\n"
 "  "
 
-#: .\quotation_app\templates\quotation_app\quotation_page_per_seller.html:43
+#: .\quotation_app\templates\quotation_app\quotation_page_per_seller.html:51
+msgid "Description:"
+msgstr "Descrição:"
+
+#: .\quotation_app\templates\quotation_app\quotation_page_per_seller.html:53
+msgid "Price:"
+msgstr "Preço:"
+
+#: .\quotation_app\templates\quotation_app\quotation_page_per_seller.html:67
 msgid "Generate Quotation"
 msgstr "Gerar cotação"
 
