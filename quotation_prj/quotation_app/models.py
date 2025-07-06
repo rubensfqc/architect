@@ -52,6 +52,26 @@ class Quotation(models.Model):
     total_amount = models.DecimalField(max_digits=10, decimal_places=2, default=0)
     date_created = models.DateTimeField(default=timezone.now) # Automatically set on creation
 
+    @property
+    def seller(self):
+        return self.client.seller
+
+    @property
+    def currency(self):
+        return self.seller.quotation_settings.currency
+
+    @property
+    def payment_link(self):
+        return self.seller.quotation_settings.payment_link
+
+    @property
+    def base_price(self):
+        return self.seller.quotation_settings.base_price
+
+    @property
+    def custom_message(self):
+        return self.seller.quotation_settings.custom_message
+
 class QuotationProduct(models.Model):
     quotation = models.ForeignKey(Quotation, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)

@@ -10,6 +10,7 @@ urlpatterns = [
     path('delete/<int:product_id>/', views.delete_product, name='delete_product'),
     path('my-quotations/', views.seller_quotations, name='seller_quotations'),
     path('update/', views.update_seller, name='update_seller'),
+    path('quote-settings/', views.update_quotation_settings, name='update_quote_settings'),
     path("signup/", SignUpView.as_view(), name="signup"),
     path('register/', views.register, name='register'),
     path('clients/', views.seller_clients, name='seller_clients'),

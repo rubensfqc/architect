@@ -42,3 +42,32 @@ class Seller(AbstractUser): #models.Model):
         if not self.slug:
             self.slug = slugify(self.username)
         super().save(*args, **kwargs)
+
+class SellerQuotationSettings(models.Model):
+    CURRENCY_CHOICES = [
+        ('BRL', 'Brazilian Real'),
+        ('USD', 'US Dollar'),
+        ('EUR', 'Euro'),
+        ('ARS', 'Argentine Peso'),
+        ('GBP', 'British Pound'),
+        ('JPY', 'Japanese Yen'),
+        ('AUD', 'Australian Dollar'),
+        ('CAD', 'Canadian Dollar'),
+        ('CHF', 'Swiss Franc'),
+        ('CNY', 'Chinese Yuan'),
+    ]
+    seller = models.OneToOneField(Seller, on_delete=models.CASCADE, related_name='quotation_settings')
+    currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default='EUR')
+    payment_link = models.URLField(blank=True, null=True)
+    pix_key = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True,
+        verbose_name=_("PIX Key"),
+        help_text=_("Enter your PIX key (CPF, CNPJ, email, phone or random)")
+    )
+    base_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    custom_message = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"Quotation Settings for {self.seller.name}"

@@ -14,7 +14,14 @@
        
   
              <br><br> 
-      <h5>{% trans "Share the link below with your clients to start automating your quotes:" %}</h5> 
+
+
+<h3>
+    {% blocktrans with seller_name=seller.name %}
+        Welcome to your dashboard {{ seller_name }}
+    {% endblocktrans %}
+</h3>
+             <h5>{% trans "Share the link below with your clients to start automating your quotes:" %}</h5> 
 <p>
   {% trans "Your public page URL: " %}
   <a href="{{ request.scheme }}://{{ request.get_host }}{% url 'landing_page_per_seller' slug=seller.slug %}">
@@ -50,8 +57,10 @@
         <td>
         <a href="{% url 'edit_product' product.id %}" class="btn btn-sm btn-primary">{% trans "Edit" %}</a></td>
       <td>
-        <a href="{% url 'delete_product' product.id %}" class="btn btn-sm btn-danger" onclick="return confirm('{% trans "Are you sure you want to delete?" %}')">
-          {% trans "Delete" %}
+        <a href="{% url 'delete_product' product.id %}" 
+   class="btn btn-sm btn-danger" 
+   onclick="return confirm('Are you sure you want to delete?');">
+   {% trans "Delete" %}
         </a>
       </td>
     </tr>

@@ -5,10 +5,10 @@ from quotation_app.forms import ProductForm
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
-from seller_app.models import Seller
+from seller_app.models import Seller, SellerQuotationSettings
 from django.urls import reverse_lazy
 from django.views.generic import CreateView
-from .forms import CustomUserCreationForm, SellerUpdateForm
+from .forms import CustomUserCreationForm, SellerUpdateForm, SellerQuotationSettingsForm
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden, JsonResponse
 
@@ -116,8 +116,6 @@ def register(request):
         form = CustomUserCreationForm()
     return render(request, 'seller_app/register.html', {'form': form})
 
-
-
 @login_required
 def update_seller(request):
     seller = request.user
@@ -132,6 +130,23 @@ def update_seller(request):
         form = SellerUpdateForm(instance=request.user)
     return render(request, 'seller_app/update_seller.html', {'form': form, 'seller':seller})
 
+@login_required
+def update_quotation_settings(request):
+    seller = request.user
+    try:
+        quote_settings = SellerQuotationSettings.objects.get(seller=seller)
+    except SellerQuotationSettings.DoesNotExist:
+        quote_settings = SellerQuotationSettings(seller=seller)
+
+    if request.method == 'POST':
+        form = SellerQuotationSettingsForm(request.POST, instance=quote_settings)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Quotation settings updated successfully.')
+            return redirect('update_quote_settings')
+    else:
+        form = SellerQuotationSettingsForm(instance=quote_settings)
+    return render(request, 'seller_app/update_quote_settings.html', {'form': form, 'quote_settings': quote_settings, 'seller': seller})
 
 def slug_search(request):
     """
