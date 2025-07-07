@@ -1,0 +1,101 @@
+{% extends 'quotation_app/base.html' %}
+
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "Update Quotation Information" %}{% endblock %}
+    
+{% block content %}
+{% load widget_tweaks %}
+
+
+ <br>
+<br>
+       <a href="{% url 'update_quote_settings' %}" class="btn btn-primary">{% trans "Update Quotation Settings" %}</a> &nbsp;
+       
+
+<br><br>
+<title>{% trans "Update Quotation Information" %}</title>
+</head>
+<body>
+ <h1>{% trans "Update your quotation custom data" %}</h1>
+<!--  <form method="post" enctype="multipart/form-data">
+ {% csrf_token %}
+ {{ form.as_p }}
+ <button type="submit">Update</button> -->
+ 
+
+{% load widget_tweaks %}
+
+
+{% if messages %}
+     {% for message in messages %}
+     <div class="alert alert-success" role="alert">
+     {{ message }}
+     </div>
+  {% endfor %}
+{% endif %}
+
+<script>
+  setTimeout(function() {
+   const alert = document.querySelector('.alert');
+   if (alert) {
+     alert.style.transition = 'opacity 0.5s ease-out';
+     alert.style.opacity = '0';
+     setTimeout(() => alert.remove(), 500);
+   }
+ }, 3000); // 3 seconds
+</script>
+
+
+
+<form method="post">
+    {% csrf_token %}
+
+    <div class="form-group">
+        <label for="{{ form.currency.id_for_label }}">{{ form.currency.label }}</label>
+        {{ form.currency|add_class:"form-control" }}
+    </div>
+
+
+    <div class="form-group">
+        <label for="{{ form.payment_link.id_for_label }}">{{ form.payment_link.label }}</label>
+        {{ form.payment_link|add_class:"form-control"|attr:"placeholder:Optional: Enter payment link" }}
+    </div>
+
+     <div class="form-group">
+        <label for="{{ form.payment_link.id_for_label }}">{{ form.pix_key.label }}</label>
+        {{ form.pix_key|add_class:"form-control"|attr:"placeholder:Optional: Enter your PIX key (CPF, CNPJ, email, phone or random)" }}
+    </div>
+    
+    <div class="form-group">
+        <label for="{{ form.redirect_url.id_for_label }}">{{ form.redirect_url.label }}</label>
+        {{ form.redirect_url|add_class:"form-control"|attr:"placeholder:Optional: Enter a URL to redirect customers after a quotation." }}
+    </div>
+    
+    <div class="form-group">
+        <label for="{{ form.product_catalog_url.id_for_label }}">{{ form.product_catalog_url.label }}</label>
+        {{ form.product_catalog_url|add_class:"form-control"|attr:"placeholder:Optional: Enter a URL for your product catalog (e.g.,Instagram post, PDF, Google Drive, or Website)" }}
+    </div>
+
+    <div style="display:none;">
+        <label for="{{ form.base_price.id_for_label }}">{{ form.base_price.label }}</label>
+        {{ form.base_price|add_class:"form-control"|attr:"placeholder:Optional: Enter your base price" }}
+    </div>
+
+    <div class="form-group">
+        <label for="{{ form.custom_message.id_for_label }}">{{ form.custom_message.label }}</label>
+        {{ form.custom_message|add_class:"form-control"|attr:"placeholder:Optional: Write your custom message" }}
+    </div>
+
+    <div><br></div>
+    <button type="submit" class="btn btn-success">{% trans "Save Settings" %}</button>&nbsp;
+    <a href="{% url 'update_seller' %}" class="btn btn-secondary">{% trans "Back to Profile" %}</a>
+    
+</form>
+
+</script>
+
+
+
+{% endblock %}

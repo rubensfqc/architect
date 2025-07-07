@@ -16,9 +16,9 @@ class ClientForm(forms.ModelForm):
     def clean_whatsapp(self):
         phone = self.cleaned_data['whatsapp']
         phone = ''.join(filter(str.isdigit, phone))  # Remove non-numeric characters
-        if len(phone) != 11:
+        if len(phone) not in (10, 11):
             raise forms.ValidationError(
-                _("Enter a valid Brazilian phone number (e.g., 11 91234-5678)")
+                _("Enter a valid Brazilian or European phone number (e.g., BR 11 91234-5678 or EU 0612345678)")
             )
         return phone  # Store only digits
     
