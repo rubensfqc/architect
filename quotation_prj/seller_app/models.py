@@ -9,6 +9,12 @@ class Seller(AbstractUser): #models.Model):
     name = models.CharField(max_length=100, default="defaultname", verbose_name=_("Name"))
     phone_number = models.CharField(max_length=15, blank=True, null=True, verbose_name=_("Phone Number"))
     profile_picture = models.ImageField(upload_to='profile_pics/', blank=True, null=True, verbose_name=_("Profile Picture"))
+    social_media_link = models.URLField(
+        blank=True,
+        null=True,
+        verbose_name=_("Social Media Profile"),
+        help_text=_("Add a link to your preferred social media profile (e.g. Instagram, Facebook)")
+    )
     address = models.CharField(max_length=255, blank=True, null=True, verbose_name=_("Address"))
     slug = models.SlugField(unique=True, blank=True)
 
@@ -42,3 +48,44 @@ class Seller(AbstractUser): #models.Model):
         if not self.slug:
             self.slug = slugify(self.username)
         super().save(*args, **kwargs)
+
+class SellerQuotationSettings(models.Model):
+    CURRENCY_CHOICES = [
+        ('BRL', 'Brazilian Real'),
+        ('USD', 'US Dollar'),
+        ('EUR', 'Euro'),
+        ('ARS', 'Argentine Peso'),
+        ('GBP', 'British Pound'),
+        ('JPY', 'Japanese Yen'),
+        ('AUD', 'Australian Dollar'),
+        ('CAD', 'Canadian Dollar'),
+        ('CHF', 'Swiss Franc'),
+        ('CNY', 'Chinese Yuan'),
+    ]
+    seller = models.OneToOneField(Seller, on_delete=models.CASCADE, related_name='quotation_settings')
+    currency = models.CharField(max_length=3, choices=CURRENCY_CHOICES, default='EUR')
+    payment_link = models.URLField(blank=True, null=True)
+    pix_key = models.CharField(
+        max_length=100,
+        blank=True,
+        null=True,
+        verbose_name=_("PIX Key"),
+        help_text=_("Enter your PIX key (CPF, CNPJ, email, phone or random)")
+    )
+    redirect_url = models.URLField(  # 🔁 NEW FIELD
+        blank=True,
+        null=True,
+        verbose_name=_("Customer Redirect Link"),
+        help_text=_("Optional: Enter a URL to redirect customers after a quotation.")
+    )
+    product_catalog_url = models.URLField(
+        blank=True,
+        null=True,
+        verbose_name=_("Product Catalog Link"),
+        help_text=_("Enter a URL for your product catalog (e.g.,Instagram post, PDF, Google Drive, or Website)")
+    )
+    base_price = models.DecimalField(max_digits=10, decimal_places=2, default=0)
+    custom_message = models.TextField(blank=True, null=True)
+
+    def __str__(self):
+        return f"Quotation Settings for {self.seller.name} currency: {self.currency} payment_link: {self.payment_link} pix_key: {self.pix_key} redirect_url: {self.redirect_url} pix_key: {self.pix_key}"

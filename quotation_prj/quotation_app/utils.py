@@ -44,3 +44,35 @@ def format_brazilian_phone(phone):
         return f"({digits[:2]}) {digits[2:7]}-{digits[7:]}"
     else:
         return phone  # return as is if length doesn't match
+    
+CURRENCY_SYMBOLS = {
+    'BRL': 'R$',     # Brazilian Real
+    'USD': '$',      # US Dollar
+    'EUR': '€',      # Euro
+    'ARS': 'AR$',    # Argentine Peso
+    'GBP': '£',      # British Pound
+    'JPY': '¥',      # Japanese Yen
+    'CNY': '¥',      # Chinese Yuan
+    'CAD': 'C$',     # Canadian Dollar
+    'AUD': 'A$',     # Australian Dollar
+    'CHF': 'CHF',    # Swiss Franc
+    'INR': '₹',      # Indian Rupee
+    'KRW': '₩',      # South Korean Won
+    'MXN': 'MX$',    # Mexican Peso
+    'ZAR': 'R',      # South African Rand
+    'SEK': 'kr',     # Swedish Krona
+    'NOK': 'kr',     # Norwegian Krone
+    'DKK': 'kr',     # Danish Krone
+    'RUB': '₽',      # Russian Ruble
+    'TRY': '₺',      # Turkish Lira
+    'ILS': '₪',      # Israeli Shekel
+    'PLN': 'zł',     # Polish Zloty
+    'THB': '฿',      # Thai Baht
+    'IDR': 'Rp',     # Indonesian Rupiah
+    'PHP': '₱',      # Philippine Peso
+    'VND': '₫',      # Vietnamese Dong
+    'MYR': 'RM',     # Malaysian Ringgit
+    'SGD': 'S$',     # Singapore Dollar
+    'HKD': 'HK$',    # Hong Kong Dollar
+    'NZD': 'NZ$',    # New Zealand Dollar
+}
