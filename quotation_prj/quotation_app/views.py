@@ -7,10 +7,11 @@ from reportlab.lib import colors
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.platypus import Table, TableStyle, Paragraph, Spacer, Image
 from io import BytesIO
-from .models import Client, Quotation, Product, QuotationProduct, Seller # Import models
+from .models import Client, Quotation, Product, QuotationProduct
+from seller_app.models import Seller, SellerQuotationSettings # Import models
 from .forms import ClientForm, QuotationForm, ProductForm, QuotationProductForm, QuotationFormPerSeller
 from django.urls import reverse
-from .utils import list_all_urls, format_brazilian_phone
+from .utils import list_all_urls, format_brazilian_phone, CURRENCY_SYMBOLS
 from textwrap import wrap
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
@@ -20,6 +21,7 @@ from django.conf import settings
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 from django.utils.translation import gettext as _
+import textwrap
 
 # Full path to the font file
 font_path = os.path.join(settings.BASE_DIR, 'quotation_app', 'static', 'fonts', 'DejaVuSans.ttf')
@@ -127,17 +129,26 @@ def generate_pdf(request, slug, quotation_id):
 
     p.setFont("DejaVuSans", 12)
     p.drawString(260,height - 100, _("Phone: %(phone)s") % {'phone': format_brazilian_phone(seller.phone_number)})
-    p.drawString(260, height - 120, "email: " + seller.email)
+    #p.drawString(260, height - 120, "email: " + seller.email)
 
+    #y_position = height - 140
+    y_position = height - 120
+
+    # 🔁 Show social media link FIRST
+    if seller.social_media_link:
+        p.setFont("DejaVuSans", 12)
+        p.drawString(260, y_position, seller.social_media_link)
+        y_position -= 20  # Move down
+
+    # ✅ Then show address BELOW it
     if seller.address:
-        text_object = p.beginText(260, height - 140)
-        # Make sure address is a string and in UTF-8 (should be by default in Python 3)
+        text_object = p.beginText(260, y_position)
         wrapped_lines = wrap(seller.address, width=50)
         text_object.setFont("DejaVuSans", 12)
         text_object.textLines(wrapped_lines)
         p.drawText(text_object)
     else:
-        p.drawString(260, height - 140, "")
+        p.drawString(260, y_position, "")
 
     # Add RFQ title
     p.setFont("Helvetica-Bold", 18)
@@ -155,15 +166,19 @@ def generate_pdf(request, slug, quotation_id):
     ]
     # Loop through only products with quantity > 0
     quotation_items = quotation.quotationproduct_set.filter(quantity__gt=0)
+
+    # Get the currency from the seller's settings
+    currency = quotation.seller.quotation_settings.currency
+    symbol = CURRENCY_SYMBOLS.get(currency, '€')  # Default to R$
  
     for item in quotation_items:
         data.append([
             item.product.name, 
             str(item.quantity), 
-            f"R${item.product.price:.2f}", 
-            f"R${item.quantity * item.product.price:.2f}"
+            f"{symbol}{item.product.price:.2f}", 
+            f"{symbol}{item.quantity * item.product.price:.2f}"
         ])
-    data.append(["", "", _("Total Amount"), f"R${quotation.total_amount:.2f}"])
+    data.append(["", "", _("Total Amount"), f"{symbol}{quotation.total_amount:.2f}"])
 
     table = Table(data, colWidths=[230, 70, 100, 100])
     table.setStyle(TableStyle([
@@ -196,13 +211,33 @@ def generate_pdf(request, slug, quotation_id):
         p.showPage()
         thank_you_y = height - 100  # new page start
 
+    quote_settings = seller.quotation_settings
+    message_parts = []
+    # Add custom message if it exists
+    if quote_settings.custom_message:
+        message_parts.append(quote_settings.custom_message.strip())
+    else:
+        # Default message if no custom message is set
+        message_parts.append(_("Thank you for your request. Your quotation is valid for 7 days,\n if you accept it we will send the payment link."))
+    # Add payment link if it exists
+    if quote_settings.payment_link:
+        message_parts.append(f"=> {quote_settings.payment_link}")
+    # Add PIX key if it exists
+    if quote_settings.pix_key:
+        message_parts.append(f"PIX: {quote_settings.pix_key}")
     # Add thank you message
     p.setFont("Helvetica", 12)
-    message = _("Thank you for your request. Your quotation is valid for 7 days,\n if you accept it we will send the payment link.")
+    # Combine into a single message with line breaks
+    message = "\n".join(message_parts)
+    # Optional: wrap lines at 90 characters max
+    wrapped_lines = []
+    for paragraph in message.split("\n"):
+        wrapped_lines.extend(textwrap.wrap(paragraph, width=90))  # You can adjust the width
+
     lines = message.split('\n') 
     y = thank_you_y
     line_height = 15
-    for line in lines:
+    for line in wrapped_lines:
         p.drawString(50, y, line.strip())
         y -= line_height
     #p.drawString(50, thank_you_y, _("Thank you for your request. Your quotation is valid for 7 days, if you accept it we will send the payment link."))

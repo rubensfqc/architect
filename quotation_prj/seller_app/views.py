@@ -12,6 +12,7 @@ from .forms import CustomUserCreationForm, SellerUpdateForm, SellerQuotationSett
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden, JsonResponse
 
+
 @login_required
 def seller_dashboard(request):
     # Get products for this seller
@@ -137,15 +138,21 @@ def update_quotation_settings(request):
         quote_settings = SellerQuotationSettings.objects.get(seller=seller)
     except SellerQuotationSettings.DoesNotExist:
         quote_settings = SellerQuotationSettings(seller=seller)
-
+    print(f"DEBUG1")
     if request.method == 'POST':
         form = SellerQuotationSettingsForm(request.POST, instance=quote_settings)
+        print(f"Formulario valido ou nao: {form.is_valid()}")
+        print(f"Form error: {form.error_class}")
+        print(f"Form errors: {form.errors}")
         if form.is_valid():
             form.save()
+            print(f"DEBUG2")
             messages.success(request, 'Quotation settings updated successfully.')
             return redirect('update_quote_settings')
     else:
+        print(f"DEBUG3")
         form = SellerQuotationSettingsForm(instance=quote_settings)
+    print(f"DEBUG4")
     return render(request, 'seller_app/update_quote_settings.html', {'form': form, 'quote_settings': quote_settings, 'seller': seller})
 
 def slug_search(request):

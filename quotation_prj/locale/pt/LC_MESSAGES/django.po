@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-07-06 22:51+0200\n"
+"POT-Creation-Date: 2025-07-07 19:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,9 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: .\email_app\forms.py:10 .\quotation_app\forms.py:11
-#: .\quotation_app\templates\quotation_app\landing_page_per_seller.html:20
-#: .\seller_app\models.py:9
+#: .\email_app\forms.py:10 .\quotation_app\forms.py:11 .\seller_app\models.py:9
 #: .\seller_app\templates\seller_app\add_product.html:13
 #: .\seller_app\templates\seller_app\edit_product.html:13
 #: .\seller_app\templates\seller_app\seller_clients.html:25
@@ -88,7 +86,7 @@ msgid ""
 "EU 0612345678)"
 msgstr "Digite um numero de telefone válido  (ex., 11 91234-5678)"
 
-#: .\quotation_app\forms.py:30 .\quotation_app\views.py:154
+#: .\quotation_app\forms.py:30 .\quotation_app\views.py:165
 #: .\seller_app\forms.py:24
 #: .\seller_app\templates\seller_app\seller_dashboard.html:45
 msgid "Product Name"
@@ -118,7 +116,7 @@ msgstr "Produto"
 
 #: .\quotation_app\forms.py:67
 #: .\quotation_app\templates\quotation_app\quotation_page_per_seller.html:30
-#: .\quotation_app\views.py:154
+#: .\quotation_app\views.py:165
 msgid "Quantity"
 msgstr "Quantidade"
 
@@ -175,6 +173,10 @@ msgstr ""
 "    Bem-vindo ao catálogo de %(seller_name)s\n"
 "  "
 
+#: .\quotation_app\templates\quotation_app\landing_page_per_seller.html:20
+msgid "Name or Instgram @"
+msgstr "Nome ou @ do Instagram"
+
 #: .\quotation_app\templates\quotation_app\landing_page_per_seller.html:43
 msgid "Proceed to Quotation"
 msgstr "Peça sua cotação"
@@ -217,33 +219,33 @@ msgstr "Preço:"
 msgid "Generate Quotation"
 msgstr "Gerar cotação"
 
-#: .\quotation_app\views.py:129
+#: .\quotation_app\views.py:131
 #, python-format
 msgid "Phone: %(phone)s"
 msgstr "Celular: %(phone)s"
 
-#: .\quotation_app\views.py:144
+#: .\quotation_app\views.py:155
 msgid "Request for Quotation #"
 msgstr "Pedido de cotação #"
 
-#: .\quotation_app\views.py:148
+#: .\quotation_app\views.py:159
 #, python-format
 msgid "Client Name: %(name)s"
 msgstr "Nome do cliente: %(name)s"
 
-#: .\quotation_app\views.py:154
+#: .\quotation_app\views.py:165
 msgid "Unit Price"
 msgstr "Preço Unit."
 
-#: .\quotation_app\views.py:154
+#: .\quotation_app\views.py:165
 msgid "Total Price"
 msgstr "Preço Total"
 
-#: .\quotation_app\views.py:166
+#: .\quotation_app\views.py:181
 msgid "Total Amount"
 msgstr "Valor total"
 
-#: .\quotation_app\views.py:201
+#: .\quotation_app\views.py:221
 msgid ""
 "Thank you for your request. Your quotation is valid for 7 days,\n"
 " if you accept it we will send the payment link."
@@ -284,41 +286,79 @@ msgstr "Nome completo ou da empresa"
 msgid "Profile Picture"
 msgstr "Foto de perfil"
 
-#: .\seller_app\forms.py:43 .\seller_app\models.py:12
+#: .\seller_app\forms.py:43 .\seller_app\models.py:15
+#: .\seller_app\templates\seller_app\update_seller.html:86
+msgid "Social Media Profile"
+msgstr "Perfil de rede social"
+
+#: .\seller_app\forms.py:44 .\seller_app\models.py:18
 #: .\seller_app\templates\seller_app\update_seller.html:81
 msgid "Address"
 msgstr "Endereço"
 
-#: .\seller_app\forms.py:51
+#: .\seller_app\forms.py:52
 msgid "Currency"
 msgstr "Moeda"
 
-#: .\seller_app\forms.py:52
+#: .\seller_app\forms.py:53
 msgid "Payment Link"
 msgstr "Link para pagamento"
 
-#: .\seller_app\forms.py:53 .\seller_app\models.py:66
+#: .\seller_app\forms.py:54 .\seller_app\models.py:72
 msgid "PIX Key"
 msgstr "Chave PIX"
 
-#: .\seller_app\forms.py:54
-msgid "Base Price"
-msgstr "Preço Total"
-
 #: .\seller_app\forms.py:55
+msgid "Redirect URL"
+msgstr "Link de redirecionamento"
+
+#: .\seller_app\forms.py:56
+msgid "Product Catalog URL"
+msgstr "Link para o catálogo de produtos"
+
+#: .\seller_app\forms.py:57
+msgid "Base Price"
+msgstr "Preço base (a ser somado ao valor da cotação)"
+
+#: .\seller_app\forms.py:58
 msgid "Custom Message"
 msgstr "Mensagem customizada de rodapé"
 
-#: .\seller_app\models.py:67
-#: .\seller_app\templates\seller_app\update_quote_settings.html:68
+#: .\seller_app\models.py:16
+msgid ""
+"Add a link to your preferred social media profile (e.g. Instagram, Facebook)"
+msgstr ""
+"Adicione seu link de perfil na rede social (ex. Instagram, Facebook)"
+
+#: .\seller_app\models.py:73
 msgid "Enter your PIX key (CPF, CNPJ, email, phone or random)"
 msgstr "Digite sua chave PIX (CPF, CNPJ, email, telefone ou outra)"
 
-#: .\seller_app\populate_db.py:30
+#: .\seller_app\models.py:78
+msgid "Customer Redirect Link"
+msgstr "Link de redirecionamento pro cliente"
+
+#: .\seller_app\models.py:79
+msgid "Optional: Enter a URL to redirect customers after a quotation."
+msgstr "Optional: Link para redirecionar os clientes após a cotação."
+
+#: .\seller_app\models.py:84
+msgid "Product Catalog Link"
+msgstr "Lista de Produtos"
+
+#: .\seller_app\models.py:85
+msgid ""
+"Enter a URL for your product catalog (e.g.,Instagram post, PDF, Google "
+"Drive, or Website)"
+msgstr ""
+"Digite o link para seu catálogo de produto (ex., post do Instagram, PDF, "
+"Google Drive, ou Website)"
+
+#: .\seller_app\populate_db.py:41
 msgid "Célia Doces"
 msgstr "Célia Doces"
 
-#: .\seller_app\populate_db.py:64
+#: .\seller_app\populate_db.py:151
 msgid "Reforma de banheiro (m², mín. 6m²)"
 msgstr "Reforma de banheiro (m², mín. 6m²)"
 
@@ -503,7 +543,7 @@ msgid "Update Quotation Information"
 msgstr "Atualize dados das cotações"
 
 #: .\seller_app\templates\seller_app\update_quote_settings.html:14
-#: .\seller_app\templates\seller_app\update_seller.html:113
+#: .\seller_app\templates\seller_app\update_seller.html:118
 msgid "Update Quotation Settings"
 msgstr "Customizar cotação"
 
@@ -511,19 +551,13 @@ msgstr "Customizar cotação"
 msgid "Update your quotation custom data"
 msgstr "Customize os dados das cotações"
 
-#: .\seller_app\templates\seller_app\update_quote_settings.html:63
-#, fuzzy
-#| msgid "Payment Link"
-msgid "Enter payment link"
-msgstr "Link para pagamento"
-
-#: .\seller_app\templates\seller_app\update_quote_settings.html:82
+#: .\seller_app\templates\seller_app\update_quote_settings.html:92
 msgid "Save Settings"
 msgstr "Salvar configurações"
 
-#: .\seller_app\templates\seller_app\update_quote_settings.html:83
-msgid "Cancel and Back to Profile"
-msgstr "Cancelar e voltar ao perfil"
+#: .\seller_app\templates\seller_app\update_quote_settings.html:93
+msgid "Back to Profile"
+msgstr "Voltar a meus dados"
 
 #: .\seller_app\templates\seller_app\update_seller.html:6
 #: .\seller_app\templates\seller_app\update_seller.html:20
@@ -538,19 +572,19 @@ msgstr "Atualize seus dados"
 msgid "No profile picture uploaded."
 msgstr "Nenhuma imagem de perfil foi enviada ainda."
 
-#: .\seller_app\templates\seller_app\update_seller.html:87
+#: .\seller_app\templates\seller_app\update_seller.html:92
 msgid "Upload Profile Picture"
 msgstr "Envie sua foto de perfil"
 
-#: .\seller_app\templates\seller_app\update_seller.html:93
+#: .\seller_app\templates\seller_app\update_seller.html:98
 msgid "Save changes"
 msgstr "Salvar alterações"
 
-#: .\seller_app\templates\seller_app\update_seller.html:95
-msgid "Cancel and back to Dashboard"
-msgstr "Cancelar e voltar ao portal"
+#: .\seller_app\templates\seller_app\update_seller.html:100
+msgid "Back to Dashboard"
+msgstr "Voltar ao portal"
 
-#: .\seller_app\templates\seller_app\update_seller.html:112
+#: .\seller_app\templates\seller_app\update_seller.html:117
 msgid "Click below to customize your template:"
 msgstr "Clique abaixo para customizar seu modelo de cotação:"
 
@@ -1017,7 +1051,7 @@ msgstr ""
 
 #: .\venv\Lib\site-packages\django\core\validators.py:227
 msgid "Enter a valid email address."
-msgstr ""
+msgstr "Digite um email válido"
 
 #. Translators: "letters" means latin letters: a-z and A-Z.
 #: .\venv\Lib\site-packages\django\core\validators.py:310
@@ -1277,7 +1311,7 @@ msgstr ""
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1915
 msgid "Email address"
-msgstr ""
+msgstr "Endereço de email"
 
 #: .\venv\Lib\site-packages\django\db\models\fields\__init__.py:1940
 msgid "File path"
@@ -2189,6 +2223,11 @@ msgstr ""
 #: .\venv\Lib\site-packages\django\views\templates\default_urlconf.html:236
 msgid "Connect, get help, or contribute"
 msgstr "Conecte-se, peça ajuda ou contribua"
+
+#, fuzzy
+#~| msgid "Payment Link"
+#~ msgid "Enter payment link"
+#~ msgstr "Link para pagamento"
 
 #~ msgid "Are you sure you want to delete?"
 #~ msgstr "Está certo que deseja deletar \"%(product.name)s\"?"
