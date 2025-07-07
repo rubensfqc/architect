@@ -27,9 +27,9 @@ seller = Seller.objects.create_user(
     username='celia',
     email='celia@exemplo.com',
     password='demosenha123',  # this is hashed automatically
-    name=_("Célia Doces"),
+    name=_("C\u00e9lia Doces"),
     phone_number='1234567890',
-    address='12 Av Paulista, São Paulo, SP, 01311-000 - instagram: @celia_doces',
+    address='12 Av Paulista, S\u00e3o Paulo, SP, 01311-000 - instagram: @celia_doces',
 )
 print(f"Created seller: {seller} ---Seller ID: {seller.id}")
 
@@ -48,27 +48,27 @@ product = Product.objects.create(
 )
 product = Product.objects.create(
     name='Sobrancelha Design',
-    description='Design de sobrancelhas com técnicas modernas para realçar o olhar.',
+    description='Design de sobrancelhas com t\u00e9cnicas modernas para realçar o olhar.',
     price=80,
     seller=seller
 )
 
 seller = Seller.objects.get(id=3) 
 product = Product.objects.create(
-    name='Vistoria de obra (por visita tecnica)',
-    description='Vistoria completa de obra para garantir a qualidade e segurança da construção.',
+    name='Vistoria de obra (por visita t\u00e9cnica)',
+    description='Vistoria completa de obra para garantir a qualidade e segurança da constru\u00e7\u00e3o.',
     price=100,
     seller=seller
 )
 product = Product.objects.create(
-    name=_("Reforma de banheiro (m², mín. 6m²)"),
+    name=_("Reforma de banheiro (m\u00b2, mín. 6m\u00b2)"),
     description='Reforma completa de banheiro, incluindo revestimentos, louças e acabamentos.',
     price=199.99,
     seller=seller
 )
 product = Product.objects.create(
-    name='Reforma de cozinha (m², mín. 8m²)',
-    description='Reforma completa de cozinha, incluindo armários, bancadas e revestimentos.',
+    name='Reforma de cozinha (m\u00b2, mín. 8m\u00b2)',
+    description='Reforma completa de cozinha, incluindo arm\u00e1rios, bancadas e revestimentos.',
     price=299.99,
     seller=seller
 )
@@ -76,25 +76,25 @@ product = Product.objects.create(
 seller = Seller.objects.get(id=4)
 product = Product.objects.create(
     name='Brigadeiro Gourmet (un.)',
-    description='Clássico brasileiro reinventado com chocolate belga, creme de leite fresco e confeitos sofisticados como nibs de cacau ou pistache.',
+    description='Cl\u00e1ssico brasileiro reinventado com chocolate belga, creme de leite fresco e confeitos sofisticados como nibs de cacau ou pistache.',
     price=3.00,
     seller=seller
 )
 product = Product.objects.create(
     name='Camafeu de Nozes (un.)',
-    description='Doce refinado feito com nozes trituradas e leite condensado, coberto com fondant branco e decorado com uma meia noz – símbolo de tradição e elegância.',
+    description='Doce refinado feito com nozes trituradas e leite condensado, coberto com fondant branco e decorado com uma meia noz, símbolo de tradi\u00e7\u00e3o.',
     price=3.80,
     seller=seller
 )
 product = Product.objects.create(
     name='Bem-Casado (min. 10, preço por un.)',
-    description='Dois discos de pão de ló recheados com doce de leite e cobertos por açúcar de confeiteiro ou pasta fina. Representa a união e prosperidade dos noivos.',
+    description='Dois discos de pão de l\u00f3 recheados com doce de leite e cobertos por a\u00e7\u00facar de confeiteiro ou pasta fina. Representa a uni\u00e3o e prosperidade dos noivos.',
     price=4.5,
     seller=seller
 )
 product = Product.objects.create(
-    name='Tartelete de Limão (por 100g)',
-    description='Mini tortinhas com base crocante, recheadas com curd de limão siciliano e finalizadas com merengue italiano tostado.',
+    name='Tartelete de Lim\u00e3o (por 100g)',
+    description='Mini tortinhas com base crocante, recheadas com curd de lim\u00e3o siciliano e finalizadas com merengue italiano tostado.',
     price=8.50,
     seller=seller
 )
@@ -105,8 +105,8 @@ product = Product.objects.create(
     seller=seller
 )
 product = Product.objects.create(
-    name='Mini Pavê de Nozes (por taça)',
-    description='Versão em mini taças do tradicional pavê, com camadas de creme, biscoito embebido e nozes/amêndoas caramelizadas.',
+    name='Mini Pav\u00ea de Nozes (por taça)',
+    description='Versão em mini taças do tradicional pav\u00ea, com camadas de creme, biscoito embebido e nozes/am\u00eandoas caramelizadas.',
     price=12.00,
     seller=seller
 )
