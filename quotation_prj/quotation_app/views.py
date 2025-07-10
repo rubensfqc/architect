@@ -85,7 +85,10 @@ def quotation_page_per_seller(request, slug, client_id):
     seller = get_object_or_404(Seller, slug=slug)
     client = get_object_or_404(Client, id=client_id)
     products = Product.objects.filter(seller=seller)
-    
+    seller_quotation_settings = SellerQuotationSettings.objects.filter(seller=seller).first()
+    currency = seller_quotation_settings.currency
+    currency_symbol = CURRENCY_SYMBOLS.get(currency, '€')  # Default to Euro
+
     if request.method == 'POST':
         form = QuotationFormPerSeller(request.POST, seller=seller)  # Pass the seller to the form
         if form.is_valid():
@@ -102,7 +105,7 @@ def quotation_page_per_seller(request, slug, client_id):
     else:
         form = QuotationFormPerSeller(request.POST, seller=seller)  # Pass the seller to the form
    
-    return render(request, 'quotation_app/quotation_page_per_seller.html', {'form': form, 'client': client, 'seller':seller})
+    return render(request, 'quotation_app/quotation_page_per_seller.html', {'form': form, 'client': client, 'seller':seller, 'currency_symbol': currency_symbol})
 
 def generate_pdf(request, slug, quotation_id):
     seller = get_object_or_404(Seller, slug=slug)
@@ -169,7 +172,7 @@ def generate_pdf(request, slug, quotation_id):
 
     # Get the currency from the seller's settings
     currency = quotation.seller.quotation_settings.currency
-    symbol = CURRENCY_SYMBOLS.get(currency, '€')  # Default to R$
+    symbol = CURRENCY_SYMBOLS.get(currency, '€')  # Default to Euro
  
     for item in quotation_items:
         data.append([
