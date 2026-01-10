@@ -41,6 +41,6 @@ urlpatterns = [
     path('pro/<slug:slug>/', views.landing_page_per_seller, name='landing_page_per_seller'),
     path('pro/<slug:slug>/<int:client_id>', views.quotation_page_per_seller, name='quotation_page_per_seller'),
     path('pro/<slug:slug>/<int:quotation_id>/', views.generate_pdf, name='generate_pdf'),
-    path('dashboard/', architect_dashboard, name='architect_dashboard'),
+    path('arch/', include('architect_app.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

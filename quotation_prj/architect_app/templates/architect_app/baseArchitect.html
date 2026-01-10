@@ -24,23 +24,36 @@
     <aside id="sidebar" class="hidden md:block w-64 bg-gray-900 h-screen sticky top-0 text-white p-6 z-50">
         <div class="text-xl font-bold mb-10 tracking-tight hidden md:block">Arch<span class="text-blue-500">FLOW</span></div>
         <nav class="space-y-4">
-            <a href="{% url 'seller_dashboard' %}" class="block py-2.5 px-4 rounded hover:bg-gray-800 transition text-gray-400">
+            <a href="{% url 'architects_dashboard' %}" class="block py-2.5 px-4 rounded hover:bg-gray-800 transition text-gray-400">
                 {% trans "Dashboard" %}
             </a>
-            <a href="/" class="block py-2.5 px-4 rounded hover:bg-gray-800 transition text-gray-400">
+            <a href="{% url 'architects_projects' %}" class="block py-2.5 px-4 rounded hover:bg-gray-800 transition text-gray-400">
                 {% trans "Projects" %}
             </a>
-            <a href="{% url 'seller_clients' %}" class="block py-2.5 px-4 rounded bg-blue-600 text-white">
+            <a href="{% url 'architects_clients' %}" class="block py-2.5 px-4 rounded hover:bg-gray-800 transition text-gray-400">
                 {% trans "Clients" %}
             </a>
-            <a href="/" class="block py-2.5 px-4 rounded hover:bg-gray-800 transition text-gray-400">
-                {% trans "Contracts/Finance" %}
+            <a href="{% url 'architects_contracts' %}" class="block py-2.5 px-4 rounded hover:bg-gray-800 transition text-gray-400">
+                {% trans "Financial" %}
             </a>
             
             <a href="{% url 'update_seller' %}" class="block py-2.5 px-4 rounded hover:bg-gray-800 transition text-gray-400">
-                {% trans "Configurations" %}
+                {% trans "Settings" %}
             </a>
+
+            <div class="p-4 border-t border-gray-800">
+            <form action="{% url 'logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="w-full text-left py-2.5 px-4 rounded text-red-400 hover:bg-red-900/20 transition flex items-center">
+                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                    </svg>
+                    {% trans "Logout" %}
+                </button>
+            </form>
+        </div>
         </nav>
+
     </aside>
 
     <main class="flex-1 p-4 md:p-8">
