@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Arquiteto | Gestão de Projetos</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-50 text-gray-900 flex">
+
+    <aside class="w-64 bg-gray-900 h-screen sticky top-0 text-white p-6 hidden md:block">
+        <div class="text-xl font-bold mb-10 tracking-tight">ARQ<span class="text-blue-500">OS</span></div>
+        <nav class="space-y-4">
+            <a href="#" class="block py-2.5 px-4 rounded bg-blue-600 text-white">Projetos</a>
+            <a href="#" class="block py-2.5 px-4 rounded text-gray-400 hover:bg-gray-800 transition">Clientes</a>
+            <a href="#" class="block py-2.5 px-4 rounded text-gray-400 hover:bg-gray-800 transition">Financeiro</a>
+            <a href="#" class="block py-2.5 px-4 rounded text-gray-400 hover:bg-gray-800 transition">Configurações</a>
+        </nav>
+    </aside>
+
+    <main class="flex-1 p-8">
+        <header class="flex justify-between items-center mb-10">
+            <div>
+                <h1 class="text-2xl font-bold">Painel de Projetos</h1>
+                <p class="text-gray-500 text-sm">Bem-vindo de volta, Arq. Ricardo.</p>
+            </div>
+            <button class="bg-blue-600 text-white px-5 py-2.5 rounded-lg font-medium hover:bg-blue-700 transition flex items-center gap-2">
+                <span>+ Novo Projeto</span>
+            </button>
+        </header>
+
+        <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+            <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
+                <p class="text-gray-500 text-xs uppercase font-bold tracking-wider mb-1">Projetos Ativos</p>
+                <p class="text-3xl font-bold">12</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm border-l-4 border-l-yellow-400">
+                <p class="text-gray-500 text-xs uppercase font-bold tracking-wider mb-1">Aguardando Aprovação</p>
+                <p class="text-3xl font-bold">4</p>
+            </div>
+            <div class="bg-white p-6 rounded-xl border border-gray-200 shadow-sm border-l-4 border-l-green-400">
+                <p class="text-gray-500 text-xs uppercase font-bold tracking-wider mb-1">Aprovados (Mês)</p>
+                <p class="text-3xl font-bold">8</p>
+            </div>
+        </section>
+
+        <section class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+            <table class="w-full text-left">
+                <thead class="bg-gray-50 border-b border-gray-200">
+                    <tr>
+                        <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase">Projeto</th>
+                        <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase">Cliente</th>
+                        <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase">Última Entrega</th>
+                        <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase">Status</th>
+                        <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase text-right">Ações</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                    {% for projeto in projetos %}
+                    <tr class="hover:bg-gray-50 transition">
+                        <td class="px-6 py-4 font-semibold">{{ projeto.titulo }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-600">{{ projeto.cliente.get_full_name }}</td>
+                        <td class="px-6 py-4 text-sm text-gray-500">12/10/2023</td>
+                        <td class="px-6 py-4">
+                            <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase bg-yellow-100 text-yellow-700">Pendente</span>
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            <button class="text-blue-600 hover:text-blue-800 font-medium text-sm px-3">Upload</button>
+                            <button class="text-gray-400 hover:text-gray-600 font-medium text-sm px-3">Editar</button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+
+                    <tr class="hover:bg-gray-50 transition">
+                        <td class="px-6 py-4 font-semibold">Reforma Apartamento 402</td>
+                        <td class="px-6 py-4 text-sm text-gray-600">João Pedro Antunes</td>
+                        <td class="px-6 py-4 text-sm text-gray-500">08/10/2023</td>
+                        <td class="px-6 py-4">
+                            <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase bg-green-100 text-green-700">Aprovado</span>
+                        </td>
+                        <td class="px-6 py-4 text-right">
+                            <button class="text-blue-600 hover:text-blue-800 font-medium text-sm px-3">Upload</button>
+                            <button class="text-gray-400 hover:text-gray-600 font-medium text-sm px-3">Editar</button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+</body>
+</html>

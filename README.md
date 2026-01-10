@@ -1,3 +1,12 @@
+# Architect user model
+
+Seller (AUTH_USER_MODEL)
+ ├── ArchitectProfile
+ │     └── Contract
+ │           └── Project
+ └── ClientProfile
+       └── Contract (view-only from client side)
+
 pla4uDev
 vps58902.publiccloud.com.br (191.252.93.137)
 ssh root@191.252.93.137

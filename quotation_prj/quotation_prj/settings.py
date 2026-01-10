@@ -46,6 +46,8 @@ INSTALLED_APPS = [
     'email_app',
     'seller_app',
     'widget_tweaks',
+    'django.contrib.humanize',
+    'architect_app',
 ]
 
 MIDDLEWARE = [
