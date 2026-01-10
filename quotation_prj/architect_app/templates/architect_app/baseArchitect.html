@@ -13,7 +13,15 @@
 <body class="bg-gray-50 text-gray-900 md:flex">
 
     <div class="bg-gray-900 text-white p-4 flex justify-between items-center md:hidden">
-        <div class="text-xl font-bold tracking-tight">Arch<span class="text-blue-500">FLOW</span></div>
+        <div class="mb-10 flex flex-col items-center">
+        {% if user.architect_profile.logo %}
+            <img src="{{ user.architect_profile.logo.url }}" alt="{{ user.architect_profile.firm_name }}" class="h-12 w-auto mb-2 object-contain">
+        {% else %}
+            <div class="text-xl font-bold tracking-tight">Arch<span class="text-blue-500">FLOW</span></div>
+        {% endif %}
+
+        <p class="text-xs text-gray-400 mt-2">{{ user.architect_profile.firm_name }}</p>
+        </div>
         <button id="mobile-menu-button" class="p-2 focus:outline-none hover:bg-gray-800 rounded">
             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
@@ -22,7 +30,15 @@
     </div>
 
     <aside id="sidebar" class="hidden md:block w-64 bg-gray-900 h-screen sticky top-0 text-white p-6 z-50">
-        <div class="text-xl font-bold mb-10 tracking-tight hidden md:block">Arch<span class="text-blue-500">FLOW</span></div>
+        <div class="mb-10 flex flex-col items-center">
+        {% if user.architect_profile.logo %}
+            <img src="{{ user.architect_profile.logo.url }}" alt="{{ user.architect_profile.firm_name }}" class="h-12 w-auto mb-2 object-contain">
+        {% else %}
+            <div class="text-xl font-bold tracking-tight">Arch<span class="text-blue-500">FLOW</span></div>
+        {% endif %}
+        
+        <p class="text-xl text-gray-400 mt-2">{{ user.architect_profile.firm_name }}</p>
+        </div>
         <nav class="space-y-4">
             <a href="{% url 'architects_dashboard' %}" class="block py-2.5 px-4 rounded hover:bg-gray-800 transition text-gray-400">
                 {% trans "Dashboard" %}

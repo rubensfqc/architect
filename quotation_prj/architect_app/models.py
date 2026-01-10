@@ -13,6 +13,7 @@ class Architect(models.Model):
     firm_name = models.CharField(max_length=255)
     license_number = models.CharField(max_length=100, unique=True)
     phone_number = models.CharField(max_length=20, blank=True)
+    logo = models.ImageField(upload_to='architect_logos/', null=True, blank=True)
 
     def __str__(self):
         return f"{self.user.email} - {self.firm_name}"
