@@ -6,6 +6,9 @@ from django.conf import settings
 from architect_app.models import Architect, ClientProfile, Contract, Project
 from seller_app.models import Seller  # ajuste se o app for outro
 
+#para rodar: python manage.py populate_architects
+#https://chatgpt.com/c/6961ecec-8f48-8326-ac16-cccd4f315b1b
+
 
 class Command(BaseCommand):
     help = "Popula o banco com 3 arquitetos, 4 contratos e 4 projetos cada"

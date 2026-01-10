@@ -27,14 +27,18 @@
             <a href="{% url 'seller_dashboard' %}" class="block py-2.5 px-4 rounded hover:bg-gray-800 transition text-gray-400">
                 {% trans "Dashboard" %}
             </a>
-            <a href="{% url 'seller_quotations' %}" class="block py-2.5 px-4 rounded hover:bg-gray-800 transition text-gray-400">
-                {% trans "Quotations" %}
+            <a href="/" class="block py-2.5 px-4 rounded hover:bg-gray-800 transition text-gray-400">
+                {% trans "Projects" %}
             </a>
             <a href="{% url 'seller_clients' %}" class="block py-2.5 px-4 rounded bg-blue-600 text-white">
                 {% trans "Clients" %}
             </a>
+            <a href="/" class="block py-2.5 px-4 rounded hover:bg-gray-800 transition text-gray-400">
+                {% trans "Contracts/Finance" %}
+            </a>
+            
             <a href="{% url 'update_seller' %}" class="block py-2.5 px-4 rounded hover:bg-gray-800 transition text-gray-400">
-                {% trans "Profile" %}
+                {% trans "Configurations" %}
             </a>
         </nav>
     </aside>
