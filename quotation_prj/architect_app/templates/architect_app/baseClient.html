@@ -54,7 +54,7 @@
     <main class="max-w-6xl mx-auto p-8">
         
         <section class="mb-12">
-            <h1 class="text-3xl font-semibold mb-2">Residência Lago Sul</h1>
+            <h1 class="text-3xl font-semibold mb-2">A:{{ client.user.contracts }}</h1>
             <p class="text-gray-500 mb-6">Acompanhe aqui a evolução do seu projeto.</p>
             
             <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
@@ -101,6 +101,46 @@
 
             </div>
         </section>
+        <section>
+            {% block content %}
+<h1 class="text-2xl font-semibold mb-6">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
+    <div>
+        <h1 class="text-2xl font-bold text-gray-900">
+            Welcome, {{ client.user.get_full_name|default:client.user.email }}
+        </h1>
+        <p class="text-sm text-gray-500">
+            Working with <strong>{{ architect.firm_name }}</strong>
+        </p>
+    </div>
+    
+    <div class="mt-4 md:mt-0">
+        <span class="px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-semibold uppercase">
+            Client Portal
+        </span>
+    </div>
+</div>
+</h1>
+<h2 class="text-xl mb-4 text-gray-700">Your Projects</h2>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for project in projects %}
+    <div class="bg-white p-6 rounded-xl shadow border-l-4 border-green-500">
+        <h3 class="font-bold text-lg mb-2">{{ project.name }}</h3>
+        <p class="text-sm text-gray-600 mb-1"><strong>Location:</strong> {{ project.location }}</p>
+        <p class="text-sm text-gray-600"><strong>Status:</strong> 
+            {% if project.contract.is_active %} Active {% else %} Inactive {% endif %}
+        </p>
+        <div class="mt-4 text-xs text-gray-400 uppercase tracking-wider">
+            Contract: {{ project.contract.title }}
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-gray-500">You currently have no projects listed.</p>
+    {% endfor %}
+</div>
+{% endblock %}
+        </section>
     </main>
 
     <script>
@@ -115,6 +155,11 @@
             sidebar.classList.toggle('left-0');
         });
     </script>
+
+
+
+
+
 </body>
 </html>
 
