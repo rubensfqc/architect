@@ -83,6 +83,4 @@ def client_dashboard(request):
         'contracts': contracts,
         'projects': projects,
     }
-    print("Architect in client_dashboard:", architect)
-    print("Architect profile picture URL:", architect.logo.url)
     return render(request, 'architect_app/client_dashboard.html', context)
