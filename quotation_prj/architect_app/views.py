@@ -60,3 +60,27 @@ def contract_list(request):
     architect = get_object_or_404(Architect, user=request.user)
     contracts = architect.contracts.all().select_related('client__user')
     return render(request, 'architect_app/contracts.html', {'contracts': contracts})
+
+@login_required
+def client_dashboard(request):
+    # 1. Get the profile for the logged-in client
+    # We use select_related('architect') to fetch the architect's data in the same query
+    client = get_object_or_404(ClientProfile.objects.select_related('architect__user'), user=request.user)
+    
+    # 2. Get the Architect associated with this client
+    architect = client.architect
+    
+    # 3. Fetch all contracts belonging to this client
+    contracts = client.contracts.all()
+    
+    # 4. Fetch projects linked to this client
+    # We filter by client directly since Project -> Contract -> Client
+    projects = Project.objects.filter(contract__client=client).select_related('contract')
+    
+    context = {
+        'client': client,
+        'architect': architect,
+        'contracts': contracts,
+        'projects': projects,
+    }
+    return render(request, 'architect_app/client_dashboard.html', context)

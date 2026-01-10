@@ -1,0 +1,27 @@
+{% extends "architect_app/baseArchitect.html" %}
+{% block title %}My Projects Dashboard{% endblock %}
+
+{% block content %}
+<h1 class="text-2xl font-semibold mb-6">
+    Welcome, {{ client.user.get_full_name|default:client.user.name }} 
+    <span class="text-gray-500 font-normal">| to the {{ architect.user.get_full_name|default:architect.firm_name }}</span>
+</h1>
+<h2 class="text-xl mb-4 text-gray-700">Your Projects</h2>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for project in projects %}
+    <div class="bg-white p-6 rounded-xl shadow border-l-4 border-green-500">
+        <h3 class="font-bold text-lg mb-2">{{ project.name }}</h3>
+        <p class="text-sm text-gray-600 mb-1"><strong>Location:</strong> {{ project.location }}</p>
+        <p class="text-sm text-gray-600"><strong>Status:</strong> 
+            {% if project.contract.is_active %} Active {% else %} Inactive {% endif %}
+        </p>
+        <div class="mt-4 text-xs text-gray-400 uppercase tracking-wider">
+            Contract: {{ project.contract.title }}
+        </div>
+    </div>
+    {% empty %}
+    <p class="text-gray-500">You currently have no projects listed.</p>
+    {% endfor %}
+</div>
+{% endblock %}

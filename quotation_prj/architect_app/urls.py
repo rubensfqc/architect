@@ -6,5 +6,5 @@ urlpatterns = [
     path('projects/', views.project_list, name='architects_projects'),
     path('clients/', views.client_list, name='architects_clients'),
     path('contracts/', views.contract_list, name='architects_contracts'),
-    # Update other names like update_seller to update_architect if desired
+    path('client/dashboard/', views.client_dashboard, name='client_dashboard'),
 ]
