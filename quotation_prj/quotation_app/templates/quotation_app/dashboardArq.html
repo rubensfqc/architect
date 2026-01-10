@@ -1,0 +1,45 @@
+{% extends 'quotation_app/base2.html' %}
+{% load static %}
+{% load i18n %}
+
+{% block title %}{% trans "My Leads" %}{% endblock %}
+
+{% block content %}
+<header class="flex justify-between items-center mb-10">
+    <div>
+        <h1 class="text-2xl font-bold">{% trans "Leads Captured" %}</h1>
+        <p class="text-gray-500 text-sm">{% trans "Total number of clients: " %}<strong>{{ total_clients }}</strong></p>
+    </div>
+</header>
+
+<section class="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
+    <table class="w-full text-left">
+        <thead class="bg-gray-50 border-b border-gray-200">
+            <tr>
+                <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase">{% trans "Name" %}</th>
+                <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase">Email</th>
+                <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase">WhatsApp</th>
+                <th class="px-6 py-4 text-xs font-bold text-gray-500 uppercase">{% trans "Date" %}</th>
+            </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100">
+            {% if clients %}
+                {% for client in clients %}
+                <tr class="hover:bg-gray-50 transition">
+                    <td class="px-6 py-4 font-semibold">{{ client.name }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-600">{{ client.email }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-600">{{ client.whatsapp }}</td>
+                    <td class="px-6 py-4 text-sm text-gray-500">{{ client.created_at|date:"d/m/Y H:i" }}</td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="4" class="px-6 py-10 text-center text-gray-500 italic">
+                        {% trans "You still don't have any registered clients." %}
+                    </td>
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</section>
+{% endblock %}

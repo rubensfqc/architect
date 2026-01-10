@@ -46,6 +46,9 @@ def landing_page(request):
         form = ClientForm()
     return render(request, "quotation_app/landing_page.html", {'form':form})
 
+def dashboardArq(request):
+    return render(request, "quotation_app/dashboardArq.html")
+
 def landing_page_per_seller(request, slug):
     seller = get_object_or_404(Seller, slug=slug)
     if request.method == 'POST':
