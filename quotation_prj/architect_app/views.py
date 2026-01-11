@@ -1,3 +1,4 @@
+from time import timezone
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from django.db.models import Sum
@@ -83,4 +84,56 @@ def client_dashboard(request):
         'contracts': contracts,
         'projects': projects,
     }
+    print("contracts.progress_percentage: ", contracts.values('progress_percentage').all())
     return render(request, 'architect_app/client_dashboard.html', context)
+
+# Helper function to add a message to a project's conversation log
+def add_message(request, project_id):
+    project = Project.objects.get(id=project_id)
+    new_entry = {
+        "sender": request.user.username,
+        "message": request.POST.get('message'),
+        "timestamp": str(timezone.now())
+    }
+    project.conversation_log.append(new_entry)
+    project.save()
+
+from django.shortcuts import get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
+from django.utils import timezone
+from django.db import transaction
+from .models import Project
+
+# better add message function, This view uses transaction.atomic to ensure that if two people post at the exact same microsecond, the data remains consistent.
+# TODO test both
+@login_required
+def add_project_message(request, project_id):
+    if request.method == "POST":
+        project = get_object_or_404(Project, id=project_id)
+        message = request.POST.get('message', '').strip()
+
+        if message:
+            # Atomic ensures database integrity during the update
+            with transaction.atomic():
+                # Create the log entry
+                new_entry = {
+                    "user": request.user.get_full_name() or request.user.username,
+                    "role": "Architect" if request.user.is_staff else "Client",
+                    "text": message[:280], # Enforce limit
+                    "timestamp": timezone.now().strftime("%Y-%m-%d %H:%M:%S")
+                }
+
+                # Append to JSON log
+                if not project.conversation_log:
+                    project.conversation_log = []
+                project.conversation_log.append(new_entry)
+
+                # Update the specific Twitter-length field based on who sent it
+                if request.user.is_staff: # Assuming Architect is staff
+                    project.architect_comments = message[:280]
+                else:
+                    project.client_comments = message[:280]
+
+                project.save()
+
+        return redirect('project_detail', project_id=project.id)

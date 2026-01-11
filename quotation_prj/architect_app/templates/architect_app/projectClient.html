@@ -1,0 +1,17 @@
+
+
+<!-- Architect App - Project Client Conversation Log Section 
+ Displaying the Log in Templates 
+ In your base.html or project detail page, you can loop through the log to show the history:
+https://gemini.google.com/app/20f1076dbb3eee36-->
+
+<div class="chat-log bg-gray-900 p-4 rounded shadow-inner">
+    {% for entry in project.conversation_log %}
+        <div class="mb-2">
+            <span class="font-bold text-blue-400">{{ entry.sender }}:</span>
+            <span class="text-gray-300">{{ entry.message }}</span>
+        </div>
+    {% empty %}
+        <p class="text-gray-500 italic">No messages yet.</p>
+    {% endfor %}
+</div>
