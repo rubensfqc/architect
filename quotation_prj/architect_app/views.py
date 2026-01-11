@@ -43,10 +43,25 @@ def architect_dashboard(request):
 
 @login_required
 def project_list(request):
-    # Fetch projects associated with the logged-in architect's contracts
     architect = get_object_or_404(Architect, user=request.user)
-    projects = Project.objects.filter(contract__architect=architect).select_related('contract')
-    return render(request, 'architect_app/projects.html', {'projects': projects})
+    
+    # Get all contracts for the architect to populate the filter dropdown
+    contracts = Contract.objects.filter(architect=architect)
+    
+    # Start with all projects belonging to this architect
+    projects = Project.objects.filter(contract__architect=architect)
+    
+    # Apply filter if a specific contract is selected
+    selected_contract_id = request.GET.get('contract')
+    if selected_contract_id:
+        projects = projects.filter(contract_id=selected_contract_id)
+
+    context = {
+        'projects': projects,
+        'contracts': contracts,
+        'selected_contract_id': selected_contract_id,
+    }
+    return render(request, 'architect_app/projects.html', context)
 
 @login_required
 def client_list(request):
