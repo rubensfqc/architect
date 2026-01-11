@@ -1,8 +1,9 @@
 from time import timezone
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Sum
 from .models import Architect, Contract, Project, ClientProfile
+from .forms import ContractForm
 
 
 @login_required
@@ -152,3 +153,29 @@ def add_project_message(request, project_id):
                 project.save()
 
         return redirect('project_detail', project_id=project.id)
+    
+@login_required
+def contract_upsert(request, pk=None):
+    """Handles both Creating and Editing a contract."""
+    contract = get_object_or_404(Contract, pk=pk) if pk else None
+    architect = get_object_or_404(Architect, user=request.user)
+
+    if request.method == 'POST':
+        form = ContractForm(request.POST, instance=contract)
+        if form.is_valid():
+            new_contract = form.save(commit=False)
+            new_contract.architect = architect  # Link to current architect
+            new_contract.save()
+            return redirect('architects_contracts')
+    else:
+        form = ContractForm(instance=contract)
+    
+    return render(request, 'architect_app/contract_form.html', {'form': form, 'contract': contract})
+
+@login_required
+def contract_delete(request, pk):
+    contract = get_object_or_404(Contract, pk=pk, architect__user=request.user)
+    if request.method == 'POST':
+        contract.delete()
+        return redirect('architects_contracts')
+    return render(request, 'architect_app/contract_confirm_delete.html', {'contract': contract})
