@@ -25,59 +25,41 @@
 </head>
 <body class="bg-gray-50 text-gray-900">
 
-    <nav class="bg-white border-b border-gray-100 py-4 px-8 flex justify-between items-center">
-        <div class="mb-10 flex flex-col items-center">
+<nav class="bg-white border-b border-gray-100 py-4 px-8 flex justify-between items-center">
+    <div class="flex flex-col items-start">
         {% if architect.logo %}
-            <img src="{{ architect.logo.url }}" alt="{{ architect.firm_name }}" class="h-12 w-auto mb-2 object-contain">
+            <img src="{{ architect.logo.url }}" alt="{{ architect.firm_name }}" class="h-10 w-auto object-contain">
         {% else %}
             <div class="text-xl font-bold tracking-tight">Arch<span class="text-blue-500">FLOW</span></div>
         {% endif %}
+        <p class="text-[10px] text-gray-400 leading-tight uppercase tracking-tighter">{{ architect.firm_name }}</p>
+    </div>
 
-        <p class="text-xs text-gray-400 mt-2">{{ architect.firm_name }}</p>
+    <div class="flex items-center gap-6">
+        <div class="flex items-center gap-3">
+            <span class="text-sm text-gray-500">Hi, {{ user.name }}</span>
+            <div class="w-10 h-10 rounded-full bg-gray-200 border border-gray-300 overflow-hidden flex items-center justify-center">
+                {% if user.profile_picture %}
+                    <img src="{{ user.profile_picture.url }}" alt="{{ user.name }}" class="w-full h-full object-cover">
+                {% else %}
+                    <span class="text-gray-500 font-bold text-xs uppercase">{{ user.name|slice:":2" }}</span>
+                {% endif %}
+            </div>
         </div>
-        <div class="flex items-center gap-4">
-    <span class="text-sm text-gray-500">Hi, {{ user.name }}</span>
-    
-    <div class="w-10 h-10 rounded-full bg-gray-200 border border-gray-300 overflow-hidden flex items-center justify-center">
-        {% if user.profile_picture %}
-            <img src="{{ user.profile_picture.url }}" alt="{{ user.name }}" class="w-full h-full object-cover">
-        {% else %}
-            <span class="text-gray-500 font-bold text-xs uppercase">
-                {{ user.name|slice:":2" }}
-            </span>
-        {% endif %}
-        </div>
 
-
-        <form action="{% url 'logout' %}" method="post">
+        <form action="{% url 'logout' %}" method="post" class="m-0">
             {% csrf_token %}
-            <button type="submit" class="w-full text-left py-2.5 px-4 rounded text-red-400 hover:bg-red-900/20 transition flex items-center">
-                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
-                    </svg>
-                    {% trans "Logout" %}
-                </button>
-            </form>
-    </nav>
+            <button type="submit" class="text-red-400 hover:text-red-600 transition flex items-center gap-2 text-sm font-medium">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+                </svg>
+                {% trans "Logout" %}
+            </button>
+        </form>
+    </div>
+</nav>
 
     <main class="max-w-6xl mx-auto p-8">
-        
-        <section class="mb-12">
-            <p class="text-gray-500 mb-6">Acompanhe aqui a evolução do seu contrato.</p>
-            
-            <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
-                <div class="flex justify-between text-xs font-medium text-gray-400 mb-2 uppercase tracking-widest">
-                    <span>Estudo</span>
-                    <span class="text-black font-bold text-blue-600">Anteprojeto</span>
-                    <span>Executivo</span>
-                    <span>Obra</span>
-                </div>
-                <div class="w-full bg-gray-100 h-2 rounded-full">
-                    <div class="bg-blue-600 h-2 rounded-full" style="width: 70%"></div>
-                </div>
-            </div>
-        </section>
-
         <section>
             <h2 class="text-xl font-semibold mb-6">Entregas para Revisão</h2>
             
