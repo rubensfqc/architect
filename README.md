@@ -43,6 +43,13 @@ Dev Server
 ---
 # Installed Packages
 
+### To hanlde ImageField 
+Django doesn't actually store the image "logic" itself—it relies on an external Python library called Pillow (a fork of the Python Imaging Library).
+
+```
+pip install Pillow
+``
+
 ### Create the PDF Generation Page
 Install reportlab for PDF Generation:
 ```
