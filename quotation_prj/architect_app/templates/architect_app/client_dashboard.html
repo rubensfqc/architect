@@ -2,8 +2,7 @@
 {% block title %}My Projects Dashboard{% endblock %}
 
 {% block content %}
-<h1 class="text-2xl font-semibold mb-6">
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
+<div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
     <div>
         <h1 class="text-2xl font-bold text-gray-900">
             Welcome, {{ client.user.get_full_name|default:client.user.email }}
@@ -12,7 +11,6 @@
             Working with <strong>{{ architect.firm_name }}</strong>
         </p>
     </div>
-    
     <div class="mt-4 md:mt-0">
         <span class="px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-semibold uppercase">
             Client Portal
@@ -64,15 +62,59 @@
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     {% for project in projects %}
-    <div class="bg-white p-6 rounded-xl shadow border-l-4 border-green-500">
-        <h3 class="font-bold text-lg mb-2">{{ project.name }}</h3>
-        <p class="text-sm text-gray-600 mb-1"><strong>Location:</strong> {{ project.location }}</p>
-        <p class="text-sm text-gray-600"><strong>Status:</strong> 
-            {% if project.contract.is_active %} Active {% else %} Inactive {% endif %}
-        </p>
-        <div class="mt-4 text-xs text-gray-400 uppercase tracking-wider">
-            Contract: {{ project.contract.title }}
+    <div class="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-gray-100">
+        <div class="h-48 bg-gray-100 relative">
+            {% if project.get_thumbnail %}
+                <img src="{{ project.get_thumbnail }}" 
+                    class="object-cover w-full h-full" 
+                    alt="{{ project.name }}">
+            {% else %}
+                <img src="https://loremflickr.com/800/600/architecture?lock={{ project.id }}"
+                    class="object-cover w-full h-full"
+                    style="filter: sepia(0.2) contrast(1.1);"
+                    alt="Architectural placeholder">                    
+            {% endif %}
+
+            <span class="absolute top-3 right-3 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider
+                {% if project.status == 'NEW' %} bg-blue-100 text-blue-700
+                {% elif project.status == 'REV' %} bg-yellow-100 text-yellow-700
+                {% elif project.status == 'APP' %} bg-green-100 text-green-700
+                {% else %} bg-gray-100 text-gray-700 {% endif %}">
+                {{ project.get_status_display }}
+            </span>
         </div>
+
+        <div class="p-5">
+            <div class="mb-3">
+                <h3 class="font-bold text-lg text-gray-900 leading-tight mb-1 truncate">{{ project.name }}</h3>
+                <p class="text-sm text-gray-500 flex items-center">
+                    <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    {{ project.location }}
+                </p>
+            </div>
+
+            <div class="space-y-2 mb-5">
+                <div class="flex justify-between text-xs">
+                    <span class="text-gray-400 uppercase font-medium tracking-tight">Contract Reference</span>
+                    <span class="text-gray-700 font-semibold">{{ project.contract.title|truncatechars:20 }}</span>
+                </div>
+                <div class="flex justify-between text-xs">
+                    <span class="text-gray-400 uppercase font-medium tracking-tight">
+                        {% if project.completion_date %} Finished {% else %} Expected {% endif %}
+                    </span>
+                    <span class="text-gray-700 font-semibold">
+                        {% if project.completion_date %}
+                            {{ project.completion_date|date:"d M Y" }}
+                        {% else %}
+                            {{ project.expected_completion_date|date:"d M Y" }}
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+   
+            <div class="inline-block w-full text-center bg-black text-white py-3 rounded-xl font-medium text-sm hover:bg-gray-800 transition-all active:scale-[0.98]">Visualizar e Aprovar</div>
+        </div>
+        
     </div>
     {% empty %}
     <p class="text-gray-500">You currently have no projects listed.</p>
