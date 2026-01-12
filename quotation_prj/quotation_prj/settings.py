@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'django.contrib.humanize',
     'architect_app',
+    'amznstorage_app',
+    'storages', # django-storages package to handle AWS S3
 ]
 
 MIDDLEWARE = [
@@ -159,6 +161,15 @@ EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')  # Read from .env  # Replace with your email
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')  # Read from .env  # Replace with your email password, https://support.google.com/accounts/answer/185833?hl=en https://myaccount.google.com/apppasswords
+
+# AWS Settings
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME')  # e.g., us-east-1
+
+# Use S3 for Media Files (Uploads)
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # Other settings
 SECRET_KEY = config('SECRET_KEY')

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>S3 Document Manager</title>
+</head>
+<body>
+<h2>{{ document.title }}</h2>
+
+<div class="preview">
+    <iframe src="{{ document.upload.url }}" width="100%" height="600px"></iframe>
+</div>
+
+<a href="{{ document.upload.url }}" download class="btn">Download Document</a>
+<br>
+<a href="{% url 'document_list' %}">Back to list</a>
+</body>
+</html>

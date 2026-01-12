@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>S3 Document Manager</title>
+</head>
+<body>
+    <h1>My Documents</h1>
+    <a href="{% url 'upload_document' %}">Upload New File</a>
+    <hr>
+    <ul>
+        {% for document in documents %}
+            <li>
+                <strong>{{ document.title }}</strong> 
+                (Uploaded: {{ document.uploaded_at|date:"M d, Y" }})
+                <br>
+                <a href="{% url 'document_detail' pk=document.pk %}">Visualize</a> | 
+                <a href="{{ document.upload.url }}" download>Download</a>
+            </li>
+        {% empty %}
+            <li>No documents found in S3 storage.</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
