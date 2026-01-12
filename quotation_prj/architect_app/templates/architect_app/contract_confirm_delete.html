@@ -1,0 +1,24 @@
+{% extends "architect_app/baseArchitect.html" %}
+
+{% block content %}
+<div class="max-w-md mx-auto bg-white p-8 rounded-xl shadow">
+    <h2 class="text-2xl font-bold text-red-600 mb-4">Delete Contract</h2>
+    <p class="text-gray-600 mb-6">
+        Are you sure you want to delete the contract: <strong>"{{ contract.title }}"</strong>? </p>
+    <p>This action cannot be undone and will remove all projects associated to this contract.
+    </p>
+    <br>
+
+    <form method="post">
+        {% csrf_token %}
+        <div class="flex justify-between">
+            <a href="{% url 'contract_edit' contract.pk %}" class="bg-gray-200 text-gray-800 px-4 py-2 rounded-lg hover:bg-gray-300">
+                Cancel
+            </a>
+            <button type="submit" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700">
+                Confirm Delete
+            </button>
+        </div>
+    </form>
+</div>
+{% endblock %}

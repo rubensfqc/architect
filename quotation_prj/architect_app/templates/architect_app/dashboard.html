@@ -1,0 +1,109 @@
+{% extends "architect_app/baseArchitect.html" %}
+{% load humanize %}
+
+{% block title %}Architect Dashboard{% endblock %}
+
+{% block content %}
+
+<h1 class="text-2xl font-semibold mb-6">
+    Welcome, {{ architect.user.name }} 👋
+</h1>
+
+<!-- KPI Cards -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+
+    <div class="bg-white p-6 rounded-xl shadow">
+        <p class="text-sm text-gray-500">Clients</p>
+        <p class="text-3xl font-bold">{{ clients_count }}</p>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow">
+        <p class="text-sm text-gray-500">Active Contracts</p>
+        <p class="text-3xl font-bold">{{ active_contracts_count }}</p>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow">
+        <p class="text-sm text-gray-500">Total Budget</p>
+        <p class="text-3xl font-bold">
+            ${{ total_budget|floatformat:2|intcomma }}
+        </p>
+    </div>
+
+    <div class="bg-white p-6 rounded-xl shadow">
+        <p class="text-sm text-gray-500">Projects</p>
+        <p class="text-3xl font-bold">{{ projects_count }}</p>
+    </div>
+
+</div>
+
+<!-- Recent Contracts -->
+<div class="bg-white rounded-xl shadow mb-8">
+    <div class="p-6 border-b">
+        <h2 class="text-lg font-semibold">Recent Contracts</h2>
+    </div>
+
+    <div class="overflow-x-auto">
+        <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50 text-sm text-gray-500">
+                <tr>
+                    <th class="px-6 py-3 text-left">Title</th>
+                    <th class="px-6 py-3 text-left">Client</th>
+                    <th class="px-6 py-3 text-left">Start Date</th>
+                    <th class="px-6 py-3 text-left">Budget</th>
+                    <th class="px-6 py-3 text-left">Status</th>
+                </tr>
+            </thead>
+            <tbody class="divide-y divide-gray-100">
+                {% for contract in recent_contracts %}
+                <tr>
+                    <td class="px-6 py-4 font-medium">{{ contract.title }}</td>
+                    <td class="px-6 py-4">{{ contract.client.user.email }}</td>
+                    <td class="px-6 py-4">{{ contract.start_date }}</td>
+                    <td class="px-6 py-4">${{ contract.budget|intcomma }}</td>
+                    <td class="px-6 py-4">
+                        {% if contract.is_active %}
+                            <span class="px-3 py-1 text-xs rounded-full bg-green-100 text-green-700">
+                                Active
+                            </span>
+                        {% else %}
+                            <span class="px-3 py-1 text-xs rounded-full bg-gray-200 text-gray-600">
+                                Closed
+                            </span>
+                        {% endif %}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5" class="px-6 py-4 text-center text-gray-500">
+                        No contracts yet
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Recent Projects -->
+<div class="bg-white rounded-xl shadow">
+    <div class="p-6 border-b">
+        <h2 class="text-lg font-semibold">Recent Projects</h2>
+    </div>
+
+    <ul class="divide-y divide-gray-100">
+        {% for project in recent_projects %}
+        <li class="p-6">
+            <p class="font-medium">{{ project.name }}</p>
+            <p class="text-sm text-gray-500">
+                {{ project.location }} • Expected {{ project.expected_completion_date }}
+            </p>
+        </li>
+        {% empty %}
+        <li class="p-6 text-center text-gray-500">
+            No projects found
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+{% endblock %}

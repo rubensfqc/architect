@@ -1,0 +1,33 @@
+{% extends "architect_app/baseArchitect.html" %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto bg-white p-8 rounded-xl shadow">
+    <div class="flex justify-between items-center mb-6">
+        <h2 class="text-2xl font-bold">{% if contract %}Edit{% else %}Add{% endif %} Contract</h2>
+        <a href="{% url 'architects_contracts' %}" class="text-gray-500 hover:text-gray-700">
+            &larr; Back to List
+        </a>
+    </div>
+
+    <form method="post" class="space-y-4">
+        {% csrf_token %}
+        
+        {{ form.as_p }}
+
+        <div class="pt-6 border-t flex justify-between items-center">
+            <div class="space-x-4">
+                <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700">
+                    Save Contract
+                </button>
+                <a href="{% url 'architects_contracts' %}" class="text-gray-600 hover:underline">Cancel</a>
+            </div>
+
+            {% if contract %}
+            <a href="{% url 'contract_delete' contract.pk %}" class="text-red-600 hover:text-red-800 text-sm font-medium">
+                Delete Contract
+            </a>
+            {% endif %}
+        </div>
+    </form>
+</div>
+{% endblock %}

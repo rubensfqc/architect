@@ -1,0 +1,77 @@
+{% extends "architect_app/baseArchitect.html" %}
+{% block title %}My Projects{% endblock %}
+
+{% block content %}
+<div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+    <h1 class="text-2xl font-semibold">Projects</h1>
+    
+    <form method="GET" action="{% url 'architects_projects' %}" class="mt-4 md:mt-0">
+        <select name="contract" onchange="this.form.submit()" 
+                class="bg-white border border-gray-200 text-gray-700 text-sm rounded-xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+            <option value="">All Contracts</option>
+            {% for contract in contracts %}
+                <option value="{{ contract.id }}" {% if selected_contract_id == contract.id|stringformat:"i" %}selected{% endif %}>
+                    {{ contract.title }}
+                </option>
+            {% endfor %}
+        </select>
+    </form>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    {% for project in projects %}
+    <div class="bg-white rounded-2xl shadow-sm border border-gray-100 hover:shadow-md transition-all overflow-hidden flex flex-col">
+        
+        <div class="h-48 w-full overflow-hidden bg-gray-100">
+            {% if project.get_thumbnail %}
+                <img src="{{ project.get_thumbnail }}" 
+                    class="object-cover w-full h-full transition-transform duration-500 hover:scale-110" 
+                    alt="{{ project.name }}">
+            {% else %}
+                <img src="https://loremflickr.com/800/600/architecture?lock={{ project.id }}"
+                    class="object-cover w-full h-full"
+                    style="filter: sepia(0.2) contrast(1.1);"
+                    alt="Architectural placeholder">                    
+            {% endif %}
+        </div>
+
+        <div class="p-6">
+            <div class="mb-5">
+                <h3 class="font-bold text-gray-800 text-lg mb-1">{{ project.name }}</h3>
+                <p class="text-xs text-gray-400 flex items-center">
+                    <svg class="w-3 h-3 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+                    {{ project.location }}
+                </p>
+            </div>
+
+            <div class="space-y-2 mb-5">
+                <div class="flex justify-between text-xs">
+                    <span class="text-gray-400 uppercase font-medium tracking-tight">Contract Reference</span>
+                    <span class="text-gray-700 font-semibold">{{ project.contract.title|truncatechars:20 }}</span>
+                </div>
+                <div class="flex justify-between text-xs">
+                    <span class="text-gray-400 uppercase font-medium tracking-tight">
+                        {% if project.completion_date %} Finished {% else %} Expected {% endif %}
+                    </span>
+                    <span class="text-gray-700 font-semibold">
+                        {% if project.completion_date %}
+                            {{ project.completion_date|date:"d M Y" }}
+                        {% else %}
+                            {{ project.expected_completion_date|date:"d M Y" }}
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+    
+            <div class="inline-block w-full text-center bg-black text-white py-3 rounded-xl font-medium text-sm hover:bg-gray-800 transition-all active:scale-[0.98] cursor-pointer">
+                Visualizar Detalhes
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-span-full py-12 text-center bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
+        <p class="text-gray-500">No projects found for the selected filter.</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
