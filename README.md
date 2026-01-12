@@ -12,6 +12,7 @@ pla4uDev
 vps58902.publiccloud.com.br (191.252.93.137)
 ssh root@191.252.93.137
 
+
 # QuotationAPP
 App to Request for Quotation
 
@@ -43,6 +44,11 @@ Dev Server
 
 ---
 # Installed Packages
+
+### To handle AWS S3 Storage app
+```
+pip install django-storages boto3
+```
 
 ### To hanlde ImageField 
 Django doesn't actually store the image "logic" itself—it relies on an external Python library called Pillow (a fork of the Python Imaging Library).
