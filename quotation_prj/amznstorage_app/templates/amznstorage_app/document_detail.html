@@ -4,14 +4,26 @@
     <title>S3 Document Manager</title>
 </head>
 <body>
-<h2>{{ document.title }}</h2>
+<h2>{{ document.title }} teste 10:32</h2>
 
-<div class="preview">
-    <iframe src="{{ document.upload.url }}" width="100%" height="600px"></iframe>
+<div style="border: 1px solid #000; margin-bottom: 20px;">
+    {% if document.upload.url %}
+        <iframe 
+            src="https://mozilla.github.io/pdf.js/web/viewer.html?file={{ document.upload.url|urlencode }}" 
+            width="100%" 
+            height="600px" 
+            style="border: none;">
+        </iframe>
+    {% else %}
+        <p>No document file found.</p>
+    {% endif %}
 </div>
 
-<a href="{{ document.upload.url }}" download class="btn">Download Document</a>
-<br>
-<a href="{% url 'document_list' %}">Back to list</a>
+<p>
+    <a href="{{ document.upload.url }}" download class="btn">Download Document</a>
+</p>
+<p>
+    <a href="{% url 'document_list' %}">Back to List</a>
+</p>
 </body>
 </html>
