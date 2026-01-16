@@ -167,6 +167,7 @@ AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME')  # e.g., us-east-1
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
 # Use S3 for Media Files (Uploads)
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
@@ -179,6 +180,29 @@ DEBUG = config('DEBUG', cast=bool)
 AUTH_USER_MODEL = 'seller_app.Seller'
 
 
+# 1. Ensure django-storages is using the S3 backend
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+# 2. Set the custom domain so URLs are absolute
+# AWS_S3_CUSTOM_DOMAIN is already set above
+
 # Where the pictures shall be stored
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+# 3. Update MEDIA_URL to use the S3 domain instead of a local path
+MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
+MEDIA_ROOT = 'media/'
+
+# 4. S3 Specific Tweaks
+AWS_S3_FILE_OVERWRITE = False  # Prevents files with the same name from being overwritten
+AWS_QUERYSTRING_AUTH = True    # Required if your S3 bucket is private
+
+
+# 1. Use S3 for Media Files (Uploads)
+# Note: For Django 4.2+, the modern way is using the STORAGES dictionary
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}

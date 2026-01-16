@@ -13,6 +13,9 @@ def upload_document(request):
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
         if form.is_valid():
+            print("Form is valid, saving document.")
+            print(f"Uploaded file name: {request.FILES['upload'].name}")
+            print(f"Request: {request}")
             form.save()
             return redirect('document_list')
     else:

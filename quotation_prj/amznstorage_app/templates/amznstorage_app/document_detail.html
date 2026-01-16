@@ -4,7 +4,9 @@
     <title>S3 Document Manager</title>
 </head>
 <body>
-<h2>{{ document.title }} teste 10:32</h2>
+<h2>{{ document.title }} update 13:05</h2>
+<p>Uploaded at: {{ document.uploaded_at }}</p>
+<p> Document url : {{ document.upload.url }}</p>
 
 <div style="border: 1px solid #000; margin-bottom: 20px;">
     {% if document.upload.url %}
@@ -14,6 +16,7 @@
             height="600px" 
             style="border: none;">
         </iframe>
+
     {% else %}
         <p>No document file found.</p>
     {% endif %}
