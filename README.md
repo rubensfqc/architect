@@ -12,6 +12,16 @@ pla4uDev
 vps58902.publiccloud.com.br (191.252.93.137)
 ssh root@191.252.93.137
 
+# PDF.js two location restriction
+```
+Browser
+  ↓
+PythonAnywhere /pdf/<id>
+  ↓
+Fetch from S3
+  ↓
+Stream back to browser
+``` 
 
 # QuotationAPP
 App to Request for Quotation
@@ -55,7 +65,7 @@ Django doesn't actually store the image "logic" itself—it relies on an externa
 
 ```
 pip install Pillow
-``
+```
 
 ### Create the PDF Generation Page
 Install reportlab for PDF Generation:
@@ -128,13 +138,17 @@ Para acessar o projeto no [local server](http://127.0.0.1:8000/)
 Iniciando um projeto novo, eh preciso ter um VENV (copiar pasta) ou setar um novo
 
 Activate the venv
+
 ```
 source venv/bin/activate
 ```
+
 or in Bash
+
 ```
 C:\LocalData\quotation\quotation_prj>.\venv\Scripts\activate
-````
+```
+
 and finally, to deactivate it is simply: `deactivate`
 
 Comecar o projeto novo
