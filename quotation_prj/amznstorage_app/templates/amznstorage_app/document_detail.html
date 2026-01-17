@@ -5,9 +5,14 @@
 </head>
 <body>
 <h2>{{ document.title }} update 13:05</h2>
-<p>Uploaded at: {{ document.uploaded_at }}</p>
-<p> Document url : {{ document.upload.url }}</p>
+<p>
 
+    <a href="{% url 'pdf_proxy' document.id %}" download="{{ document.title }}.pdf" class="btn">
+        Download Document
+    </a>
+    &nbsp;&nbsp;&nbsp;
+    <a href="{% url 'document_list' %}">Back to List</a>
+</p>
 <div style="border: 1px solid #000; margin-bottom: 20px;">
     {% if document.upload.url %}
         <iframe
@@ -21,11 +26,6 @@
     {% endif %}
 </div>
 
-<p>
-    <a href="{{ document.upload.url }}" download class="btn">Download Document</a>
-</p>
-<p>
-    <a href="{% url 'document_list' %}">Back to List</a>
-</p>
+
 </body>
 </html>

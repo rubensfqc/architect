@@ -57,7 +57,8 @@ def pdf_proxy(request, document_id):
         content_type="application/pdf",
     )
 
-    response["Content-Disposition"] = "inline; filename=document.pdf"
-    response["Accept-Ranges"] = "bytes"  # Important for PDF.js
-
+    # Change "inline" to "attachment" if you want to force download, 
+    # or keep "inline" to let the browser 'download' attribute handle it.
+    response["Content-Disposition"] = f'inline; filename="{document.title}.pdf"'
+    response["Accept-Ranges"] = "bytes"
     return response
