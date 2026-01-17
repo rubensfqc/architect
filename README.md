@@ -192,3 +192,17 @@ accounts reset/done/ [name='password_reset_complete']
 The current path, accounts, didn’t match any of these.
 ```
 The current path, accounts, didn’t match any of these.
+
+# Useful MySQL Commands
+```
+Command,Action
+SHOW TABLES;      Lists all tables in your database.
+DESCRIBE table_name;    Shows the columns and data types for a specific table.
+SELECT * FROM table_name LIMIT 10;  View the first 10 rows of data.
+EXIT;       Closes the MySQL shell and returns to Bash.
+```
+
+## Alternative: Django's dbshell
+```
+python manage.py dbshell
+```
