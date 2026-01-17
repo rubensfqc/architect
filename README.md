@@ -1,15 +1,27 @@
 # Architect user model
 
+```
 Seller (AUTH_USER_MODEL)
  ├── ArchitectProfile
  │     └── Contract
  │           └── Project
  └── ClientProfile
        └── Contract (view-only from client side)
-
+```
 pla4uDev
 vps58902.publiccloud.com.br (191.252.93.137)
 ssh root@191.252.93.137
+
+# PDF.js two location restriction
+```
+Browser
+  ↓
+PythonAnywhere /pdf/<id>
+  ↓
+Fetch from S3
+  ↓
+Stream back to browser
+``` 
 
 # QuotationAPP
 App to Request for Quotation
@@ -43,12 +55,17 @@ Dev Server
 ---
 # Installed Packages
 
+### To handle AWS S3 Storage app
+```
+pip install django-storages boto3
+```
+
 ### To hanlde ImageField 
 Django doesn't actually store the image "logic" itself—it relies on an external Python library called Pillow (a fork of the Python Imaging Library).
 
 ```
 pip install Pillow
-``
+```
 
 ### Create the PDF Generation Page
 Install reportlab for PDF Generation:
@@ -121,13 +138,17 @@ Para acessar o projeto no [local server](http://127.0.0.1:8000/)
 Iniciando um projeto novo, eh preciso ter um VENV (copiar pasta) ou setar um novo
 
 Activate the venv
+
 ```
 source venv/bin/activate
 ```
+
 or in Bash
+
 ```
 C:\LocalData\quotation\quotation_prj>.\venv\Scripts\activate
-````
+```
+
 and finally, to deactivate it is simply: `deactivate`
 
 Comecar o projeto novo
@@ -171,3 +192,17 @@ accounts reset/done/ [name='password_reset_complete']
 The current path, accounts, didn’t match any of these.
 ```
 The current path, accounts, didn’t match any of these.
+
+# Useful MySQL Commands
+```
+Command,Action
+SHOW TABLES;      Lists all tables in your database.
+DESCRIBE table_name;    Shows the columns and data types for a specific table.
+SELECT * FROM table_name LIMIT 10;  View the first 10 rows of data.
+EXIT;       Closes the MySQL shell and returns to Bash.
+```
+
+## Alternative: Django's dbshell
+```
+python manage.py dbshell
+```

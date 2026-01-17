@@ -29,6 +29,8 @@ SECRET_KEY = 'django-insecure-#i$oz!grazcw*6kj!upr50=5#0a(5rxjnvd_g7@el+mwi*^8&7
 DEBUG = True
 
 ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['archflw.pythonanywhere.com', 'amzn-plat4u-tst-bucket.s3.amazonaws.com']
+#X_FRAME_OPTIONS = "SAMEORIGIN"
 
 LOGIN_REDIRECT_URL = 'seller_dashboard'
 LOGOUT_REDIRECT_URL = 'login'
@@ -48,6 +50,8 @@ INSTALLED_APPS = [
     'widget_tweaks',
     'django.contrib.humanize',
     'architect_app',
+    'amznstorage_app',
+    'storages', # django-storages package to handle AWS S3
 ]
 
 MIDDLEWARE = [
@@ -90,7 +94,17 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
+""" DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "archflw$archflwdb",
+        "USER": "archflw",
+        "PASSWORD": config('DB_PASSWORD'),
+        "HOST": "archflw.mysql.pythonanywhere-services.com",
+        "PORT": "5432",
+    }
+}
+ """
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -134,6 +148,14 @@ LOCALE_PATHS = [
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
+# Where you store your original files
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+# Where Django will put EVERYTHING for production
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
 STATIC_URL = 'static/'
 
 # Default primary key field type
@@ -160,6 +182,16 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = config('EMAIL_HOST_USER')  # Read from .env  # Replace with your email
 EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')  # Read from .env  # Replace with your email password, https://support.google.com/accounts/answer/185833?hl=en https://myaccount.google.com/apppasswords
 
+# AWS Settings
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME')  # e.g., us-east-1
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+# Use S3 for Media Files (Uploads)
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
 # Other settings
 SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', cast=bool)
@@ -168,6 +200,29 @@ DEBUG = config('DEBUG', cast=bool)
 AUTH_USER_MODEL = 'seller_app.Seller'
 
 
+# 1. Ensure django-storages is using the S3 backend
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+# 2. Set the custom domain so URLs are absolute
+# AWS_S3_CUSTOM_DOMAIN is already set above
+
 # Where the pictures shall be stored
-MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+# 3. Update MEDIA_URL to use the S3 domain instead of a local path
+MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
+MEDIA_ROOT = 'media/'
+
+# 4. S3 Specific Tweaks
+AWS_S3_FILE_OVERWRITE = False  # Prevents files with the same name from being overwritten
+AWS_QUERYSTRING_AUTH = True    # Required if your S3 bucket is private
+
+
+# 1. Use S3 for Media Files (Uploads)
+# Note: For Django 4.2+, the modern way is using the STORAGES dictionary
+STORAGES = {
+    "default": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
