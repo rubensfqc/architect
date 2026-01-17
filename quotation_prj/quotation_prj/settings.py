@@ -29,6 +29,8 @@ SECRET_KEY = 'django-insecure-#i$oz!grazcw*6kj!upr50=5#0a(5rxjnvd_g7@el+mwi*^8&7
 DEBUG = True
 
 ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['archflw.pythonanywhere.com', 'amzn-plat4u-tst-bucket.s3.amazonaws.com']
+#X_FRAME_OPTIONS = "SAMEORIGIN"
 
 LOGIN_REDIRECT_URL = 'seller_dashboard'
 LOGOUT_REDIRECT_URL = 'login'
@@ -92,7 +94,17 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
+""" DATABASES = {
+    "default": {
+        "ENGINE": "django.db.backends.mysql",
+        "NAME": "archflw$archflwdb",
+        "USER": "archflw",
+        "PASSWORD": config('DB_PASSWORD'),
+        "HOST": "archflw.mysql.pythonanywhere-services.com",
+        "PORT": "5432",
+    }
+}
+ """
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
@@ -135,6 +147,14 @@ LOCALE_PATHS = [
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
+
+# Where you store your original files
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static'),
+]
+
+# Where Django will put EVERYTHING for production
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATIC_URL = 'static/'
 
