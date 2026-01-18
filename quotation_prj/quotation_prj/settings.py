@@ -32,7 +32,9 @@ ALLOWED_HOSTS = []
 #ALLOWED_HOSTS = ['archflw.pythonanywhere.com', 'amzn-plat4u-tst-bucket.s3.amazonaws.com']
 #X_FRAME_OPTIONS = "SAMEORIGIN"
 
-LOGIN_REDIRECT_URL = 'seller_dashboard'
+# Point this to the name of the 'Traffic Controller' view in urls.py
+LOGIN_REDIRECT_URL = 'dashboard_redirect' 
+# Standard logout behavior is usually fine to stay as 'login'
 LOGOUT_REDIRECT_URL = 'login'
 
 # Application definition

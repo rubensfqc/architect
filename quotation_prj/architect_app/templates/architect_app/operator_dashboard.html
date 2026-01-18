@@ -1,0 +1,10 @@
+{% extends "architect_app/baseArchitect.html" %}
+{% block content %}
+  <h1>Operator Control Room</h1>
+  <table>
+      <tr><th>User</th><th>Role</th><th>Status</th></tr>
+      {% for user in all_users %}
+      <tr><td>{{ user.email }}</td><td>{{ user.role }}</td><td>Active</td></tr>
+      {% endfor %}
+  </table>
+{% endblock %}

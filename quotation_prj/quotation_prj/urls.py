@@ -26,11 +26,10 @@ from architect_app.views import architect_dashboard
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('pages', views.home_view, name='pages'),  # Set this as the home view
-    path('', seller_views.slug_search, name='slug_search'),  # Search by slug
+    path('', views.home_view, name='pages'),  # Set this as the home view
+    path('search', seller_views.slug_search, name='slug_search'),  # Search by slug
     path('autocomplete/', seller_views.slug_autocomplete, name='slug_autocomplete'), 
     path('lp', views.landing_page, name='landing_page'),
-    path('dashboardArq', views.dashboardArq, name='dashboardArq'),
     path('quotation/<int:client_id>/', views.quotation_page, name='quotation_page'),
     #path('generate-pdf/<int:quotation_id>/', views.generate_pdf, name='generate_pdf'),
     path('email/', include('email_app.urls')),

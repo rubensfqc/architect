@@ -36,6 +36,18 @@ class ClientProfile(models.Model):
 
     def __str__(self):
         return f"Client: {self.user.email}"
+    
+class Operator(models.Model):
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='operator_profile'
+    )
+    department = models.CharField(max_length=100)
+    access_level = models.IntegerField(default=1)
+
+    def __str__(self):
+        return f"Operator: {self.user.email}"
 
 class Contract(models.Model):
     # Each contract belongs to ONE architect, only signed contracts before that they are quotes
