@@ -24,11 +24,8 @@ def signup_view(request):
 
 def role_required(allowed_roles=[]):
     def decorator(view_func):
-        print("Applying role_required decorator for roles:", allowed_roles)
         def _wrapped_view(request, *args, **kwargs):
-            print("role_required check for user:", request.user.username, "with role:", request.user.role)
             if request.user.role in allowed_roles:
-                print("Access granted to", request.user.username, "for roles:", allowed_roles)
                 return view_func(request, *args, **kwargs)
             raise PermissionDenied
         return _wrapped_view
@@ -40,7 +37,6 @@ def dashboard_redirect(request):
     Acts as the dynamic LOGIN_REDIRECT_URL logic.
     """
     user = request.user
-    print("dashboard_redirect for user:", user.username, "with role:", user.role)
     # Logic based on the 'role' field we added to the Seller model
     if user.role == 'ARCHITECT':
         return redirect('architect_dashboard')
