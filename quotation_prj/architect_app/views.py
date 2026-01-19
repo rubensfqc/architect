@@ -1,11 +1,14 @@
 from time import timezone
+from django.utils import timezone
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Sum
+from django.db import transaction
 from .models import Architect, Contract, Project, ClientProfile
 from .forms import ContractForm, SellerSignUpForm, ClientSignUpForm
 from django.core.exceptions import PermissionDenied
 from django.contrib.auth import login
+
 
 def signup_view(request):
     if request.method == 'POST':
@@ -21,8 +24,11 @@ def signup_view(request):
 
 def role_required(allowed_roles=[]):
     def decorator(view_func):
+        print("Applying role_required decorator for roles:", allowed_roles)
         def _wrapped_view(request, *args, **kwargs):
+            print("role_required check for user:", request.user.username, "with role:", request.user.role)
             if request.user.role in allowed_roles:
+                print("Access granted to", request.user.username, "for roles:", allowed_roles)
                 return view_func(request, *args, **kwargs)
             raise PermissionDenied
         return _wrapped_view
@@ -148,7 +154,7 @@ def contract_list(request):
     return render(request, 'architect_app/contracts.html', {'contracts': contracts})
 
 @login_required
-@role_required(allowed_roles=['ClIENT', 'OPERATOR'])
+@role_required(allowed_roles=['CLIENT', 'OPERATOR'])
 def client_dashboard(request):
     # 1. Get the profile for the logged-in client
     # We use select_related('architect') to fetch the architect's data in the same query
@@ -170,7 +176,6 @@ def client_dashboard(request):
         'contracts': contracts,
         'projects': projects,
     }
-    print("contracts.progress_percentage: ", contracts.values('progress_percentage').all())
     return render(request, 'architect_app/client_dashboard.html', context)
 
 # Helper function to add a message to a project's conversation log
@@ -183,12 +188,6 @@ def add_message(request, project_id):
     }
     project.conversation_log.append(new_entry)
     project.save()
-
-from django.shortcuts import get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
-from django.utils import timezone
-from django.db import transaction
-from .models import Project
 
 # better add message function, This view uses transaction.atomic to ensure that if two people post at the exact same microsecond, the data remains consistent.
 # TODO test both
