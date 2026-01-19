@@ -50,6 +50,11 @@ class ArchitectAdmin(admin.ModelAdmin):
     search_fields = ('user__email', 'firm_name', 'license_number')
     inlines = [ContractInline]
 
+    # fields defines what is inside the Edit/Create form
+    # Note: custom methods MUST be in readonly_fields to appear here
+    fields = ('user', 'get_role_display_only', 'firm_name', 'license_number', 'phone_number')
+    readonly_fields = ('get_role_display_only',)
+
     def get_role(self, obj):
         return obj.user.get_role_display()
     get_role.short_description = 'Papel Atual'
@@ -85,6 +90,12 @@ class OperatorAdmin(admin.ModelAdmin):
     fields = ('user', 'get_role_display_only', 'department', 'access_level')
     list_editable = ('access_level',) # Permite mudar o nível direto na lista
     search_fields = ('user__email', 'department')
+    list_filter = ('department', 'access_level')
+
+    # fields defines the layout of the edit form
+    # Note: 'get_role_display_only' MUST be in readonly_fields to appear here
+    fields = ('user', 'get_role_display_only', 'department', 'access_level')
+    readonly_fields = ('get_role_display_only',)
 
     def get_role(self, obj):
         return obj.user.get_role_display()
