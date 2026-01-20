@@ -257,13 +257,13 @@ def operator_dashboard(request):
 
 class ProjectDetailView(DetailView):
     model = Project
-    template_name = 'projects/project_detail.html'
+    template_name = 'architect_app/project_detail.html'
     context_object_name = 'project'
 
 class ProjectUpdateView(UpdateView):
     model = Project
     form_class = ProjectForm
-    template_name = 'projects/project_form.html'
+    template_name = 'architect_app/project_form.html'
     
     def get_success_url(self):
-        return reverse_lazy('project-detail', kwargs={'pk': self.object.pk})
+        return reverse_lazy('project_detail', kwargs={'pk': self.object.pk})
