@@ -10,11 +10,11 @@ from django.http import StreamingHttpResponse, Http404
 class DocumentForm(forms.ModelForm):
     class Meta:
         model = Document
-        fields = ['title', 'upload']
+        fields = ['title', 'upload', 'image']
 
 def upload_document(request):
     if request.method == 'POST':
-        form = DocumentForm(request.POST, request.FILES)
+        form = DocumentForm(request.POST, request.FILES)# request.FILES handles both FileField and ImageField
         if form.is_valid():
             print("Form is valid, saving document.")
             print(f"Uploaded file name: {request.FILES['upload'].name}")

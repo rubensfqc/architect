@@ -12,7 +12,16 @@
             <li>
                 <strong>{{ document.title }}</strong> 
                 (Uploaded: {{ document.uploaded_at|date:"M d, Y" }})
+                {% if document.image %}
+                    <br>
+                    URL: {{ document.image.url }}
+                    <img src="{{ document.image.url }}" alt="{{ document.title }}" style="max-width: 100px;">
+                {% endif %}
                 <br>
+                <br>
+                URL+PK: {{ document.upload.url }}
+                <br>
+                URL+PK2: {% url 'document_detail' pk=document.pk %}
                 <a href="{% url 'document_detail' pk=document.pk %}">Visualize</a> | 
                 <a href="{{ document.upload.url }}" download>Download</a>
             </li>

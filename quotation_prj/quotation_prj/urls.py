@@ -42,5 +42,5 @@ urlpatterns = [
     path('pro/<slug:slug>/<int:quotation_id>/', views.generate_pdf, name='generate_pdf'),
     path('arch/', include('architect_app.urls')),
     path('amzn/', include('amznstorage_app.urls')),  # Include URLs for amznstorage_app
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] #+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

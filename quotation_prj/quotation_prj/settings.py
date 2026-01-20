@@ -189,7 +189,7 @@ AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_REGION_NAME = config('AWS_S3_REGION_NAME')  # e.g., us-east-1
-AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+#AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
 # Use S3 for Media Files (Uploads)
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
@@ -210,13 +210,16 @@ DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # Where the pictures shall be stored
 # 3. Update MEDIA_URL to use the S3 domain instead of a local path
-MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
+#MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
 MEDIA_ROOT = 'media/'
 
 # 4. S3 Specific Tweaks
 AWS_S3_FILE_OVERWRITE = False  # Prevents files with the same name from being overwritten
 AWS_QUERYSTRING_AUTH = True    # Required if your S3 bucket is private
-
+# Set the link expiration to 2 days (172,800 seconds)
+AWS_QUERYSTRING_EXPIRE = 172800
+# 2. Set the default ACL for new uploads
+#AWS_DEFAULT_ACL = 'public-read'
 
 # 1. Use S3 for Media Files (Uploads)
 # Note: For Django 4.2+, the modern way is using the STORAGES dictionary
