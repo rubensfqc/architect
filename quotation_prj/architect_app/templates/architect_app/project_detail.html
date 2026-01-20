@@ -1,0 +1,41 @@
+
+{% extends "architect_app/baseArchitect.html" %}
+{% block title %}My Project Details{% endblock %}
+
+{% block content %}
+<div class="project-container">
+    <h2>{{ project.name }}</h2>
+    <span class="badge {% if project.status == 'APP' %}bg-success{% else %}bg-primary{% endif %}">
+        {{ project.get_status_display }}
+    </span>
+
+    <div class="row mt-4">
+        <div class="col-md-4">
+            {% if project.get_thumbnail %}
+                <img src="{{ project.get_thumbnail }}" class="img-fluid rounded" alt="Thumbnail">
+            {% endif %}
+        </div>
+        <div class="col-md-8">
+            <p><strong>Location:</strong> {{ project.location }}</p>
+            <p><strong>Description:</strong> {{ project.description }}</p>
+            <p><strong>Expected Completion:</strong> {{ project.expected_completion_date }}</p>
+        </div>
+    </div>
+
+    <hr>
+    <h3>Conversation Log</h3>
+    <div class="log-box" style="background: #f8f9fa; padding: 15px; border-radius: 8px;">
+        {% for entry in project.conversation_log %}
+            <p><strong>{{ entry.user }}:</strong> {{ entry.msg }} <small class="text-muted">({{ entry.date }})</small></p>
+        {% empty %}
+            <p>No conversation history yet.</p>
+        {% endfor %}
+    </div>
+
+    <div class="mt-4">
+        <a href="{% url 'project-edit' project.pk %}" class="btn btn-warning">Edit Project</a>
+        <a href="{% url 'contract-detail' project.contract.pk %}" class="btn btn-secondary">Back to Contract</a>
+    </div>
+</div>
+
+{% endblock %}

@@ -1,13 +1,15 @@
 from time import timezone
 from django.utils import timezone
+from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Sum
 from django.db import transaction
 from .models import Architect, Contract, Project, ClientProfile
-from .forms import ContractForm, SellerSignUpForm, ClientSignUpForm
+from .forms import ContractForm, SellerSignUpForm, ClientSignUpForm, ProjectForm
 from django.core.exceptions import PermissionDenied
-from django.contrib.auth import login
+from django.views.generic import DetailView, UpdateView
+from django.urls import reverse_lazy
 
 
 def signup_view(request):
@@ -252,3 +254,16 @@ def contract_delete(request, pk):
 @role_required(allowed_roles=['OPERATOR'])
 def operator_dashboard(request):
     return render(request, 'architect_app/operator_dashboard.html')
+
+class ProjectDetailView(DetailView):
+    model = Project
+    template_name = 'projects/project_detail.html'
+    context_object_name = 'project'
+
+class ProjectUpdateView(UpdateView):
+    model = Project
+    form_class = ProjectForm
+    template_name = 'projects/project_form.html'
+    
+    def get_success_url(self):
+        return reverse_lazy('project-detail', kwargs={'pk': self.object.pk})

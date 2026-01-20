@@ -1,0 +1,23 @@
+
+{% extends "architect_app/baseArchitect.html" %}
+{% block title %}My Project form{% endblock %}
+
+{% block content %}
+
+
+<h2>Edit Project: {{ project.name|default:"New Project" }}</h2>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    
+    <div class="form-grid" style="display: grid; gap: 15px;">
+        {{ form.as_p }}
+    </div>
+
+    <div class="actions mt-3">
+        <button type="submit" class="btn btn-primary">Save Changes</button>
+        <a href="{% url 'project-detail' project.pk %}" class="btn btn-outline-secondary">Cancel</a>
+    </div>
+</form>
+
+{% endblock %}

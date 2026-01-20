@@ -1,6 +1,6 @@
 # forms.py
 from django import forms
-from .models import Contract
+from .models import Contract, Project
 from django.contrib.auth.forms import UserCreationForm
 from seller_app.models import Seller
 
@@ -44,3 +44,20 @@ class ClientSignUpForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = [
+            'name', 'description', 'location', 'status', 
+            'thumbnail_file', 'thumbnail_url', 
+            'client_comments', 'architect_comments', 
+            'expected_completion_date'
+        ]
+        widgets = {
+            'expected_completion_date': forms.DateInput(attrs={'type': 'date'}),
+            'description': forms.Textarea(attrs={'rows': 3}),
+            'client_comments': forms.Textarea(attrs={'rows': 2, 'placeholder': 'Max 280 chars'}),
+            'architect_comments': forms.Textarea(attrs={'rows': 2, 'placeholder': 'Max 280 chars'}),
+        }
