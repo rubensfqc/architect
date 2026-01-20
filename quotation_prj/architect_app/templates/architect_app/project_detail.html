@@ -33,8 +33,9 @@
     </div>
 
     <div class="mt-4">
-        <a href="{% url 'project-edit' project.pk %}" class="btn btn-warning">Edit Project</a>
-        <a href="{% url 'contract-detail' project.contract.pk %}" class="btn btn-secondary">Back to Contract</a>
+        <a href="{% url 'project_edit' project.pk %}" class="btn btn-warning">Edit Project</a>
+        <br>
+        <a href="{% url 'project_detail' project.contract.pk %}" class="btn btn-secondary">Back to Contract</a>
     </div>
 </div>
 

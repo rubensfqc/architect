@@ -69,6 +69,7 @@ pip install Pillow
 
 ### Create the PDF Generation Page
 Install reportlab for PDF Generation:
+
 ```
 pip install reportlab
 ```
