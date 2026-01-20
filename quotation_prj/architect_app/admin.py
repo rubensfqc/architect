@@ -45,14 +45,14 @@ class ProjectAdmin(admin.ModelAdmin):
 
 @admin.register(Architect)
 class ArchitectAdmin(admin.ModelAdmin):
-    list_display = ('user', 'get_role', 'firm_name', 'license_number', 'phone_number')
-    fields = ('user', 'get_role_display_only', 'firm_name', 'license_number', 'phone_number')
+    list_display = ('user', 'logo', 'get_role', 'firm_name', 'license_number', 'phone_number')
+    fields = ('user', 'logo', 'get_role_display_only', 'firm_name', 'license_number', 'phone_number')
     search_fields = ('user__email', 'firm_name', 'license_number')
     inlines = [ContractInline]
 
     # fields defines what is inside the Edit/Create form
     # Note: custom methods MUST be in readonly_fields to appear here
-    fields = ('user', 'get_role_display_only', 'firm_name', 'license_number', 'phone_number')
+    fields = ('user', 'logo', 'get_role_display_only', 'firm_name', 'license_number', 'phone_number')
     readonly_fields = ('get_role_display_only',)
 
     def get_role(self, obj):
