@@ -33,9 +33,9 @@
     </div>
 
     <div class="mt-4">
-        <a href="{% url 'project_edit' project.pk %}" class="btn btn-warning">Edit Project</a>
-        <br>
-        <a href="{% url 'contract_edit' project.contract.pk %}" class="btn btn-secondary">Back to Contract</a>
+        <a href="{% url 'project_edit' project.pk %}" class="block py-2.5 px-4 rounded hover:bg-gray-800 transition text-gray-400">Edit Project</a>
+        <a href="{% url 'architects_projects' %}" class="block py-2.5 px-4 rounded hover:bg-gray-800 transition text-gray-400">Back to Projects</a>
+        <a href="{% url 'contract_edit' project.contract.pk %}" class="block py-2.5 px-4 rounded hover:bg-gray-800 transition text-gray-400">Contract details</a>
     </div>
 </div>
 
