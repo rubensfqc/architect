@@ -2,6 +2,7 @@ from time import timezone
 from django.utils import timezone
 from django.contrib.auth import login
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Sum
 from django.db import transaction
@@ -255,12 +256,21 @@ def contract_delete(request, pk):
 def operator_dashboard(request):
     return render(request, 'architect_app/operator_dashboard.html')
 
-class ProjectDetailView(DetailView):
+class RoleRequiredMixin(UserPassesTestMixin):
+    allowed_roles = []
+
+    def test_func(self):
+        # Assumes your User model has a 'role' attribute
+        return self.request.user.role in self.allowed_roles
+
+class ProjectDetailView(LoginRequiredMixin, RoleRequiredMixin, DetailView):
+    allowed_roles = ['ARCHITECT', 'OPERATOR']
     model = Project
     template_name = 'architect_app/project_detail.html'
     context_object_name = 'project'
 
-class ProjectUpdateView(UpdateView):
+class ProjectUpdateView(LoginRequiredMixin, RoleRequiredMixin, UpdateView):
+    allowed_roles = ['ARCHITECT', 'OPERATOR']
     model = Project
     form_class = ProjectForm
     template_name = 'architect_app/project_edit.html'
