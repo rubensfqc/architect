@@ -3,7 +3,7 @@
 {% block title %}My Project form{% endblock %}
 
 {% block content %}
-
+{% load widget_tweaks %}
 
 <h2>Edit Project: {{ project.name|default:"New Project" }}</h2>
 
@@ -16,7 +16,12 @@
 
     <div class="actions mt-3">
         <button type="submit" class="block py-2.5 px-4 rounded hover:bg-gray-800 transition text-gray-400">Save Changes</button>
-        <a href="{% url 'project_detail' project.pk %}" class="block py-2.5 px-4 rounded hover:bg-gray-800 transition text-gray-400">Cancel</a>
+    </div>
+    <div class="actions mt-3">
+        <a href="{% url 'project_detail' project.pk %}" 
+            class="block py-2.5 px-4 rounded hover:bg-gray-800 transition text-gray-400 text-center">
+            Cancel
+        </a>
     </div>
 </form>
 
