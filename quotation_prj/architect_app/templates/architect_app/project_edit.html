@@ -52,15 +52,21 @@
             </div>
 
             <div class="mt-10 pt-6 border-t border-gray-100 flex flex-row-reverse gap-3">
-                <button type="submit" 
-                        class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 px-8 rounded-lg transition shadow-md">
-                    Save Changes
+                <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 px-8 rounded-lg transition shadow-md">
+                    {% if project.pk %}Save Changes{% else %}Create Project{% endif %}
                 </button>
                 
-                <a href="{% url 'project_detail' project.pk %}" 
-                   class="bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium py-2.5 px-8 rounded-lg transition text-center">
-                    Cancel
-                </a>
+                {% if project.pk %}
+                    <a href="{% url 'project_detail' project.pk %}" 
+                    class="bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium py-2.5 px-8 rounded-lg transition">
+                        Cancel
+                    </a>
+                {% else %}
+                    <a href="{% url 'architects_projects' %}" 
+                    class="bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium py-2.5 px-8 rounded-lg transition">
+                        Cancel
+                    </a>
+                {% endif %}
             </div>
         </form>
     </div>

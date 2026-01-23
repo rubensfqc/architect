@@ -12,7 +12,9 @@ urlpatterns = [
     path('contracts/delete/<int:pk>/', views.contract_delete, name='contract_delete'),
 
     path('project/<int:pk>/', views.ProjectDetailView.as_view(), name='project_detail'),
-    path('project/edit/<int:pk>/', views.ProjectUpdateView.as_view(), name='project_edit'),
+    path('project/edit/<int:pk>/', views.project_upsert, name='project_edit'),
+    path('projects/add/', views.project_upsert, name='project_add'),
+    path('projects/delete/<int:pk>/', views.ProjectDeleteView.as_view(), name='project_delete'),
 
     # The "Traffic Controller" - where users go right after login
     path('dashboard3roles/', views.dashboard_redirect, name='dashboard_redirect'),

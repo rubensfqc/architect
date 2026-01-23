@@ -9,7 +9,7 @@ from django.db import transaction
 from .models import Architect, Contract, Project, ClientProfile
 from .forms import ContractForm, SellerSignUpForm, ClientSignUpForm, ProjectForm
 from django.core.exceptions import PermissionDenied
-from django.views.generic import DetailView, UpdateView
+from django.views.generic import DetailView, UpdateView, CreateView, DeleteView
 from django.urls import reverse_lazy
 
 
@@ -277,3 +277,37 @@ class ProjectUpdateView(LoginRequiredMixin, RoleRequiredMixin, UpdateView):
     
     def get_success_url(self):
         return reverse_lazy('project_detail', kwargs={'pk': self.object.pk})
+    
+@login_required
+@role_required(allowed_roles=['ARCHITECT', 'OPERATOR'])
+def project_upsert(request, pk=None):
+    """Handles both Creating and Editing a project."""
+    project = get_object_or_404(Project, pk=pk) if pk else None
+    architect = get_object_or_404(Architect, user=request.user)
+    constract_queryset = Contract.objects.filter(architect=architect)
+    if request.method == 'POST':
+        form = ProjectForm(request.POST, request.FILES, instance=project)
+        if form.is_valid():
+            # The contract is already selected in the form, 
+            # and because we filter the queryset below, it's safe.
+            new_project = form.save()
+            return redirect('architects_projects')
+    else:
+        form = ProjectForm(instance=project)
+        # Filter the contract dropdown to only show contracts belonging to this architect
+        form.fields['contract'].queryset = constract_queryset
+    
+    return render(request, 'architect_app/project_edit.html', {
+        'form': form, 
+        'project': project
+    })
+
+class ProjectDeleteView(LoginRequiredMixin, RoleRequiredMixin, DeleteView):
+    allowed_roles = ['ARCHITECT']
+    model = Project
+    template_name = 'architect_app/project_confirm_delete.html'
+    success_url = reverse_lazy('architects_projects')
+
+    def get_queryset(self):
+        """Ensure an architect can only delete projects from their own contracts."""
+        return self.model.objects.filter(contract__architect__user=self.request.user)

@@ -39,16 +39,21 @@
                 </div>
             </div>
 
-            <div class="flex flex-wrap gap-3">
-                <a href="{% url 'project_edit' project.pk %}" class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 px-6 rounded-lg transition shadow-sm">
-                    Edit Project
-                </a>
-                <a href="{% url 'contract_edit' project.contract.pk %}" class="bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium py-2.5 px-6 rounded-lg transition">
-                    Contract Details
-                </a>
-                <a href="{% url 'architects_projects' %}" class="block py-2.5 px-4 rounded hover:bg-gray-800 transition text-gray-400">
-                    Back to Projects
-                </a>
+            <div class="bg-gray-50 rounded-xl p-6 border border-gray-200">
+                <h3 class="text-lg font-bold mb-4">Project Actions</h3>
+                <div class="space-y-3">
+                    <a href="{% url 'project_edit' project.pk %}" class="block w-full text-center bg-indigo-600 text-white py-2.5 rounded-lg font-medium hover:bg-indigo-700 transition">
+                        Edit Details
+                    </a>
+
+                    <a href="{% url 'project_delete' project.pk %}" class="block w-full text-center text-red-600 py-2.5 rounded-lg font-medium border border-red-100 hover:bg-red-50 transition">
+                        <i class="fas fa-trash-alt mr-2"></i>Delete Project
+                    </a>
+                    
+                    <a href="{% url 'architects_projects' %}" class="block w-full text-center text-gray-500 py-2.5 text-sm">
+                        Back to Projects
+                    </a>
+                </div>
             </div>
         </div>
 
