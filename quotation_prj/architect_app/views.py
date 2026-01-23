@@ -263,7 +263,7 @@ class ProjectDetailView(DetailView):
 class ProjectUpdateView(UpdateView):
     model = Project
     form_class = ProjectForm
-    template_name = 'architect_app/project_form.html'
+    template_name = 'architect_app/project_edit.html'
     
     def get_success_url(self):
         return reverse_lazy('project_detail', kwargs={'pk': self.object.pk})
