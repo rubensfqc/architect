@@ -52,12 +52,11 @@ class ProjectForm(forms.ModelForm):
         fields = [
             'name', 'description', 'location', 'status', 
             'thumbnail_file', 'thumbnail_url', 
-            'client_comments', 'architect_comments', 
+            'architect_comments', 
             'expected_completion_date'
         ]
         widgets = {
             'expected_completion_date': forms.DateInput(attrs={'type': 'date'}),
             'description': forms.Textarea(attrs={'rows': 3}),
-            'client_comments': forms.Textarea(attrs={'rows': 2, 'placeholder': 'Max 280 chars'}),
-            'architect_comments': forms.Textarea(attrs={'rows': 2, 'placeholder': 'Max 280 chars'}),
+            'architect_comments': forms.Textarea(attrs={'rows': 3, 'placeholder': 'Max 280 chars'}),
         }
