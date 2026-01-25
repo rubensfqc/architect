@@ -1,0 +1,9 @@
+Hi {{ user.first_name }},
+
+Architect {{ user.client_profile.architect.firm_name }} has invited you to join their project portal. 
+
+To access your projects, please click the link below to set your account password:
+
+{{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}
+
+If you did not expect this invitation, you can safely ignore this email.

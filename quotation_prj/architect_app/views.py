@@ -1,6 +1,6 @@
 from time import timezone
 from django.utils import timezone
-from django.contrib.auth import login
+from django.contrib.auth import login, get_user_model
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, redirect, get_object_or_404
@@ -8,6 +8,7 @@ from django.db.models import Sum
 from django.db import transaction
 from .models import Architect, Contract, Project, ClientProfile
 from .forms import ContractForm, SellerSignUpForm, ClientSignUpForm, ProjectForm
+from django.core.mail import send_mail
 from django.core.exceptions import PermissionDenied
 from django.views.generic import DetailView, UpdateView, CreateView, DeleteView
 from django.urls import reverse_lazy
@@ -311,3 +312,69 @@ class ProjectDeleteView(LoginRequiredMixin, RoleRequiredMixin, DeleteView):
     def get_queryset(self):
         """Ensure an architect can only delete projects from their own contracts."""
         return self.model.objects.filter(contract__architect__user=self.request.user)
+    
+User = get_user_model()
+
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_encode
+from django.utils.encoding import force_bytes
+
+@login_required
+@role_required(allowed_roles=['ARCHITECT'])
+def client_invite(request):
+    architect = get_object_or_404(Architect, user=request.user)
+    
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        first_name = request.POST.get('first_name')
+        
+        with transaction.atomic():
+            # 1. Get or Create the User
+            user, created = User.objects.get_or_create(
+                email=email,
+                defaults={
+                    'username': email,
+                    'first_name': first_name,
+                    'role': 'CLIENT',
+                    'is_active': True 
+                }
+            )
+            
+            # 2. Create/Link the Profile
+            ClientProfile.objects.update_or_create(
+                user=user,
+                defaults={'architect': architect}
+            )
+
+            # 3. MANUAL EMAIL LOGIC (Bypasses PasswordResetForm filters)
+            context = {
+                'email': user.email,
+                'domain': request.get_host(), # Will be 127.0.0.1:8000 in dev
+                'site_name': 'Architect Portal',
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                'user': user,
+                'token': default_token_generator.make_token(user),
+                'protocol': 'https' if request.is_secure() else 'http',
+                'architect': architect,
+            }
+
+            subject = f"Invitation to join {architect.firm_name} Portal"
+            # Make sure this template exists in templates/registration/invite_email.html
+            body = render_to_string('registration/invite_email.html', context)
+
+            # This will show up in your terminal immediately
+            send_mail(
+                subject,
+                body,
+                'noreply@yourdomain.com',
+                [user.email],
+                fail_silently=False,
+            )
+            
+            print(f"DEBUG: Manual invitation email sent to {user.email}")
+
+        return redirect('architects_clients')
+    
+    return render(request, 'architect_app/client_invite_form.html')
