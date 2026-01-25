@@ -1,13 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Get Pricing – {{ company_name|default:"MySaaS" }}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script src="https://cdn.tailwindcss.com"></script>
-</head>
+{% extends "website_app/base.html" %}
 
-<body class="bg-slate-50 text-slate-900">
+{% block hero %}{% endblock %}
+{% block content %}
 
 <section class="min-h-screen flex items-center justify-center px-6">
     <div class="max-w-md w-full bg-white rounded-2xl shadow-lg p-8">
@@ -68,5 +62,4 @@
     </div>
 </section>
 
-</body>
-</html>
+{% endblock %}
