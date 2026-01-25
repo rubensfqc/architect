@@ -1,4 +1,94 @@
 {% extends "website_app/base.html" %}
 {% block content %}
-<!-- page content -->
+<!-- Pricing Section -->
+<section class="bg-white py-24">
+    <div class="max-w-7xl mx-auto px-6">
+
+        <!-- Section Header -->
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-4">
+                Simple, transparent pricing
+            </h2>
+            <p class="text-slate-600 text-lg max-w-2xl mx-auto">
+                Choose the plan that fits your stage. Upgrade or cancel anytime.
+            </p>
+        </div>
+
+        <!-- Pricing Cards -->
+        <div class="grid gap-8 md:grid-cols-3">
+
+            <!-- Starter Plan -->
+            <div class="rounded-2xl border border-slate-200 p-8 shadow-sm">
+                <h3 class="text-xl font-semibold mb-2">Starter</h3>
+                <p class="text-slate-600 mb-6">For individuals getting started</p>
+
+                <div class="mb-6">
+                    <span class="text-4xl font-extrabold">$19</span>
+                    <span class="text-slate-500">/month</span>
+                </div>
+
+                <ul class="space-y-3 mb-8 text-slate-600">
+                    <li>✓ Up to 3 projects</li>
+                    <li>✓ Basic analytics</li>
+                    <li>✓ Email support</li>
+                </ul>
+
+                <a href="#"
+                   class="block text-center rounded-lg border border-slate-300 py-3 font-semibold text-blue-600 hover:bg-slate-100 transition">
+                    Get Started
+                </a>
+            </div>
+
+            <!-- Pro Plan (Highlighted) -->
+            <div class="rounded-2xl border-2 border-blue-600 p-8 shadow-lg relative">
+                <span class="absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-sm font-semibold px-4 py-1 rounded-full">
+                    Most Popular
+                </span>
+
+                <h3 class="text-xl font-semibold mb-2">Pro</h3>
+                <p class="text-slate-600 mb-6">For growing teams</p>
+
+                <div class="mb-6">
+                    <span class="text-4xl font-extrabold">$49</span>
+                    <span class="text-slate-500">/month</span>
+                </div>
+
+                <ul class="space-y-3 mb-8 text-slate-600">
+                    <li>✓ Unlimited projects</li>
+                    <li>✓ Advanced analytics</li>
+                    <li>✓ Priority support</li>
+                    <li>✓ Team collaboration</li>
+                </ul>
+
+                <a href="#"
+                   class="block text-center rounded-lg bg-blue-600 py-3 font-semibold text-white hover:bg-blue-700 transition">
+                    Start Free Trial
+                </a>
+            </div>
+
+            <!-- Enterprise Plan -->
+            <div class="rounded-2xl border border-slate-200 p-8 shadow-sm">
+                <h3 class="text-xl font-semibold mb-2">Enterprise</h3>
+                <p class="text-slate-600 mb-6">For large organizations</p>
+
+                <div class="mb-6">
+                    <span class="text-4xl font-extrabold">Custom</span>
+                </div>
+
+                <ul class="space-y-3 mb-8 text-slate-600">
+                    <li>✓ Dedicated account manager</li>
+                    <li>✓ Custom integrations</li>
+                    <li>✓ SLA & security reviews</li>
+                </ul>
+
+                <a href="#"
+                   class="block text-center rounded-lg border border-slate-300 py-3 font-semibold text-blue-600 hover:bg-slate-100 transition">
+                    Contact Sales
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
+
 {% endblock %}
