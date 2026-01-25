@@ -68,25 +68,25 @@
 
 <body>
 <header>
-    <strong>{{ company_name|default:"MySaaS" }}</strong>
+    <strong>{{ company_name|default:"wiserArch" }}</strong>
     <nav>
         <a href="#">Features</a>
-        <a href="#">Pricing</a>
+        <a href="{% url 'landing' %}">Pricing</a> 
         <a href="#">Login</a>
     </nav>
 </header>
-
+{% block hero %}
 <section class="hero">
     <h1>Build faster. Scale smarter.</h1>
-    <p>
-        {{ tagline|default:"All-in-one SaaS platform to grow your business." }}
-    </p>
+    <p>{{ tagline }}</p>
 
     <div class="cta-buttons">
-        <a href="#" class="btn-primary">Get Started</a>
+        <a href="{% url 'landing' %}" class="btn-primary">Get Started</a>
         <a href="#" class="btn-secondary">Request Demo</a>
     </div>
 </section>
+{% endblock %}
+
     {% block content %}{% endblock %}
 
 <footer>
