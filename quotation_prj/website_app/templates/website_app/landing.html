@@ -3,63 +3,82 @@
 {% block hero %}{% endblock %}
 {% block content %}
 
-<section class="min-h-screen flex items-center justify-center px-6">
-    <div class="max-w-md w-full bg-white rounded-2xl shadow-lg p-8">
+<div class="relative min-h-screen overflow-hidden">
+    <div class="blur-[2px] opacity-60 pointer-events-none select-none" aria-hidden="true">
+        <section class="bg-white py-24">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Simple, transparent pricing</h2>
+                    <p class="text-slate-600 text-lg max-w-2xl mx-auto">Choose the plan that fits your stage.</p>
+                </div>
 
-        <h1 class="text-3xl font-extrabold mb-4 text-center">
-            Get Instant Access to Pricing
-        </h1>
+                <div class="grid gap-8 md:grid-cols-3">
+                    <div class="rounded-2xl border border-slate-200 p-8 shadow-sm">
+                        <h3 class="text-xl font-semibold mb-2">Starter</h3>
+                        <div class="text-4xl font-extrabold mb-6">$**,*</div>
+                        <ul class="space-y-3 mb-8 text-slate-400">
+                            <li>✓ Up to 3 projects</li>
+                            <li>✓ Basic analytics</li>
+                            <li>✓ Email support</li>
+                        </ul>
+                        <div class="w-full h-12 bg-slate-100 rounded-lg"></div>
+                    </div>
 
-        <p class="text-slate-600 text-center mb-8">
-            Tell us a bit about you and we’ll show you the plans that fit best.
-        </p>
+                    <div class="rounded-2xl border-2 border-blue-600 p-8 shadow-lg relative bg-white">
+                        <h3 class="text-xl font-semibold mb-2 text-blue-600">Pro</h3>
+                        <div class="text-4xl font-extrabold mb-6 text-slate-900">$**,*</div>
+                        <ul class="space-y-3 mb-8 text-slate-400">
+                            <li>✓ Unlimited projects</li>
+                            <li>✓ Advanced analytics</li>
+                            <li>✓ Priority support</li>
+                        </ul>
+                        <div class="w-full h-12 bg-blue-600 rounded-lg"></div>
+                    </div>
 
-        <form method="post" class="space-y-5">
-            {% csrf_token %}
-
-            <div>
-                <label class="block text-sm font-medium mb-1">Full Name</label>
-                <input
-                    type="text"
-                    name="name"
-                    required
-                    class="w-full rounded-lg border border-slate-300 px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                >
+                    <div class="rounded-2xl border border-slate-200 p-8 shadow-sm">
+                        <h3 class="text-xl font-semibold mb-2">Enterprise</h3>
+                        <div class="text-4xl font-extrabold mb-6">Custom</div>
+                        <ul class="space-y-3 mb-8 text-slate-400">
+                            <li>✓ Dedicated manager</li>
+                            <li>✓ Custom integrations</li>
+                            <li>✓ SLA reviews</li>
+                        </ul>
+                        <div class="w-full h-12 bg-slate-100 rounded-lg"></div>
+                    </div>
+                </div>
             </div>
-
-            <div>
-                <label class="block text-sm font-medium mb-1">Email</label>
-                <input
-                    type="email"
-                    name="email"
-                    required
-                    class="w-full rounded-lg border border-slate-300 px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                >
-            </div>
-
-            <div>
-                <label class="block text-sm font-medium mb-1">WhatsApp Number</label>
-                <input
-                    type="tel"
-                    name="whatsapp"
-                    placeholder="+1 555 123 4567"
-                    required
-                    class="w-full rounded-lg border border-slate-300 px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                >
-            </div>
-
-            <button
-                type="submit"
-                class="w-full rounded-lg bg-blue-600 py-3 text-white font-semibold hover:bg-blue-700 transition"
-            >
-                View Pricing
-            </button>
-
-            <p class="text-xs text-slate-500 text-center">
-                No spam. We only use this to share product updates.
-            </p>
-        </form>
+        </section>
     </div>
-</section>
+
+    <div class="absolute inset-0 flex items-center justify-center px-6 z-10 bg-slate-900/5">
+        <div class="max-w-md w-full bg-white rounded-2xl shadow-2xl p-8 border border-slate-200">
+            <h1 class="text-3xl font-extrabold mb-2 text-center text-slate-900">
+                Unlock Pricing
+            </h1>
+            <p class="text-slate-600 text-center mb-8">
+                Enter your details to see our full plans for **wiserArch**.
+            </p>
+
+            <form method="post" class="space-y-5">
+                {% csrf_token %}
+                <div>
+                    <label class="block text-sm font-medium mb-1">Full Name</label>
+                    <input type="text" name="name" required class="w-full rounded-lg border border-slate-300 px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">Email</label>
+                    <input type="email" name="email" required class="w-full rounded-lg border border-slate-300 px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <div>
+                    <label class="block text-sm font-medium mb-1">WhatsApp Number</label>
+                    <input type="tel" name="whatsapp" required class="w-full rounded-lg border border-slate-300 px-4 py-3 focus:ring-2 focus:ring-blue-500 outline-none">
+                </div>
+                <button type="submit" class="w-full rounded-lg bg-blue-600 py-3 text-white font-semibold hover:bg-blue-700 transition">
+                    View Pricing
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
 
 {% endblock %}
