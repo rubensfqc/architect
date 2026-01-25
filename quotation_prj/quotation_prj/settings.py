@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'architect_app',
     'amznstorage_app',
     'storages', # django-storages package to handle AWS S3
+    'website_app',
 ]
 
 MIDDLEWARE = [
