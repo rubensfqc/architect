@@ -1,5 +1,7 @@
 {% extends "website_app/base.html" %}
 
+{% load i18n %}
+
 {% block hero %}{% endblock %}
 {% block content %}
 
@@ -14,10 +16,10 @@
 
                 <div class="grid gap-8 md:grid-cols-3">
                     <div class="rounded-2xl border border-slate-200 p-8 shadow-sm">
-                        <h3 class="text-xl font-semibold mb-2">Starter</h3>
+                    <h3 class="text-xl font-semibold mb-2">{% trans "4 months" %}</h3>
                         <div class="text-4xl font-extrabold mb-6">$**,*</div>
                         <ul class="space-y-3 mb-8 text-slate-400">
-                            <li>✓ Up to 3 projects</li>
+                            <li>✓ Up to 10 projects</li>
                             <li>✓ Basic analytics</li>
                             <li>✓ Email support</li>
                         </ul>
@@ -25,7 +27,7 @@
                     </div>
 
                     <div class="rounded-2xl border-2 border-blue-600 p-8 shadow-lg relative bg-white">
-                        <h3 class="text-xl font-semibold mb-2 text-blue-600">Pro</h3>
+                        <h3 class="text-xl font-semibold mb-2 text-blue-600">{% trans "8 months" %}</h3>
                         <div class="text-4xl font-extrabold mb-6 text-slate-900">$**,*</div>
                         <ul class="space-y-3 mb-8 text-slate-400">
                             <li>✓ Unlimited projects</li>
@@ -36,8 +38,8 @@
                     </div>
 
                     <div class="rounded-2xl border border-slate-200 p-8 shadow-sm">
-                        <h3 class="text-xl font-semibold mb-2">Enterprise</h3>
-                        <div class="text-4xl font-extrabold mb-6">Custom</div>
+                        <h3 class="text-xl font-semibold mb-2">{% trans "Annual" %}</h3>
+                        <div class="text-4xl font-extrabold mb-6">$**,*</div>
                         <ul class="space-y-3 mb-8 text-slate-400">
                             <li>✓ Dedicated manager</li>
                             <li>✓ Custom integrations</li>
@@ -53,10 +55,10 @@
     <div class="absolute inset-0 flex items-center justify-center px-6 z-10 bg-slate-900/5">
         <div class="max-w-md w-full bg-white rounded-2xl shadow-2xl p-8 border border-slate-200">
             <h1 class="text-3xl font-extrabold mb-2 text-center text-slate-900">
-                Unlock Pricing
+                {% trans "Unlock Pricing" %}
             </h1>
             <p class="text-slate-600 text-center mb-8">
-                Enter your details to see our full plans for **wiserArch**.
+                {% trans "Enter your details to see our full plans for **wiserArch**." %}
             </p>
             <style>
                 /* This makes the actual input field expand to fill your styled div */
@@ -91,7 +93,7 @@
                 <div class="grid grid-cols-1 md:grid-cols-4 gap-4 pt-4">
                     <div class="hidden md:block"></div> <div class="md:col-span-3">
                         <button type="submit" class="w-full rounded-lg bg-blue-600 py-3 text-white font-semibold hover:bg-blue-700 transition shadow-sm">
-                            View Pricing
+                            {% trans "View Pricing" %}
                         </button>
                     </div>
                 </div>

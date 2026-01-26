@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
+{% load i18n %}
+
 <head>
     <title>{% block title %}wiserarch{% endblock %}</title>
     <script src="https://cdn.tailwindcss.com"></script>
@@ -83,19 +86,21 @@
 <body>
 <header>
     <a href="{% url 'home' %}" class="logo-link">
-        <strong>{{ company_name|default:"wiserArch" }}</strong>
+        <strong>{{ company_name|default:"wiserarch" }}</strong>
     </a>
     <nav>
-        <a href="{% url 'pages' %}">Features</a>
-        <a href="{% url 'landing' %}">Pricing</a> 
-        <a href="{% url 'login' %}">Login</a>
+        <a href="{% url 'pages' %}">{% trans "Features" %}</a>
+        <a href="{% url 'landing' %}">{% trans "Pricing" %}</a> 
+        <a href="{% url 'login' %}">{% trans "Login" %}</a>
     </nav>
 </header>
 
 {% block content %}{% endblock %}
 
 <footer>
-    © {{ year|default:2026 }} {{ company_name|default:"MySaaS" }}. All rights reserved.
+ {% blocktrans with year=year|default:2026 name=company_name|default:"wiserarch.com" %}
+        &copy; {{ year }} {{ name }}. All rights reserved.
+    {% endblocktrans %}
 </footer>
 
 </body>
