@@ -58,6 +58,17 @@
             <p class="text-slate-600 text-center mb-8">
                 Enter your details to see our full plans for **wiserArch**.
             </p>
+            <style>
+                /* This makes the actual input field expand to fill your styled div */
+                .md\:col-span-3 input, 
+                .md\:col-span-3 select, 
+                .md\:col-span-3 textarea {
+                    width: 100%;
+                    border: none;
+                    outline: none;
+                    background: transparent;
+                }
+            </style>
 
             <form method="post" class="space-y-4">
                 {% csrf_token %}
