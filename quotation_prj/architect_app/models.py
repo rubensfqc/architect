@@ -12,8 +12,8 @@ class Architect(models.Model):
         on_delete=models.CASCADE,
         related_name='architect_profile'
     )
-    firm_name = models.CharField(max_length=255)
-    license_number = models.CharField(max_length=100, unique=True)
+    firm_name = models.CharField(max_length=255, blank=True)
+    license_number = models.CharField(max_length=100, unique=True, blank=True)
     phone_number = models.CharField(max_length=20, blank=True)
     logo = models.ImageField(upload_to='architect_logos/', null=True, blank=True)
 
