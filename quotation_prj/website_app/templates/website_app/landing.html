@@ -52,13 +52,38 @@
 
     <div class="absolute inset-0 flex items-center justify-center px-6 z-10 bg-slate-900/5">
         <div class="max-w-md w-full bg-white rounded-2xl shadow-2xl p-8 border border-slate-200">
-            <h1>Get Started with Wiserarch</h1>
-            <p>Please enter your details to view our pricing.</p>
-            
-            <form method="post">
+            <h1 class="text-3xl font-extrabold mb-2 text-center text-slate-900">
+                Unlock Pricing
+            </h1>
+            <p class="text-slate-600 text-center mb-8">
+                Enter your details to see our full plans for **wiserArch**.
+            </p>
+
+            <form method="post" class="space-y-4">
                 {% csrf_token %}
-                {{ form.as_p }}
-                <button type="submit">See Pricing</button>
+                
+                {% for field in form %}
+                <div class="grid grid-cols-1 md:grid-cols-4 items-center gap-4">
+                    <label for="{{ field.id_for_label }}" class="text-sm font-semibold text-slate-700 md:text-right">
+                        {{ field.label }}
+                    </label>
+
+                    <div class="md:col-span-3">
+                        {{ field }}
+                        {% if field.errors %}
+                            <p class="text-red-500 text-xs mt-1">{{ field.errors.0 }}</p>
+                        {% endif %}
+                    </div>
+                </div>
+                {% endfor %}
+
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-4 pt-4">
+                    <div class="hidden md:block"></div> <div class="md:col-span-3">
+                        <button type="submit" class="w-full rounded-lg bg-blue-600 py-3 text-white font-semibold hover:bg-blue-700 transition shadow-sm">
+                            View Pricing
+                        </button>
+                    </div>
+                </div>
             </form>
         </div>
     </div>
