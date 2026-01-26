@@ -18,7 +18,18 @@ class Command(BaseCommand):
 
         today = timezone.now().date()
 
-        # 1. CREATE OPERATOR
+        # 1. Create the 1st user: wa_user
+        # Using get_or_create prevents duplicates if you run the script twice
+        wa_user, created = Seller.objects.get_or_create(
+            username="wa_user",
+            email="wiserarch@gmail.com",    
+            defaults={'role': Seller.Roles.ARCHITECT}
+        )
+        if created:
+            wa_user.set_password("123456")
+            wa_user.save()
+
+        # 1.1. CREATE OPERATOR
         op_user, created = Seller.objects.get_or_create(
             username="admin_operator",
             email="operator@portal.com",
