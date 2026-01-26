@@ -18,12 +18,19 @@ def landing(request):
             # 1. Create client instance but don't save to DB yet
             client = form.save(commit=False)
             
-            # 2. Assign a seller (Your model defaults to 1, but we'll be explicit)
-            # You might want to change this logic later to pick a specific seller
-            default_seller = Seller.objects.get(id=1) 
-            client.seller = default_seller
-            
-            # 3. Save to Database
+            # 1. Attempt to find the specific seller by email
+            # 2. Fall back to the seller with ID=1 if not found
+            seller = Seller.objects.filter(email="wiserarch@gmail.com").first()
+
+            if not seller:
+                try:
+                    seller = Seller.objects.get(id=1)
+                except Seller.DoesNotExist:
+                    # Optional: Handle the rare case where even ID=1 doesn't exist
+                    seller = None 
+
+            # 3. Assign the seller to the client before saving
+            client.seller = seller
             client.save()
 
             # 4. Keep data in session for the pricing page if needed
@@ -33,7 +40,6 @@ def landing(request):
                 "whatsapp": client.whatsapp,
                 "client_id": client.id, # Useful for linking to quotes later
             }
-
             return redirect("pricing")
     else:
         form = ClientForm()
