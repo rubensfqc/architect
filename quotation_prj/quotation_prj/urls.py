@@ -23,11 +23,13 @@ from quotation_prj import settings
 from seller_app import views as seller_views
 #from email_app import views
 from architect_app.views import architect_dashboard
+from website_app.views import home_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.home_view, name='pages'),  # Set this as the home view
+    path('', home_view, name='home'),  # Set this as the home view
     path('home/', include('website_app.urls')),
+    path('pages', views.pages_view, name='pages'),  # Set this as the home view
     path('search', seller_views.slug_search, name='slug_search'),  # Search by slug
     path('autocomplete/', seller_views.slug_autocomplete, name='slug_autocomplete'), 
     path('lp', views.landing_page, name='landing_page'),
