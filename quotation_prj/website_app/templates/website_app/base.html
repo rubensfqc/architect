@@ -4,7 +4,6 @@
     <title>{% block title %}wiserarch{% endblock %}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <meta charset="UTF-8">
-    <title>{{ company_name|default:"MySaaS" }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <style>
@@ -19,6 +18,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            /* Ensuring header stays above background if needed */
+            position: relative;
+            z-index: 10;
         }
         header a {
             text-decoration: none;
@@ -26,21 +28,32 @@
             margin-left: 20px;
             font-weight: 500;
         }
+
+        /* --- Updated Hero Section with Background --- */
         .hero {
-            max-width: 1100px;
-            margin: 80px auto;
-            padding: 0 24px;
+            position: relative;
+            max-width: 100%;
+            /* Increased top/bottom padding to 180px to show more image verticality */
+            padding: 220px 24px; 
             text-align: center;
+            
+            /* Lowered opacity from 0.85 to 0.5 to make image more visible */
+            background-image: linear-gradient(rgba(15, 23, 42, 0.5), rgba(15, 23, 42, 0.5)), 
+                            url('https://img1.wsimg.com/isteam/getty/1883285957/:/rs=w:1920,m');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            
+            /* If using a dark overlay, make text white for contrast */
+            color: white; 
         }
-        .hero h1 {
-            font-size: 48px;
-            margin-bottom: 16px;
-        }
+
+        /* Ensure the paragraph text inside the hero also adapts to the dark background */
         .hero p {
-            font-size: 20px;
-            color: #475569;
-            margin-bottom: 32px;
+            color: #e2e8f0 !important; 
         }
+        /* --- End Background Changes --- */
+
         .cta-buttons a {
             display: inline-block;
             padding: 14px 28px;
@@ -56,6 +69,7 @@
         .btn-secondary {
             border: 1px solid #cbd5f5;
             color: #2563eb;
+            background: rgba(255, 255, 255, 0.8);
         }
         footer {
             text-align: center;
@@ -68,26 +82,17 @@
 
 <body>
 <header>
-    <strong>{{ company_name|default:"wiserArch" }}</strong>
+    <a href="{% url 'home' %}" class="logo-link">
+        <strong>{{ company_name|default:"wiserArch" }}</strong>
+    </a>
     <nav>
-        <a href="#">Features</a>
+        <a href="{% url 'pages' %}">Features</a>
         <a href="{% url 'landing' %}">Pricing</a> 
-        <a href="#">Login</a>
+        <a href="{% url 'login' %}">Login</a>
     </nav>
 </header>
-{% block hero %}
-<section class="hero">
-    <h1>Build faster. Scale smarter.</h1>
-    <p>{{ tagline }}</p>
 
-    <div class="cta-buttons">
-        <a href="{% url 'landing' %}" class="btn-primary">Get Started</a>
-        <a href="#" class="btn-secondary">Request Demo</a>
-    </div>
-</section>
-{% endblock %}
-
-    {% block content %}{% endblock %}
+{% block content %}{% endblock %}
 
 <footer>
     © {{ year|default:2026 }} {{ company_name|default:"MySaaS" }}. All rights reserved.
