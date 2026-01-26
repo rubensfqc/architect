@@ -3,8 +3,8 @@ from datetime import datetime
 
 def home_view(request):
     return render(request, "website_app/home.html", {
-        "company_name": "wiserArch",
-        "tagline": "Spend your time wisely with your design, let us handle the clients and contracts.",
+        "company_name": "wiserarch",
+        "tagline": "Architecture is about design, not endless whatsApps and emails.",
         "year": datetime.now().year,
     })
 
