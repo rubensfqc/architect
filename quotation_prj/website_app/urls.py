@@ -1,4 +1,4 @@
-# urls.py
+# quotation_prj/website_app/urls.py
 from django.urls import path
 from .views import home_view, pricing_view, landing # Import landing
 
