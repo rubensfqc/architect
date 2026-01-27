@@ -3,11 +3,12 @@ from django.shortcuts import render, redirect
 from datetime import datetime
 from quotation_app.forms import ClientForm
 from seller_app.models import Seller
+from django.utils.translation import gettext_lazy as _
 
 def home_view(request):
     return render(request, "website_app/home.html", {
         "company_name": "wiserarch",
-        "tagline": "Architecture is about design, not endless whatsApps and emails.",
+        "tagline": _("Architecture is about design, not endless whatsApps and emails."),
         "year": datetime.now().year,
     })
 

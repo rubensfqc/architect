@@ -7,49 +7,7 @@
 
 <div class="relative min-h-screen overflow-hidden">
     <div class="blur-[2px] opacity-60 pointer-events-none select-none" aria-hidden="true">
-        <section class="bg-white py-24">
-            <div class="max-w-7xl mx-auto px-6">
-                <div class="text-center mb-16">
-                    <h2 class="text-3xl md:text-4xl font-extrabold mb-4">Simple, transparent pricing</h2>
-                    <p class="text-slate-600 text-lg max-w-2xl mx-auto">Choose the plan that fits your stage.</p>
-                </div>
-
-                <div class="grid gap-8 md:grid-cols-3">
-                    <div class="rounded-2xl border border-slate-200 p-8 shadow-sm">
-                    <h3 class="text-xl font-semibold mb-2">{% trans "4 months" %}</h3>
-                        <div class="text-4xl font-extrabold mb-6">$**,*</div>
-                        <ul class="space-y-3 mb-8 text-slate-400">
-                            <li>✓ Up to 10 projects</li>
-                            <li>✓ Basic analytics</li>
-                            <li>✓ Email support</li>
-                        </ul>
-                        <div class="w-full h-12 bg-slate-100 rounded-lg"></div>
-                    </div>
-
-                    <div class="rounded-2xl border-2 border-blue-600 p-8 shadow-lg relative bg-white">
-                        <h3 class="text-xl font-semibold mb-2 text-blue-600">{% trans "8 months" %}</h3>
-                        <div class="text-4xl font-extrabold mb-6 text-slate-900">$**,*</div>
-                        <ul class="space-y-3 mb-8 text-slate-400">
-                            <li>✓ Unlimited projects</li>
-                            <li>✓ Advanced analytics</li>
-                            <li>✓ Priority support</li>
-                        </ul>
-                        <div class="w-full h-12 bg-blue-600 rounded-lg"></div>
-                    </div>
-
-                    <div class="rounded-2xl border border-slate-200 p-8 shadow-sm">
-                        <h3 class="text-xl font-semibold mb-2">{% trans "Annual" %}</h3>
-                        <div class="text-4xl font-extrabold mb-6">$**,*</div>
-                        <ul class="space-y-3 mb-8 text-slate-400">
-                            <li>✓ Dedicated manager</li>
-                            <li>✓ Custom integrations</li>
-                            <li>✓ SLA reviews</li>
-                        </ul>
-                        <div class="w-full h-12 bg-slate-100 rounded-lg"></div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        {% include "website_app/price3boxesHide.html" %}
     </div>
 
     <div class="absolute inset-0 flex items-center justify-center px-6 z-10 bg-slate-900/5">

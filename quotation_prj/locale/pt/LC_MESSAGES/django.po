@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-27 00:29+0100\n"
+"POT-Creation-Date: 2026-01-27 00:56+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -845,73 +845,158 @@ msgstr ""
 "        &copy; %(year)s %(name)s. Todos os direitos reservados.\n"
 "    "
 
-#: .\website_app\templates\website_app\home.html:6
+#: .\website_app\templates\website_app\home.html:8
 msgid "Smart Solutions for Architects"
 msgstr "Soluções tech para Arquitetos"
 
-#: .\website_app\templates\website_app\home.html:10
-#: .\website_app\templates\website_app\pricing.html:40
+#: .\website_app\templates\website_app\home.html:12
+#: .\website_app\templates\website_app\price3boxes.html:37
+#: .\website_app\templates\website_app\price3boxesHide.html:37
 msgid "Get Started"
 msgstr "Começe agora"
 
-#: .\website_app\templates\website_app\home.html:11
+#: .\website_app\templates\website_app\home.html:13
 msgid "Request Demo"
 msgstr "Faça uma demo"
 
-#: .\website_app\templates\website_app\landing.html:17
-#: .\website_app\templates\website_app\pricing.html:24
-msgid "4 months"
-msgstr "4 meses"
-
-#: .\website_app\templates\website_app\landing.html:28
-#: .\website_app\templates\website_app\pricing.html:50
-msgid "8 months"
-msgstr "8 meses"
-
-#: .\website_app\templates\website_app\landing.html:39
-#: .\website_app\templates\website_app\pricing.html:73
-msgid "Annual"
-msgstr "Anual"
-
-#: .\website_app\templates\website_app\landing.html:56
+#: .\website_app\templates\website_app\landing.html:16
 msgid "Unlock Pricing"
 msgstr "Desbloqueie o Preço"
 
-#: .\website_app\templates\website_app\landing.html:59
+#: .\website_app\templates\website_app\landing.html:19
 msgid "Enter your details to see our full plans for **wiserArch**."
 msgstr "Entre seus dados para ver todos os planos da ***wiserarch*"
 
-#: .\website_app\templates\website_app\landing.html:94
+#: .\website_app\templates\website_app\landing.html:54
 msgid "View Pricing"
 msgstr "Ver o preço"
 
-#: .\website_app\templates\website_app\pricing.html:12
+#: .\website_app\templates\website_app\price3boxes.html:9
+#: .\website_app\templates\website_app\price3boxesHide.html:9
 msgid "Simple, transparent pricing"
 msgstr "Precificação simples e transparente"
 
-#: .\website_app\templates\website_app\pricing.html:15
+#: .\website_app\templates\website_app\price3boxes.html:12
+#: .\website_app\templates\website_app\price3boxesHide.html:12
 msgid "Choose the plan that fits your stage. Upgrade or cancel anytime."
-msgstr "Escolha o melhor plano para você. Cancele ou renove a qualquer momento."
+msgstr ""
+"Escolha o melhor plano para você. Cancele ou renove a qualquer momento."
 
-#: .\website_app\templates\website_app\pricing.html:47
-msgid "Most Popular"
-msgstr "Mais popular"
+#: .\website_app\templates\website_app\price3boxes.html:21
+#: .\website_app\templates\website_app\price3boxesHide.html:21
+msgid "4 months"
+msgstr "4 meses"
 
-#: .\website_app\templates\website_app\pricing.html:51
+#: .\website_app\templates\website_app\price3boxes.html:22
+#: .\website_app\templates\website_app\price3boxesHide.html:22
+msgid "For individuals getting started"
+msgstr ""
+
+#: .\website_app\templates\website_app\price3boxes.html:26
+#: .\website_app\templates\website_app\price3boxesHide.html:26
+#, fuzzy
+#| msgid "4 months"
+msgid "/month"
+msgstr "4 meses"
+
+#: .\website_app\templates\website_app\price3boxes.html:30
+#: .\website_app\templates\website_app\price3boxesHide.html:30
+msgid "✓ Up to 10 contracts"
+msgstr ""
+
+#: .\website_app\templates\website_app\price3boxes.html:31
+#: .\website_app\templates\website_app\price3boxesHide.html:31
+msgid "✓ Basic analytics"
+msgstr ""
+
+#: .\website_app\templates\website_app\price3boxes.html:32
+#: .\website_app\templates\website_app\price3boxesHide.html:32
+msgid "✓ Email support"
+msgstr ""
+
+#: .\website_app\templates\website_app\price3boxes.html:43
+#: .\website_app\templates\website_app\price3boxesHide.html:43
+msgid "8 months"
+msgstr "8 meses"
+
+#: .\website_app\templates\website_app\price3boxes.html:44
+#: .\website_app\templates\website_app\price3boxesHide.html:44
 msgid "For growing offices"
 msgstr "Para escritórios em crescimento"
 
-#: .\website_app\templates\website_app\pricing.html:67
+#: .\website_app\templates\website_app\price3boxes.html:52
+#: .\website_app\templates\website_app\price3boxesHide.html:52
+msgid "✓ All from previous plan"
+msgstr "✓ Tudo do plano anterior"
+
+#: .\website_app\templates\website_app\price3boxes.html:53
+#: .\website_app\templates\website_app\price3boxesHide.html:53
+msgid "✓ Unlimited projects"
+msgstr "✓ Projetos ilimitados"
+
+#: .\website_app\templates\website_app\price3boxes.html:54
+#: .\website_app\templates\website_app\price3boxesHide.html:54
+msgid "✓ Advanced analytics"
+msgstr "✓ Analytics avançados"
+
+#: .\website_app\templates\website_app\price3boxes.html:55
+#: .\website_app\templates\website_app\price3boxesHide.html:55
+msgid "✓ Priority support"
+msgstr "✓ Suporte prioritário"
+
+#: .\website_app\templates\website_app\price3boxes.html:56
+#: .\website_app\templates\website_app\price3boxesHide.html:56
+msgid "✓ Contractor portal"
+msgstr "✓ Portal do executor"
+
+#: .\website_app\templates\website_app\price3boxes.html:61
+#: .\website_app\templates\website_app\price3boxesHide.html:61
 msgid "15 days free trial"
 msgstr "15 dias de teste grátis"
 
-#: .\website_app\templates\website_app\pricing.html:74
+#: .\website_app\templates\website_app\price3boxes.html:68
+#: .\website_app\templates\website_app\price3boxesHide.html:68
+msgid "Most Popular"
+msgstr "Mais popular"
+
+#: .\website_app\templates\website_app\price3boxes.html:71
+#: .\website_app\templates\website_app\price3boxesHide.html:71
+msgid "Annual"
+msgstr "Anual"
+
+#: .\website_app\templates\website_app\price3boxes.html:72
+#: .\website_app\templates\website_app\price3boxesHide.html:72
 msgid "For large ambitions"
 msgstr "Para grandes ambições"
 
-#: .\website_app\templates\website_app\pricing.html:88
+#: .\website_app\templates\website_app\price3boxes.html:79
+#: .\website_app\templates\website_app\price3boxesHide.html:79
+msgid "✓ All from previous plans"
+msgstr "✓ Tudo dos planos anteriores"
+
+#: .\website_app\templates\website_app\price3boxes.html:80
+#: .\website_app\templates\website_app\price3boxesHide.html:80
+msgid "✓ Dedicated account manager"
+msgstr "✓ Gerente de conta dedicado"
+
+#: .\website_app\templates\website_app\price3boxes.html:81
+#: .\website_app\templates\website_app\price3boxesHide.html:81
+msgid "✓ Custom integrations"
+msgstr "✓ Integrações customizadas"
+
+#: .\website_app\templates\website_app\price3boxes.html:82
+#: .\website_app\templates\website_app\price3boxesHide.html:82
+msgid "✓ SLA & security reviews"
+msgstr "✓ Revicões de segurança"
+
+#: .\website_app\templates\website_app\price3boxes.html:87
+#: .\website_app\templates\website_app\price3boxesHide.html:87
 msgid "Contact Sales"
 msgstr "Entre em contato com vendas"
+
+#: .\website_app\views.py:10
+msgid "Architecture is about design, not endless whatsApps and emails."
+msgstr "Arquitetura é sobre design, não sobre emails e whatsApps sem fim."
 
 #~ msgid "Request for Quotation App"
 #~ msgstr "Peça sua cotação"
