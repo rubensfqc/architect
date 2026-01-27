@@ -52,10 +52,10 @@ class Operator(models.Model):
 class Contract(models.Model):
     # Each contract belongs to ONE architect, only signed contracts before that they are quotes
     class Phases(models.TextChoices):
-        ESTUDO = 'EST', _('Estudo')
-        ANTEPROJETO = 'ANT', _('Anteprojeto')
-        EXECUTIVO = 'EXE', _('Executivo')
-        FINALIZADO = 'FIN', _('Finalizado')
+        ESTUDO = 'EST', _('Schematic design') # Estudo preliminar
+        ANTEPROJETO = 'ANT', _('Design development') # Anteprojeto
+        EXECUTIVO = 'EXE', _('Construction documents') # Executivo
+        FINALIZADO = 'FIN', _('Closure') # Finalizado
 
     architect = models.ForeignKey('Architect', on_delete=models.CASCADE, related_name="contracts")
     client = models.ForeignKey('ClientProfile', on_delete=models.CASCADE, related_name='contracts')

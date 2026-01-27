@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-27 00:56+0100\n"
+"POT-Creation-Date: 2026-01-27 17:45+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -19,19 +19,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: .\architect_app\models.py:55
-msgid "Estudo"
+msgid "Schematic design"
 msgstr ""
 
 #: .\architect_app\models.py:56
-msgid "Anteprojeto"
+msgid "Design development"
 msgstr ""
 
 #: .\architect_app\models.py:57
-msgid "Executivo"
+msgid "Construction documents"
 msgstr ""
 
 #: .\architect_app\models.py:58
-msgid "Finalizado"
+msgid "Closure"
 msgstr ""
 
 #: .\architect_app\models.py:75
@@ -108,6 +108,11 @@ msgstr "Logout (sair)"
 msgid "powered by"
 msgstr "powered by"
 
+#: .\architect_app\views.py:364
+#, python-format
+msgid "Invitation to join %(firm)s Portal"
+msgstr ""
+
 #: .\email_app\forms.py:10 .\quotation_app\forms.py:12
 #: .\quotation_app\templates\quotation_app\dashboardArq.html:19
 #: .\seller_app\models.py:19 .\seller_app\seller_app.models.py:19
@@ -160,7 +165,7 @@ msgid ""
 "Best regards,\n"
 "My Team"
 msgstr ""
-"Olá {name},\n"
+"Oi {name},\n"
 "\n"
 "Obrigado por entrar em contato. Retornaremos em breve.\n"
 "\n"
@@ -697,17 +702,43 @@ msgstr "Voltar ao portal"
 msgid "Click below to customize your template:"
 msgstr "Clique abaixo para customizar seu modelo de cotação:"
 
+#: .\templates\registration\invite_email.html:3
+msgid "Hi %(name)s,"
+msgstr "Oi %(name)s"
+
+#: .\templates\registration\invite_email.html:5
+msgid ""
+"\n"
+"Architect %(firm)s has invited you to join their project portal.\n"
+msgstr ""
+"\n"
+"O arquiteto %(firm)s lhe convidou para acessar seu portal de projetos.\n"
+
+
+#: .\templates\registration\invite_email.html:9
+msgid ""
+"To access your projects, please click the link below to set your account "
+"password:"
+msgstr ""
+"Para ver seus projetos, por favor clique no link abaixo para acessar sua conta "
+"senha:"
+
+#: .\templates\registration\invite_email.html:13
+msgid ""
+"If you did not expect this invitation, you can safely ignore this email."
+msgstr ""
+"Caso não esteja esperando este convite, basta ignorar este email."
+
 #: .\templates\registration\login.html:5
 msgid "Login Seller"
 msgstr "Login (entrar)"
 
 #: .\templates\registration\login.html:13
 msgid "Hi"
-msgstr "Olá"
+msgstr "Oi"
 
 #: .\templates\registration\login.html:14
-msgid ""
-"You are already logged in. Press the button below in case you want to logout."
+msgid "You are already logged in. Press the button below in case you want to logout."
 msgstr "Você já está logado no app. Aperte o botão abaixo para fazer logout."
 
 #: .\templates\registration\login.html:20
@@ -820,21 +851,21 @@ msgstr ""
 msgid "Send Reset Link"
 msgstr "Enviar link de reset de senha"
 
-#: .\website_app\templates\website_app\base.html:92
+#: .\website_app\templates\website_app\base.html:94
 msgid "Features"
 msgstr "Funcionalidades"
 
-#: .\website_app\templates\website_app\base.html:93
+#: .\website_app\templates\website_app\base.html:95
 msgid "Pricing"
 msgstr "Preço"
 
-#: .\website_app\templates\website_app\base.html:94
+#: .\website_app\templates\website_app\base.html:96
 #, fuzzy
 #| msgid "Log In page"
 msgid "Login"
 msgstr "página de Login"
 
-#: .\website_app\templates\website_app\base.html:101
+#: .\website_app\templates\website_app\base.html:103
 #, python-format
 msgid ""
 "\n"
@@ -994,6 +1025,6 @@ msgstr "✓ Revicões de segurança"
 msgid "Contact Sales"
 msgstr "Entre em contato com vendas"
 
-#: .\website_app\views.py:10
+#: .\website_app\views.py:11
 msgid "Architecture is about design, not endless whatsApps and emails."
 msgstr "Arquitetura é sobre design, não sobre emails e whatsApps sem fim."

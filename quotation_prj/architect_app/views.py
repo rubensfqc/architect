@@ -12,6 +12,7 @@ from django.core.mail import send_mail
 from django.core.exceptions import PermissionDenied
 from django.views.generic import DetailView, UpdateView, CreateView, DeleteView
 from django.urls import reverse_lazy
+from django.utils.translation import gettext as _
 
 
 def signup_view(request):
@@ -360,7 +361,7 @@ def client_invite(request):
                 'architect': architect,
             }
 
-            subject = f"Invitation to join {architect.firm_name} Portal"
+            subject = _("Invitation to join %(firm)s Portal") % {'firm': architect.firm_name}
             # Make sure this template exists in templates/registration/invite_email.html
             body = render_to_string('registration/invite_email.html', context)
 
@@ -372,8 +373,6 @@ def client_invite(request):
                 [user.email],
                 fail_silently=False,
             )
-            
-            print(f"DEBUG: Manual invitation email sent to {user.email}")
 
         return redirect('architects_clients')
     

@@ -233,3 +233,5 @@ STORAGES = {
         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
+
+DEFAULT_CHARSET = 'utf-8'
