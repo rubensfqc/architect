@@ -85,8 +85,10 @@
 
 <body>
 <header>
-    <a href="{% url 'home' %}" class="logo-link">
-        <strong>{{ company_name|default:"wiserarch" }}</strong>
+<a href="{% url 'home' %}" class="logo-link" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit;">
+        <div style="width: 192px; height: 32px; display: flex; align-items: center; justify-content: center;">
+            {% include "website_app/logo.svg" %}
+        </div>
     </a>
     <nav>
         <a href="{% url 'pages' %}">{% trans "Features" %}</a>
