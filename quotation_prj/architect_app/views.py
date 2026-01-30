@@ -235,13 +235,18 @@ def contract_upsert(request, pk=None):
 
     if request.method == 'POST':
         form = ContractForm(request.POST, instance=contract)
+        # Re-apply the filter on POST to prevent cross-architect ID manipulation
+        form.fields['client'].queryset = ClientProfile.objects.filter(architect=architect) 
+        
         if form.is_valid():
             new_contract = form.save(commit=False)
-            new_contract.architect = architect  # Link to current architect
+            new_contract.architect = architect  # Explicitly link to current architect
             new_contract.save()
             return redirect('architects_contracts')
     else:
         form = ContractForm(instance=contract)
+        # Filter the dropdown to only show clients belonging to this architect
+        form.fields['client'].queryset = ClientProfile.objects.filter(architect=architect)
     
     return render(request, 'architect_app/contract_form.html', {'form': form, 'contract': contract})
 
