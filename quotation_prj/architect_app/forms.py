@@ -1,6 +1,6 @@
 # forms.py
 from django import forms
-from .models import Contract, Project
+from .models import Contract, Project, ClientProfile
 from django.contrib.auth.forms import UserCreationForm
 from seller_app.models import Seller
 
@@ -62,3 +62,31 @@ class ProjectForm(forms.ModelForm):
             'architect_comments': forms.Textarea(attrs={'rows': 3, 'placeholder': 'Max 280 chars'}),
             'contract': forms.Select(attrs={'class': 'form-control'}),
         }
+
+
+class ClientEditForm(forms.ModelForm):
+    # We can bring in fields from the User/Seller model directly into this form
+    first_name = forms.CharField(max_length=150, required=False)
+    last_name = forms.CharField(max_length=150, required=False)
+
+    class Meta:
+        model = ClientProfile
+        fields = ['company_name', 'phone_number']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Pre-populate first/last name from the user object
+        if self.instance and self.instance.user:
+            self.fields['first_name'].initial = self.instance.user.first_name
+            self.fields['last_name'].initial = self.instance.user.last_name
+
+    def save(self, commit=True):
+        profile = super().save(commit=False)
+        # Update the linked user object
+        user = profile.user
+        user.first_name = self.cleaned_data['first_name']
+        user.last_name = self.cleaned_data['last_name']
+        if commit:
+            user.save()
+            profile.save()
+        return profile

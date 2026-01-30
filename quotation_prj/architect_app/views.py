@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Sum
 from django.db import transaction
 from .models import Architect, Contract, Project, ClientProfile
-from .forms import ContractForm, SellerSignUpForm, ClientSignUpForm, ProjectForm
+from .forms import ContractForm, SellerSignUpForm, ClientSignUpForm, ProjectForm, ClientEditForm
 from django.core.mail import send_mail
 from django.core.exceptions import PermissionDenied
 from django.views.generic import DetailView, UpdateView, CreateView, DeleteView
@@ -377,3 +377,24 @@ def client_invite(request):
         return redirect('architects_clients')
     
     return render(request, 'architect_app/client_invite_form.html')
+
+
+@login_required
+@role_required(allowed_roles=['ARCHITECT'])
+def client_edit(request, pk):
+    # Ensure the architect can only edit THEIR clients
+    architect = get_object_or_404(Architect, user=request.user)
+    client_profile = get_object_or_404(ClientProfile, pk=pk, architect=architect)
+
+    if request.method == 'POST':
+        form = ClientEditForm(request.POST, instance=client_profile)
+        if form.is_valid():
+            form.save()
+            return redirect('architects_clients')
+    else:
+        form = ClientEditForm(instance=client_profile)
+
+    return render(request, 'architect_app/client_form.html', {
+        'form': form,
+        'client': client_profile
+    })

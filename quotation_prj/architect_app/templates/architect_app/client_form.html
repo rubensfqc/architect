@@ -1,0 +1,81 @@
+{% extends "architect_app/baseArchitect.html" %}
+{% block title %}My Clients{% endblock %}
+
+{% block content %}
+
+<div class="max-w-4xl mx-auto py-8 px-4">
+    <div class="mb-6">
+        <a href="{% url 'architects_clients' %}" class="text-sm text-indigo-600 hover:text-indigo-800 flex items-center gap-1">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="15 19l-7-7 7-7"></path></svg>
+            Back to Client List
+        </a>
+    </div>
+
+    <div class="bg-white shadow-sm border border-gray-200 rounded-xl overflow-hidden">
+        <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
+            <h3 class="text-lg font-semibold text-gray-900">
+                {% if client %}Edit Client: {{ client.user.get_full_name }}{% else %}New Client{% endif %}
+            </h3>
+            <p class="text-sm text-gray-500">Update the profile information and contact details for this client.</p>
+        </div>
+
+        <form method="post" class="p-6 space-y-6">
+            {% csrf_token %}
+
+            {% if form.non_field_errors %}
+            <div class="p-4 mb-4 text-sm text-red-700 bg-red-100 rounded-lg">
+                {{ form.non_field_errors }}
+            </div>
+            {% endif %}
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+                    <input type="text" name="first_name" value="{{ form.first_name.value|default:'' }}" 
+                           class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    {% if form.first_name.errors %}<p class="mt-1 text-xs text-red-600">{{ form.first_name.errors.0 }}</p>{% endif %}
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+                    <input type="text" name="last_name" value="{{ form.last_name.value|default:'' }}" 
+                           class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    {% if form.last_name.errors %}<p class="mt-1 text-xs text-red-600">{{ form.last_name.errors.0 }}</p>{% endif %}
+                </div>
+
+                <div class="md:col-span-2">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Company Name</label>
+                    <input type="text" name="company_name" value="{{ form.company_name.value|default:'' }}" 
+                           class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    {% if form.company_name.errors %}<p class="mt-1 text-xs text-red-600">{{ form.company_name.errors.0 }}</p>{% endif %}
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-1">Contact Email (Linked Account)</label>
+                    <input type="email" value="{{ client.user.email }}" disabled 
+                           class="w-full rounded-md border-gray-200 bg-gray-50 text-gray-500 sm:text-sm cursor-not-allowed">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                    <input type="text" name="phone_number" value="{{ form.phone_number.value|default:'' }}" 
+                           class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    {% if form.phone_number.errors %}<p class="mt-1 text-xs text-red-600">{{ form.phone_number.errors.0 }}</p>{% endif %}
+                </div>
+            </div>
+
+            <div class="pt-6 border-t border-gray-200 flex items-center justify-end gap-3">
+                <a href="{% url 'architects_clients' %}" 
+                   class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Cancel
+                </a>
+                <button type="submit" 
+                        class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Save Changes
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock content %}

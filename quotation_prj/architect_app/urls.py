@@ -5,6 +5,7 @@ urlpatterns = [
     path('dashboard/', views.architect_dashboard, name='architects_dashboard'),
     path('projects/', views.project_list, name='architects_projects'),
     path('clients/', views.client_list, name='architects_clients'),
+    path('clients/<int:pk>/edit/', views.client_edit, name='client_edit'),
     path('contracts/', views.contract_list, name='architects_contracts'),
     #path('client/dashboard/', views.client_dashboard, name='client_dashboard'),
     path('contracts/add/', views.contract_upsert, name='contract_add'),
