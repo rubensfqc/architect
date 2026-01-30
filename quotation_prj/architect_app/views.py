@@ -407,3 +407,25 @@ def client_edit(request, pk):
         'form': form,
         'client': client_profile
     })
+
+@login_required
+@role_required(allowed_roles=['ARCHITECT'])
+def client_delete(request, pk):
+    # Ensure the architect can only delete THEIR clients
+    architect = get_object_or_404(Architect, user=request.user)
+    client_profile = get_object_or_404(ClientProfile, pk=pk, architect=architect)
+    
+    if request.method == 'POST':
+        # This will cascade and delete related Contracts and Projects
+        # It will NOT delete the actual User object unless you explicitly do so
+        user = client_profile.user
+        client_profile.delete()
+        # Optional: delete the user account as well if they shouldn't exist without a profile
+        # user.delete() 
+        
+        messages.success(request, "Client and all associated data deleted successfully.")
+        return redirect('architects_clients')
+    
+    return render(request, 'architect_app/client_confirm_delete.html', {
+        'client': client_profile
+    })
