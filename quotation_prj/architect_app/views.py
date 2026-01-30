@@ -336,6 +336,16 @@ def client_invite(request):
     if request.method == 'POST':
         email = request.POST.get('email')
         first_name = request.POST.get('first_name')
+
+        # Check if a user with this email already exists
+        existing_user = User.objects.filter(email=email).first()
+        
+        if existing_user:
+            # Check if this user is already registered as a client (with any architect)
+            if ClientProfile.objects.filter(user=existing_user).exists():
+                messages.error(request, "Client with this email already exists." \
+                " If you want to link this client to your architect account, please contact support on wiserarch@gmail.co.")
+                return redirect('architects_clients')
         
         with transaction.atomic():
             # 1. Get or Create the User
@@ -429,3 +439,37 @@ def client_delete(request, pk):
     return render(request, 'architect_app/client_confirm_delete.html', {
         'client': client_profile
     })
+
+@login_required
+@role_required(allowed_roles=['ARCHITECT'])
+def client_reinvite(request, pk):
+    architect = get_object_or_404(Architect, user=request.user)
+    # Ensure this client belongs to the requesting architect
+    client_profile = get_object_or_404(ClientProfile, pk=pk, architect=architect)
+    user = client_profile.user
+
+    # MANUAL EMAIL LOGIC (Consistent with your client_invite logic)
+    context = {
+        'email': user.email,
+        'domain': request.get_host(),
+        'site_name': 'Architect Portal',
+        'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+        'user': user,
+        'token': default_token_generator.make_token(user),
+        'protocol': 'https' if request.is_secure() else 'http',
+        'architect': architect,
+    }
+
+    subject = _("Re-invitation to join %(firm)s Portal") % {'firm': architect.firm_name}
+    body = render_to_string('registration/invite_email.html', context)
+
+    send_mail(
+        subject,
+        body,
+        'noreply@yourdomain.com',
+        [user.email],
+        fail_silently=False,
+    )
+
+    messages.success(request, f'Re-invitation sent successfully to {user.email}.')
+    return redirect('architects_clients')
