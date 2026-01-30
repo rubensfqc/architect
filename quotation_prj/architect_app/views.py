@@ -13,6 +13,7 @@ from django.core.exceptions import PermissionDenied
 from django.views.generic import DetailView, UpdateView, CreateView, DeleteView
 from django.urls import reverse_lazy
 from django.utils.translation import gettext as _
+from django.contrib import messages
 
 
 def signup_view(request):
@@ -373,6 +374,9 @@ def client_invite(request):
                 [user.email],
                 fail_silently=False,
             )
+
+            # Add the success message here
+            messages.success(request, f'Success! An invitation email has been sent to {email}.')
 
         return redirect('architects_clients')
     
