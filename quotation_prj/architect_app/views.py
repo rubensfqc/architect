@@ -7,7 +7,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.db.models import Sum
 from django.db import transaction
 from .models import Architect, Contract, Project, ClientProfile
-from .forms import ContractForm, SellerSignUpForm, ClientSignUpForm, ProjectForm, ClientEditForm
+from .forms import ArchitectUnifiedSettingsForm, ContractForm, SellerSignUpForm, ClientSignUpForm, ProjectForm, ClientEditForm, ArchitectSettingsForm
 from django.core.mail import send_mail
 from django.core.exceptions import PermissionDenied
 from django.views.generic import DetailView, UpdateView, CreateView, DeleteView
@@ -473,3 +473,19 @@ def client_reinvite(request, pk):
 
     messages.success(request, f'Re-invitation sent successfully to {user.email}.')
     return redirect('architects_clients')
+
+@login_required
+@role_required(allowed_roles=['ARCHITECT'])
+def architect_settings(request):
+    architect = get_object_or_404(Architect, user=request.user)
+    
+    if request.method == 'POST':
+        form = ArchitectUnifiedSettingsForm(request.POST, request.FILES, instance=architect)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "All settings updated successfully.")
+            return redirect('architect_settings')
+    else:
+        form = ArchitectUnifiedSettingsForm(instance=architect)
+        
+    return render(request, 'architect_app/architect_settings.html', {'form': form, 'architect': architect})

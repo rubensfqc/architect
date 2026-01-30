@@ -21,6 +21,8 @@ urlpatterns = [
 
     path('clients/invite/', views.client_invite, name='client_invite'),
 
+    path('settings/', views.architect_settings, name='architect_settings'),
+
     # The "Traffic Controller" - where users go right after login
     path('dashboard3roles/', views.dashboard_redirect, name='dashboard_redirect'),
 
