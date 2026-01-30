@@ -1,36 +1,179 @@
 {% extends "architect_app/baseArchitect.html" %}
-{% block title %}My Clients{% endblock %}
+{% block title %}Architect Settings{% endblock %}
 
 {% block content %}
 
-<form method="post" enctype="multipart/form-data" class="max-w-5xl mx-auto space-y-6">
-    {% csrf_token %}
-    
-    <div class="bg-white p-6 rounded-xl border shadow-sm">
-        <h3 class="text-lg font-bold mb-4">Profile & Firm</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>{{ form.first_name.label_tag }} {{ form.first_name }}</div>
-            <div>{{ form.last_name.label_tag }} {{ form.last_name }}</div>
-            <div class="md:col-span-2">{{ form.firm_name.label_tag }} {{ form.firm_name }}</div>
-            <div>{{ form.license_number.label_tag }} {{ form.license_number }}</div>
-            <div>{{ form.phone_number.label_tag }} {{ form.phone_number }}</div>
-        </div>
+<div class="bg-white shadow-sm border border-gray-200 rounded-xl overflow-hidden">
+    <div class="px-6 py-4 border-b border-gray-200 bg-gray-50">
+        <h3 class="text-lg font-semibold text-gray-900">Architect Settings</h3>
+        <p class="text-sm text-gray-500">
+            Manage your profile, firm details, and additional preferences.
+        </p>
     </div>
 
-    <div class="bg-white p-6 rounded-xl border shadow-sm">
-        <h3 class="text-lg font-bold mb-4">Quotation & Payments</h3>
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div>{{ form.currency.label_tag }} {{ form.currency }}</div>
-            <div>{{ form.base_price.label_tag }} {{ form.base_price }}</div>
-            <div class="md:col-span-2">{{ form.payment_link.label_tag }} {{ form.payment_link }}</div>
-            <div class="md:col-span-2">{{ form.pix_key.label_tag }} {{ form.pix_key }}</div>
-        </div>
-    </div>
+    <form method="post" enctype="multipart/form-data" class="p-6 space-y-8">
+        {% csrf_token %}
 
-    <div class="flex justify-end">
-        <button type="submit" class="bg-indigo-600 text-white px-6 py-2 rounded-lg hover:bg-indigo-700 transition">
-            Save All Changes
-        </button>
-    </div>
+        {% if form.non_field_errors %}
+        <div class="p-4 text-sm text-red-700 bg-red-100 rounded-lg">
+            {{ form.non_field_errors }}
+        </div>
+        {% endif %}
+
+        <!-- ================= USER / SELLER ================= -->
+        <div>
+            <h4 class="text-md font-semibold text-gray-800 mb-4">Personal Information</h4>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                    <input type="text" name="name"
+                           value="{{ form.name.value|default:'' }}"
+                           class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    {% if form.name.errors %}
+                        <p class="mt-1 text-xs text-red-600">{{ form.name.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Phone Number</label>
+                    <input type="text" name="phone_number"
+                           value="{{ form.phone_number.value|default:'' }}"
+                           class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    {% if form.phone_number.errors %}
+                        <p class="mt-1 text-xs text-red-600">{{ form.phone_number.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-400 mb-1">Account Email</label>
+                    <input type="email" value="{{ request.user.email }}" disabled
+                           class="w-full rounded-md border-gray-200 bg-gray-50 text-gray-500 sm:text-sm cursor-not-allowed">
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= ARCHITECT ================= -->
+        <div>
+            <h4 class="text-md font-semibold text-gray-800 mb-4">Firm Details</h4>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="md:col-span-2">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Firm Name</label>
+                    <input type="text" name="firm_name"
+                           value="{{ form.firm_name.value|default:'' }}"
+                           class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    {% if form.firm_name.errors %}
+                        <p class="mt-1 text-xs text-red-600">{{ form.firm_name.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">License Number</label>
+                    <input type="text" name="license_number"
+                           value="{{ form.license_number.value|default:'' }}"
+                           class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                    {% if form.license_number.errors %}
+                        <p class="mt-1 text-xs text-red-600">{{ form.license_number.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Logo</label>
+                    <input type="file" name="logo"
+                           class="block w-full text-sm text-gray-600
+                                  file:mr-4 file:py-2 file:px-4
+                                  file:rounded-md file:border-0
+                                  file:text-sm file:font-medium
+                                  file:bg-indigo-50 file:text-indigo-700
+                                  hover:file:bg-indigo-100">
+                    {% if form.logo.errors %}
+                        <p class="mt-1 text-xs text-red-600">{{ form.logo.errors.0 }}</p>
+                    {% endif %}
+
+                    {% if form.instance.logo %}
+                        <p class="mt-2 text-xs text-gray-500">
+                            Current logo:
+                            <a href="{{ form.instance.logo.url }}" target="_blank"
+                               class="text-indigo-600 hover:underline">
+                                View
+                            </a>
+                        </p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= additional SETTINGS ================= -->
+        <div>
+            <h4 class="text-md font-semibold text-gray-800 mb-4">additional Settings</h4>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Currency</label>
+                    <select name="currency"
+                            class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                        {% for value, label in form.currency.field.choices %}
+                            <option value="{{ value }}"
+                                {% if form.currency.value == value %}selected{% endif %}>
+                                {{ label }}
+                            </option>
+                        {% endfor %}
+                    </select>
+                    {% if form.currency.errors %}
+                        <p class="mt-1 text-xs text-red-600">{{ form.currency.errors.0 }}</p>
+                    {% endif %}
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Payment Link</label>
+                    <input type="url" name="payment_link"
+                           value="{{ form.payment_link.value|default:'' }}"
+                           class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">PIX Key</label>
+                    <input type="text" name="pix_key"
+                           value="{{ form.pix_key.value|default:'' }}"
+                           class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Customer Redirect URL</label>
+                    <input type="url" name="redirect_url"
+                           value="{{ form.redirect_url.value|default:'' }}"
+                           class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                </div>
+
+                <div class="md:col-span-2">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Product Catalog URL</label>
+                    <input type="url" name="product_catalog_url"
+                           value="{{ form.product_catalog_url.value|default:'' }}"
+                           class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">
+                </div>
+
+                <div class="md:col-span-2">
+                    <label class="block text-sm font-medium text-gray-700 mb-1">Custom Message</label>
+                    <textarea name="custom_message" rows="3"
+                              class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm">{{ form.custom_message.value|default:'' }}</textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= ACTIONS ================= -->
+        <div class="pt-6 border-t border-gray-200 flex justify-end gap-3">
+            <a href="{% url 'architect_dashboard' %}"
+               class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50">
+                Cancel
+            </a>
+            <button type="submit"
+                    class="px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded-md hover:bg-indigo-700">
+                Save Changes
+            </button>
+        </div>
+
+    </form>
+</div>
 
 {% endblock %}
