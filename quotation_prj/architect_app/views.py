@@ -462,7 +462,7 @@ def client_reinvite(request, pk):
 
     subject = _("Re-invitation to join %(firm)s Portal") % {'firm': architect.firm_name}
     body = render_to_string('registration/invite_email.html', context)
-
+    
     send_mail(
         subject,
         body,

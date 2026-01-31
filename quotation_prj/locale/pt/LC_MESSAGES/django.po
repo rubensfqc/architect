@@ -995,7 +995,7 @@ msgid ""
 "Architect %(firm)s has invited you to join their project portal.\n"
 msgstr ""
 "\n"
-"O escritório %(firm)s lhe convidou para acessar seu portal de projetos.\n"
+"%(firm)s lhe convidou para acessar seu portal de projetos.\n"
 
 #: .\templates\registration\invite_email.html:9
 msgid ""
@@ -1008,7 +1008,7 @@ msgstr ""
 #: .\templates\registration\invite_email.html:13
 msgid ""
 "If you did not expect this invitation, you can safely ignore this email."
-msgstr "Caso não esteja esperando este convite, basta ignorar este email."
+msgstr "Caso este convite seja inesperado, basta ignorar este email."
 
 #: .\templates\registration\login.html:5
 msgid "Login Seller"
