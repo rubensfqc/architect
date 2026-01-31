@@ -1,11 +1,15 @@
 {% extends "architect_app/baseArchitect.html" %}
-{% block title %}My Clients{% endblock %}
+
+{% load i18n %}
+
+
+{% block title %}{% trans "My Clients" %}{% endblock %}
 
 {% block content %}
 <div class="flex justify-between items-center mb-6">
-    <h1 class="text-2xl font-semibold">Clients</h1>
+    <h1 class="text-2xl font-semibold">{% trans "My Clients" %}</h1>
     <a href="{% url 'client_invite' %}" class="bg-blue-600 text-white px-4 py-2 rounded-lg">
-        + Invite New Client
+        + {% trans "Invite New Client" %}
     </a>
 </div>
 
@@ -13,11 +17,11 @@
     <table class="min-w-full divide-y divide-gray-200 bg-white">
         <thead class="bg-gray-50">
             <tr>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Client Name</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Company</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Contact Email</th>
-                <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">Phone</th>
-                <th scope="col" class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">Actions</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">{% trans "Client Name" %}</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">{% trans "Company" %}</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">{% trans "Contact Email" %}</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">{% trans "Phone" %}</th>
+                <th scope="col" class="px-6 py-3 text-right text-xs font-semibold text-gray-500 uppercase tracking-wider">{% trans "Actions" %}</th>
             </tr>
         </thead>
         <tbody class="divide-y divide-gray-200">
@@ -51,14 +55,14 @@
                 <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                     <a href="{% url 'client_edit' client.pk %}" 
                        class="inline-flex items-center px-3 py-1.5 border border-transparent text-xs font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">
-                        Edit Client
+                        {% trans "Edit Client" %}
                     </a>
                 </td>
             </tr>
             {% empty %}
             <tr>
                 <td colspan="5" class="px-6 py-10 text-center text-sm text-gray-500">
-                    No clients assigned yet.
+                    {% trans "No clients assigned yet." %}
                 </td>
             </tr>
             {% endfor %}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-27 17:45+0100\n"
+"POT-Creation-Date: 2026-01-31 06:42+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -58,6 +58,133 @@ msgstr "Feedback do cliente (max 280 caracteres)"
 msgid "Architect's short response (max 280 characters)"
 msgstr "Resposta do arquiteto (max 280 caracteres)"
 
+#: .\architect_app\templates\architect_app\archClients.html:6
+#: .\architect_app\templates\architect_app\archClients.html:10
+msgid "My Clients"
+msgstr "Meus Clientes"
+
+#: .\architect_app\templates\architect_app\archClients.html:12
+msgid "Invite New Client"
+msgstr "Convide novo cliente"
+
+#: .\architect_app\templates\architect_app\archClients.html:20
+msgid "Client Name"
+msgstr "Nome do Cliente"
+
+#: .\architect_app\templates\architect_app\archClients.html:21
+msgid "Company"
+msgstr "Empresa"
+
+#: .\architect_app\templates\architect_app\archClients.html:22
+msgid "Contact Email"
+msgstr "Email de contato"
+
+#: .\architect_app\templates\architect_app\archClients.html:23
+msgid "Phone"
+msgstr "Celular"
+
+#: .\architect_app\templates\architect_app\archClients.html:24
+msgid "Actions"
+msgstr "Ações"
+
+#: .\architect_app\templates\architect_app\archClients.html:58
+msgid "Edit Client"
+msgstr "Editar Cliente"
+
+#: .\architect_app\templates\architect_app\archClients.html:65
+msgid "No clients assigned yet."
+msgstr "Nenhum cliente associado."
+
+#: .\architect_app\templates\architect_app\architect_settings.html:11
+msgid "Architect Settings"
+msgstr "Configurações do arquiteto"
+
+#: .\architect_app\templates\architect_app\architect_settings.html:13
+msgid "Manage your profile, firm details, and additional preferences."
+msgstr "Gerencie seu perfil, o do seu escritório e preferências adicionais."
+
+#: .\architect_app\templates\architect_app\architect_settings.html:28
+msgid "Personal Information"
+msgstr "Informação pessoal"
+
+#: .\architect_app\templates\architect_app\architect_settings.html:32
+#: .\email_app\forms.py:10 .\quotation_app\forms.py:12
+#: .\quotation_app\templates\quotation_app\dashboardArq.html:19
+#: .\seller_app\models.py:19 .\seller_app\seller_app.models.py:19
+#: .\seller_app\templates\seller_app\add_product.html:13
+#: .\seller_app\templates\seller_app\edit_product.html:13
+#: .\seller_app\templates\seller_app\seller_clients.html:25
+#: .\seller_app\templates\seller_app\update_seller.html:71
+msgid "Name"
+msgstr "Nome"
+
+#: .\architect_app\templates\architect_app\architect_settings.html:42
+#: .\seller_app\forms.py:14 .\seller_app\forms.py:41 .\seller_app\models.py:20
+#: .\seller_app\seller_app.models.py:20
+#: .\seller_app\templates\seller_app\update_seller.html:76
+msgid "Phone Number"
+msgstr "Número de Celular"
+
+#: .\architect_app\templates\architect_app\architect_settings.html:52
+msgid "Account Email"
+msgstr "Email da sua conta"
+
+#: .\architect_app\templates\architect_app\architect_settings.html:61
+msgid "Firm Details"
+msgstr "Detalhes escritório"
+
+#: .\architect_app\templates\architect_app\architect_settings.html:64
+msgid "Firm Name"
+msgstr "Nome do escritório"
+
+#: .\architect_app\templates\architect_app\architect_settings.html:74
+msgid "License Number"
+msgstr "Registro no CAU"
+
+#: .\architect_app\templates\architect_app\architect_settings.html:111
+msgid "additional Settings"
+msgstr "ConfiguraçOes adicionais"
+
+#: .\architect_app\templates\architect_app\architect_settings.html:115
+#: .\seller_app\forms.py:52
+msgid "Currency"
+msgstr "Moeda"
+
+#: .\architect_app\templates\architect_app\architect_settings.html:131
+#: .\seller_app\forms.py:53
+msgid "Payment Link"
+msgstr "Link para pagamento"
+
+#: .\architect_app\templates\architect_app\architect_settings.html:138
+#: .\seller_app\forms.py:54 .\seller_app\models.py:82
+#: .\seller_app\seller_app.models.py:82
+msgid "PIX Key"
+msgstr "Chave PIX"
+
+#: .\architect_app\templates\architect_app\architect_settings.html:145
+msgid "Customer Redirect URL"
+msgstr "Link de redirecionamento pro cliente"
+
+#: .\architect_app\templates\architect_app\architect_settings.html:152
+#: .\seller_app\forms.py:56
+msgid "Product Catalog URL"
+msgstr "Link para o catálogo de produtos"
+
+#: .\architect_app\templates\architect_app\architect_settings.html:159
+#: .\seller_app\forms.py:58
+msgid "Custom Message"
+msgstr "Mensagem customizada"
+
+#: .\architect_app\templates\architect_app\architect_settings.html:170
+#: .\seller_app\templates\seller_app\add_product.html:25
+#: .\seller_app\templates\seller_app\edit_product.html:25
+msgid "Cancel"
+msgstr "Cancelar"
+
+#: .\architect_app\templates\architect_app\architect_settings.html:174
+msgid "Save Changes"
+msgstr "Salvar alterações"
+
 #: .\architect_app\templates\architect_app\baseArchitect.html:45
 #: .\quotation_app\templates\quotation_app\base.html:36
 #: .\quotation_app\templates\quotation_app\base2.html:28
@@ -84,44 +211,50 @@ msgid "Clients"
 msgstr "Clientes"
 
 #: .\architect_app\templates\architect_app\baseArchitect.html:54
-#, fuzzy
-#| msgid "Contact Us"
 msgid "Contracts"
-msgstr "Entre em contato"
+msgstr "Contratos"
 
-#: .\architect_app\templates\architect_app\baseArchitect.html:58
-#, fuzzy
-#| msgid "Save Settings"
+#: .\architect_app\templates\architect_app\baseArchitect.html:57
 msgid "Settings"
-msgstr "Salvar configurações"
+msgstr "Configurações"
 
-#: .\architect_app\templates\architect_app\baseArchitect.html:70
-#: .\architect_app\templates\architect_app\baseClient.html:56
+#: .\architect_app\templates\architect_app\baseArchitect.html:69
+#: .\architect_app\templates\architect_app\baseClient.html:60
 #: .\templates\registration\login.html:18
 msgid "Logout"
 msgstr "Logout (sair)"
 
-#: .\architect_app\templates\architect_app\baseArchitect.html:76
-#: .\architect_app\templates\architect_app\baseClient.html:89
+#: .\architect_app\templates\architect_app\baseArchitect.html:75
+#: .\architect_app\templates\architect_app\baseClient.html:93
 #: .\quotation_app\templates\quotation_app\base.html:74
 #: .\quotation_app\templates\quotation_app\base_auth.html:62
 msgid "powered by"
 msgstr "powered by"
 
-#: .\architect_app\views.py:364
+#: .\architect_app\templates\architect_app\baseClient.html:22
+#, python-format
+msgid ""
+"\n"
+"        Client Portal | %(firm)s\n"
+"        "
+msgstr ""
+"\n"
+"        Portal do Cliente | %(firm)s\n"
+"        "
+
+#: .\architect_app\templates\architect_app\base_auth.html:7
+msgid "My App"
+msgstr "Meu App"
+
+#: .\architect_app\views.py:380
 #, python-format
 msgid "Invitation to join %(firm)s Portal"
-msgstr ""
+msgstr "Convite para accessar o Portal de Arquitetura - %(firm)s"
 
-#: .\email_app\forms.py:10 .\quotation_app\forms.py:12
-#: .\quotation_app\templates\quotation_app\dashboardArq.html:19
-#: .\seller_app\models.py:19 .\seller_app\seller_app.models.py:19
-#: .\seller_app\templates\seller_app\add_product.html:13
-#: .\seller_app\templates\seller_app\edit_product.html:13
-#: .\seller_app\templates\seller_app\seller_clients.html:25
-#: .\seller_app\templates\seller_app\update_seller.html:71
-msgid "Name"
-msgstr "Nome"
+#: .\architect_app\views.py:463
+#, python-format
+msgid "Re-invitation to join %(firm)s Portal"
+msgstr "Re-envio do convite para o Portal de Arquitetura - %(firm)s"
 
 #: .\email_app\forms.py:11 .\quotation_app\forms.py:13 .\seller_app\forms.py:13
 #: .\seller_app\forms.py:39 .\seller_app\models.py:18
@@ -153,7 +286,7 @@ msgstr "Sua mensagem foi enviada com sucesso."
 
 #: .\email_app\views.py:15
 msgid "Thank you for contacting us!"
-msgstr "Obrigado por entrar em contato conosco"
+msgstr "Obrigado por entrar em contato conosco!"
 
 #: .\email_app\views.py:17
 #, python-brace-format
@@ -177,12 +310,10 @@ msgid "WhatsApp"
 msgstr "WhatsApp"
 
 #: .\quotation_app\forms.py:22
-#, fuzzy
-#| msgid "Enter a valid Brazilian phone number (e.g., 11 91234-5678)"
 msgid ""
 "Enter a valid Brazilian or European phone number (e.g., BR 11 91234-5678 or "
 "EU 0612345678)"
-msgstr "Digite um numero de telefone válido  (ex., 11 91234-5678)"
+msgstr "Digite um numero de telefone válido no Brasil (ex., 11 91234-5678)"
 
 #: .\quotation_app\forms.py:31 .\quotation_app\views.py:171
 #: .\seller_app\forms.py:24
@@ -229,7 +360,7 @@ msgstr "Adicione novo produto"
 
 #: .\quotation_app\templates\quotation_app\base.html:26
 msgid "ArchFlow"
-msgstr ""
+msgstr "archflow"
 
 #: .\quotation_app\templates\quotation_app\base2.html:31
 #: .\quotation_app\templates\quotation_app\baseArchitect.html:31
@@ -259,14 +390,10 @@ msgid "My Leads"
 msgstr "Meus clientes em potencial"
 
 #: .\quotation_app\templates\quotation_app\dashboardArq.html:10
-#, fuzzy
-#| msgid "Leads captured"
 msgid "Leads Captured"
 msgstr "Clientes em potencial capturados"
 
 #: .\quotation_app\templates\quotation_app\dashboardArq.html:11
-#, fuzzy
-#| msgid "Total number of clientes: "
 msgid "Total number of clients: "
 msgstr "Número total de clientes: "
 
@@ -277,8 +404,6 @@ msgid "Date"
 msgstr "Data"
 
 #: .\quotation_app\templates\quotation_app\dashboardArq.html:38
-#, fuzzy
-#| msgid "You still don't have any registred client."
 msgid "You still don't have any registered clients."
 msgstr "Você ainda não possui nenhum cliente registrado."
 
@@ -397,12 +522,6 @@ msgstr "Português"
 msgid "Username"
 msgstr "Nome de usuário"
 
-#: .\seller_app\forms.py:14 .\seller_app\forms.py:41 .\seller_app\models.py:20
-#: .\seller_app\seller_app.models.py:20
-#: .\seller_app\templates\seller_app\update_seller.html:76
-msgid "Phone Number"
-msgstr "Número de Celular"
-
 #: .\seller_app\forms.py:15
 msgid "Password"
 msgstr "Senha"
@@ -432,34 +551,13 @@ msgstr "Perfil de rede social"
 msgid "Address"
 msgstr "Endereço"
 
-#: .\seller_app\forms.py:52
-msgid "Currency"
-msgstr "Moeda"
-
-#: .\seller_app\forms.py:53
-msgid "Payment Link"
-msgstr "Link para pagamento"
-
-#: .\seller_app\forms.py:54 .\seller_app\models.py:82
-#: .\seller_app\seller_app.models.py:82
-msgid "PIX Key"
-msgstr "Chave PIX"
-
 #: .\seller_app\forms.py:55
 msgid "Redirect URL"
 msgstr "Link de redirecionamento"
 
-#: .\seller_app\forms.py:56
-msgid "Product Catalog URL"
-msgstr "Link para o catálogo de produtos"
-
 #: .\seller_app\forms.py:57
 msgid "Base Price"
 msgstr "Preço base (a ser somado ao valor da cotação)"
-
-#: .\seller_app\forms.py:58
-msgid "Custom Message"
-msgstr "Mensagem customizada de rodapé"
 
 #: .\seller_app\models.py:8 .\seller_app\seller_app.models.py:8
 msgid "Architect"
@@ -518,11 +616,6 @@ msgstr "Adicionar produto"
 #: .\seller_app\templates\seller_app\add_product.html:24
 msgid "Save"
 msgstr "Salvar"
-
-#: .\seller_app\templates\seller_app\add_product.html:25
-#: .\seller_app\templates\seller_app\edit_product.html:25
-msgid "Cancel"
-msgstr "Cancelar"
 
 #: .\seller_app\templates\seller_app\confirm_delete.html:6
 #: .\seller_app\templates\seller_app\confirm_delete.html:10
@@ -703,10 +796,12 @@ msgid "Click below to customize your template:"
 msgstr "Clique abaixo para customizar seu modelo de cotação:"
 
 #: .\templates\registration\invite_email.html:3
+#, python-format
 msgid "Hi %(name)s,"
 msgstr "Oi %(name)s"
 
 #: .\templates\registration\invite_email.html:5
+#, python-format
 msgid ""
 "\n"
 "Architect %(firm)s has invited you to join their project portal.\n"
@@ -714,20 +809,18 @@ msgstr ""
 "\n"
 "O arquiteto %(firm)s lhe convidou para acessar seu portal de projetos.\n"
 
-
 #: .\templates\registration\invite_email.html:9
 msgid ""
 "To access your projects, please click the link below to set your account "
 "password:"
 msgstr ""
-"Para ver seus projetos, por favor clique no link abaixo para acessar sua conta "
-"senha:"
+"Para ver seus projetos, por favor clique no link abaixo para acessar sua "
+"conta senha:"
 
 #: .\templates\registration\invite_email.html:13
 msgid ""
 "If you did not expect this invitation, you can safely ignore this email."
-msgstr ""
-"Caso não esteja esperando este convite, basta ignorar este email."
+msgstr "Caso não esteja esperando este convite, basta ignorar este email."
 
 #: .\templates\registration\login.html:5
 msgid "Login Seller"
@@ -738,7 +831,8 @@ msgid "Hi"
 msgstr "Oi"
 
 #: .\templates\registration\login.html:14
-msgid "You are already logged in. Press the button below in case you want to logout."
+msgid ""
+"You are already logged in. Press the button below in case you want to logout."
 msgstr "Você já está logado no app. Aperte o botão abaixo para fazer logout."
 
 #: .\templates\registration\login.html:20
@@ -925,25 +1019,23 @@ msgstr ""
 
 #: .\website_app\templates\website_app\price3boxes.html:26
 #: .\website_app\templates\website_app\price3boxesHide.html:26
-#, fuzzy
-#| msgid "4 months"
-msgid "/month"
+msgid "4 month"
 msgstr "4 meses"
 
 #: .\website_app\templates\website_app\price3boxes.html:30
 #: .\website_app\templates\website_app\price3boxesHide.html:30
 msgid "✓ Up to 10 contracts"
-msgstr ""
+msgstr "✓ Até 10 contratos"
 
 #: .\website_app\templates\website_app\price3boxes.html:31
 #: .\website_app\templates\website_app\price3boxesHide.html:31
 msgid "✓ Basic analytics"
-msgstr ""
+msgstr "✓ Análses Básicas"
 
 #: .\website_app\templates\website_app\price3boxes.html:32
 #: .\website_app\templates\website_app\price3boxesHide.html:32
 msgid "✓ Email support"
-msgstr ""
+msgstr "✓ Suporte por Email"
 
 #: .\website_app\templates\website_app\price3boxes.html:43
 #: .\website_app\templates\website_app\price3boxesHide.html:43
@@ -968,7 +1060,7 @@ msgstr "✓ Projetos ilimitados"
 #: .\website_app\templates\website_app\price3boxes.html:54
 #: .\website_app\templates\website_app\price3boxesHide.html:54
 msgid "✓ Advanced analytics"
-msgstr "✓ Analytics avançados"
+msgstr "✓ Análises Avançadas"
 
 #: .\website_app\templates\website_app\price3boxes.html:55
 #: .\website_app\templates\website_app\price3boxesHide.html:55
@@ -1018,7 +1110,7 @@ msgstr "✓ Integrações customizadas"
 #: .\website_app\templates\website_app\price3boxes.html:82
 #: .\website_app\templates\website_app\price3boxesHide.html:82
 msgid "✓ SLA & security reviews"
-msgstr "✓ Revicões de segurança"
+msgstr "✓ Revisões de segurança"
 
 #: .\website_app\templates\website_app\price3boxes.html:87
 #: .\website_app\templates\website_app\price3boxesHide.html:87
@@ -1028,3 +1120,6 @@ msgstr "Entre em contato com vendas"
 #: .\website_app\views.py:11
 msgid "Architecture is about design, not endless whatsApps and emails."
 msgstr "Arquitetura é sobre design, não sobre emails e whatsApps sem fim."
+
+#~ msgid "/month"
+#~ msgstr "4 meses"

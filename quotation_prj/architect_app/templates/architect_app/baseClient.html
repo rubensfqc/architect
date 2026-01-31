@@ -18,7 +18,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal do Cliente | {{ architect.firm_name }}</title>
+    <title>
+        {% blocktrans with firm=architect.firm_name %}
+        Client Portal | {{ firm }}
+        {% endblocktrans %}
+    </title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>body { font-family: 'Inter', sans-serif; }</style>
@@ -30,7 +34,7 @@
         {% if architect.logo %}
             <img src="{{ architect.logo.url }}" alt="{{ architect.firm_name }}" class="h-10 w-auto object-contain">
         {% else %}
-            <div class="text-xl font-bold tracking-tight">Arch<span class="text-blue-500">FLOW</span></div>
+            <div class="text-xl font-bold tracking-tight">arch<span class="text-blue-500">flow</span></div>
         {% endif %}
         <p class="text-[10px] text-gray-400 leading-tight uppercase tracking-tighter">{{ architect.firm_name }}</p>
     </div>
@@ -88,7 +92,7 @@
                 <p>
                     {% trans "powered by" %} 
                     <a href="http://www.wiserarch.com" style="text-decoration: none; color: inherit;">
-                        <b>wiserArch.com</b>
+                        <b>wiserarch.com</b>
                     </a>
                 </p>
             </footer>
