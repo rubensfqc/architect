@@ -29,7 +29,7 @@
             <tr class="hover:bg-gray-50 transition-colors">
                 <td class="px-6 py-4 whitespace-nowrap">
                     <a href="{% url 'client_edit' client.pk %}" class="text-sm font-medium text-blue-600 hover:text-blue-800">
-                        {{ client.user.get_full_name|default:client.user.email }}
+                        {{ client.user.name|default:client.user.email }}
                     </a>
                 </td>
 

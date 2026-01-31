@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-31 06:42+0100\n"
+"POT-Creation-Date: 2026-01-31 07:36+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,6 +60,7 @@ msgstr "Resposta do arquiteto (max 280 caracteres)"
 
 #: .\architect_app\templates\architect_app\archClients.html:6
 #: .\architect_app\templates\architect_app\archClients.html:10
+#: .\architect_app\templates\architect_app\client_form.html:5
 msgid "My Clients"
 msgstr "Meus Clientes"
 
@@ -108,6 +109,7 @@ msgid "Personal Information"
 msgstr "Informação pessoal"
 
 #: .\architect_app\templates\architect_app\architect_settings.html:32
+#: .\architect_app\templates\architect_app\client_form.html:45
 #: .\email_app\forms.py:10 .\quotation_app\forms.py:12
 #: .\quotation_app\templates\quotation_app\dashboardArq.html:19
 #: .\seller_app\models.py:19 .\seller_app\seller_app.models.py:19
@@ -119,6 +121,7 @@ msgid "Name"
 msgstr "Nome"
 
 #: .\architect_app\templates\architect_app\architect_settings.html:42
+#: .\architect_app\templates\architect_app\client_form.html:65
 #: .\seller_app\forms.py:14 .\seller_app\forms.py:41 .\seller_app\models.py:20
 #: .\seller_app\seller_app.models.py:20
 #: .\seller_app\templates\seller_app\update_seller.html:76
@@ -176,12 +179,15 @@ msgid "Custom Message"
 msgstr "Mensagem customizada"
 
 #: .\architect_app\templates\architect_app\architect_settings.html:170
+#: .\architect_app\templates\architect_app\client_confirm_delete.html:47
+#: .\architect_app\templates\architect_app\client_form.html:87
 #: .\seller_app\templates\seller_app\add_product.html:25
 #: .\seller_app\templates\seller_app\edit_product.html:25
 msgid "Cancel"
 msgstr "Cancelar"
 
 #: .\architect_app\templates\architect_app\architect_settings.html:174
+#: .\architect_app\templates\architect_app\client_form.html:91
 msgid "Save Changes"
 msgstr "Salvar alterações"
 
@@ -245,6 +251,188 @@ msgstr ""
 #: .\architect_app\templates\architect_app\base_auth.html:7
 msgid "My App"
 msgstr "Meu App"
+
+#: .\architect_app\templates\architect_app\client_confirm_delete.html:5
+msgid "Confirm Delete"
+msgstr "Confirma deletar"
+
+#: .\architect_app\templates\architect_app\client_confirm_delete.html:17
+msgid "Permanently delete client?"
+msgstr "Deletar cliente de forma permanente?"
+
+#: .\architect_app\templates\architect_app\client_confirm_delete.html:21
+#, python-format
+msgid ""
+"\n"
+"                    Are you sure you want to delete <strong>%(name)s</"
+"strong>? \n"
+"                    This action is permanent and cannot be undone.\n"
+"                "
+msgstr ""
+"\n"
+"                    Tem certeza que deseja deletar <strong>%(name)s</"
+"strong>? \n"
+"                    Esta ação nao pode ser desfeita.\n"
+"                "
+
+#: .\architect_app\templates\architect_app\client_confirm_delete.html:30
+msgid "Warning: The following will also be deleted:"
+msgstr "Atenção: Os intens abaixo também serão deletados:"
+
+#: .\architect_app\templates\architect_app\client_confirm_delete.html:33
+#, python-format
+msgid ""
+"\n"
+"                                    All related Contracts (%(count)s)\n"
+"                                "
+msgstr ""
+"\n"
+"                                    Todos os contratos relacionados "
+"(%(count)s)\n"
+"                                "
+
+#: .\architect_app\templates\architect_app\client_confirm_delete.html:37
+msgid "All Projects linked to those contracts"
+msgstr "Todos os Projetos relacionados a estes contratos"
+
+#: .\architect_app\templates\architect_app\client_confirm_delete.html:38
+msgid "Message logs and conversation history"
+msgstr "Histórico de mensagens e logs de aprovação"
+
+#: .\architect_app\templates\architect_app\client_confirm_delete.html:50
+msgid "Yes, Delete Everything"
+msgstr "Sim, deletar tudo"
+
+#: .\architect_app\templates\architect_app\client_dashboard.html:5
+#, fuzzy
+#| msgid "Back to Dashboard"
+msgid "My Projects Dashboard"
+msgstr "Voltar ao portal"
+
+#: .\architect_app\templates\architect_app\client_dashboard.html:14
+msgid "Working with"
+msgstr ""
+
+#: .\architect_app\templates\architect_app\client_dashboard.html:19
+#, fuzzy
+#| msgid "Client Name"
+msgid "Client Portal"
+msgstr "Nome do Cliente"
+
+#: .\architect_app\templates\architect_app\client_dashboard.html:25
+#, fuzzy
+#| msgid "Contracts"
+msgid "Your Contracts"
+msgstr "Contratos"
+
+#: .\architect_app\templates\architect_app\client_dashboard.html:26
+msgid "Track the progress of each contract here."
+msgstr "Acompanhe aqui o andamento de cada contrato."
+
+#: .\architect_app\templates\architect_app\client_dashboard.html:39
+msgid "Schematic Design"
+msgstr "Estudo"
+
+#: .\architect_app\templates\architect_app\client_dashboard.html:40
+msgid "Design Development"
+msgstr "Anteprojeto"
+
+#: .\architect_app\templates\architect_app\client_dashboard.html:41
+msgid "Construction Documents"
+msgstr "Executivo e detalhamento"
+
+#: .\architect_app\templates\architect_app\client_dashboard.html:42
+msgid "Completed (As-Built)"
+msgstr "Finalizado"
+
+#: .\architect_app\templates\architect_app\client_dashboard.html:53
+#, python-format
+msgid ""
+"\n"
+"                    Start: %(start)s\n"
+"                "
+msgstr ""
+"\n"
+"                    Início: %(start)s\n"
+"                "
+
+#: .\architect_app\templates\architect_app\client_dashboard.html:59
+#, python-format
+msgid ""
+"\n"
+"                    %(percentage)s%% completed\n"
+"                "
+msgstr ""
+"\n"
+"                    %(percentage)s%% completo\n"
+"                "
+
+#: .\architect_app\templates\architect_app\client_dashboard.html:67
+msgid "No contracts found for this profile."
+msgstr "Nenhum contrato encontrado para este perfil."
+
+#: .\architect_app\templates\architect_app\client_dashboard.html:73
+msgid "Your Projects"
+msgstr "Seus Projetos"
+
+#: .\architect_app\templates\architect_app\client_dashboard.html:110
+msgid "Contract Reference"
+msgstr "Referência do Contrato"
+
+#: .\architect_app\templates\architect_app\client_dashboard.html:115
+msgid "Finished"
+msgstr "Finalizado"
+
+#: .\architect_app\templates\architect_app\client_dashboard.html:115
+msgid "Expected"
+msgstr "Estimado"
+
+#: .\architect_app\templates\architect_app\client_dashboard.html:127
+msgid "Visualize & Approve Project"
+msgstr "Visualize e Aprove o Projeto"
+
+#: .\architect_app\templates\architect_app\client_dashboard.html:132
+msgid "You currently have no projects listed."
+msgstr "Você não tem projetos listados no momento."
+
+#: .\architect_app\templates\architect_app\client_form.html:14
+#, python-format
+msgid ""
+"\n"
+"                        Edit Client: %(name)s\n"
+"                    "
+msgstr ""
+"\n"
+"                        Edite o cliente: %(name)s\n"
+"                    "
+
+#: .\architect_app\templates\architect_app\client_form.html:18
+msgid "Invite a new Client"
+msgstr "Convide novo cliente"
+
+#: .\architect_app\templates\architect_app\client_form.html:21
+msgid "Update the profile information and contact details."
+msgstr "Atualize seu perfil e contatos."
+
+#: .\architect_app\templates\architect_app\client_form.html:29
+msgid "Back to Client List"
+msgstr "Volta para lista de clientes"
+
+#: .\architect_app\templates\architect_app\client_form.html:52
+msgid "Company Name"
+msgstr "Nome da Empresa"
+
+#: .\architect_app\templates\architect_app\client_form.html:59
+msgid "Contact Email (Linked Account)"
+msgstr "Email de contato"
+
+#: .\architect_app\templates\architect_app\client_form.html:76
+msgid "Delete Client"
+msgstr "Deletar Cliente"
+
+#: .\architect_app\templates\architect_app\client_form.html:81
+msgid "Resend Invitation"
+msgstr "Reenviar email de convite"
 
 #: .\architect_app\views.py:380
 #, python-format
@@ -798,7 +986,7 @@ msgstr "Clique abaixo para customizar seu modelo de cotação:"
 #: .\templates\registration\invite_email.html:3
 #, python-format
 msgid "Hi %(name)s,"
-msgstr "Oi %(name)s"
+msgstr "Oi %(name)s,"
 
 #: .\templates\registration\invite_email.html:5
 #, python-format
@@ -807,7 +995,7 @@ msgid ""
 "Architect %(firm)s has invited you to join their project portal.\n"
 msgstr ""
 "\n"
-"O arquiteto %(firm)s lhe convidou para acessar seu portal de projetos.\n"
+"O escritório %(firm)s lhe convidou para acessar seu portal de projetos.\n"
 
 #: .\templates\registration\invite_email.html:9
 msgid ""
@@ -852,6 +1040,10 @@ msgstr "Esqueci minha senha"
 #: .\templates\registration\login.html:34
 msgid "Back to home page"
 msgstr "De volta a página inicial"
+
+#: .\templates\registration\login3roles.html:5
+msgid "Welcome to the Portal"
+msgstr ""
 
 #: .\templates\registration\password_change_done.html:5
 #: .\templates\registration\password_change_done.html:9

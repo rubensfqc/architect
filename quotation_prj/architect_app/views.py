@@ -335,7 +335,7 @@ def client_invite(request):
     
     if request.method == 'POST':
         email = request.POST.get('email')
-        first_name = request.POST.get('first_name')
+        name = request.POST.get('name')
 
         # Check if a user with this email already exists
         existing_user = User.objects.filter(email=email).first()
@@ -353,7 +353,7 @@ def client_invite(request):
                 email=email,
                 defaults={
                     'username': email,
-                    'first_name': first_name,
+                    'name': name,
                     'role': 'CLIENT',
                     'is_active': True 
                 }
@@ -385,7 +385,7 @@ def client_invite(request):
             send_mail(
                 subject,
                 body,
-                'noreply@yourdomain.com',
+                'noreply@wiserarch.com',
                 [user.email],
                 fail_silently=False,
             )
@@ -466,7 +466,7 @@ def client_reinvite(request, pk):
     send_mail(
         subject,
         body,
-        'noreply@yourdomain.com',
+        'noreply@wiseerarch.com',
         [user.email],
         fail_silently=False,
     )

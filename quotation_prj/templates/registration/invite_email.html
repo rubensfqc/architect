@@ -1,6 +1,6 @@
 {% load i18n %}
 
-{% blocktrans with name=user.first_name %}Hi {{ name }},{% endblocktrans %}
+{% blocktrans with name=user.name %}Hi {{ name }},{% endblocktrans %}
 
 {% blocktrans with firm=architect.firm_name %}
 Architect {{ firm }} has invited you to join their project portal.
