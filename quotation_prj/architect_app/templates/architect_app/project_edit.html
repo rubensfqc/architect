@@ -1,15 +1,16 @@
 {% extends "architect_app/baseArchitect.html" %}
 {% load widget_tweaks %}
+{% load i18n %}
 
-{% block title %}Edit {{ project.name|default:"Project" }}{% endblock %}
+{% block title %}{% trans "Edit Project" %} {{ project.name|default:"Project" }}{% endblock %}
 
 {% block content %}
 <div class="max-w-4xl mx-auto p-6">
     <div class="mb-8">
         <h1 class="text-3xl font-bold text-gray-900">
-            {% if project.pk %}Edit Project: {{ project.name }}{% else %}Create New Project{% endif %}
+            {% if project.pk %}{% trans "Edit Project" %}: {{ project.name }}{% else %}{% trans "Create New Project" %}{% endif %}
         </h1>
-        <p class="text-gray-500">Update the project details and specifications below.</p>
+        <p class="text-gray-500">{% trans "Update the project details and specifications below." %}</p>
     </div>
 
     <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
@@ -53,18 +54,18 @@
 
             <div class="mt-10 pt-6 border-t border-gray-100 flex flex-row-reverse gap-3">
                 <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2.5 px-8 rounded-lg transition shadow-md">
-                    {% if project.pk %}Save Changes{% else %}Create Project{% endif %}
+                    {% if project.pk %}{% trans "Save Changes" %}{% else %}{% trans "Create Project" %}{% endif %}
                 </button>
                 
                 {% if project.pk %}
                     <a href="{% url 'project_detail' project.pk %}" 
                     class="bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium py-2.5 px-8 rounded-lg transition">
-                        Cancel
+                        {% trans "Cancel" %}
                     </a>
                 {% else %}
                     <a href="{% url 'architects_projects' %}" 
                     class="bg-white border border-gray-300 hover:bg-gray-50 text-gray-700 font-medium py-2.5 px-8 rounded-lg transition">
-                        Cancel
+                        {% trans "Cancel" %}
                     </a>
                 {% endif %}
             </div>
