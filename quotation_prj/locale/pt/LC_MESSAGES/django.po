@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-31 07:58+0100\n"
+"POT-Creation-Date: 2026-02-05 15:30+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,23 +20,23 @@ msgstr ""
 
 #: .\architect_app\models.py:55
 msgid "Schematic design"
-msgstr ""
+msgstr "Estudo"
 
 #: .\architect_app\models.py:56
 msgid "Design development"
-msgstr ""
+msgstr "Anteprojeto"
 
 #: .\architect_app\models.py:57
 msgid "Construction documents"
-msgstr ""
+msgstr "Executivo"
 
 #: .\architect_app\models.py:58
 msgid "Closure"
-msgstr ""
+msgstr "Finalizado"
 
 #: .\architect_app\models.py:75
-msgid "Progresso de 0 a 100"
-msgstr ""
+msgid "Progress from 0 to 100"
+msgstr "Progresso de 0 a 100"
 
 #: .\architect_app\models.py:102
 msgid "New"
@@ -470,8 +470,8 @@ msgid ""
 "    "
 msgstr ""
 "\n"
-"        Você tem certeza que deseja deletar o contrato: <strong>\"%(title)s\"</"
-"strong>?\n"
+"        Você tem certeza que deseja deletar o contrato: "
+"<strong>\"%(title)s\"</strong>?\n"
 "    "
 
 #: .\architect_app\templates\architect_app\contract_confirm_delete.html:15
@@ -479,8 +479,8 @@ msgid ""
 "This action cannot be undone and will remove all projects associated to this "
 "contract."
 msgstr ""
-"Esta ação não poderá ser desfeita e irá remover todos os projets associados a este "
-"contrato."
+"Esta ação não poderá ser desfeita e irá remover todos os projets associados "
+"a este contrato."
 
 #: .\architect_app\templates\architect_app\contract_form.html:8
 #: .\architect_app\templates\architect_app\contract_form.html:20

@@ -72,7 +72,7 @@ class Contract(models.Model):
     progress_percentage = models.PositiveIntegerField(
         default=10,
         validators=[MinValueValidator(0), MaxValueValidator(100)],
-        help_text=_("Progresso de 0 a 100")
+        help_text=_("Progress from 0 to 100")
     )
 
     start_date = models.DateField()
