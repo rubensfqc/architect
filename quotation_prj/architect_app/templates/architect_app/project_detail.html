@@ -1,7 +1,8 @@
 {% extends "architect_app/baseArchitect.html" %}
 {% load widget_tweaks %}
+{% load i18n %}
 
-{% block title %}{{ project.name }} | Details{% endblock %}
+{% block title %}{{ project.name }} | {% trans "Details" %}{% endblock %}
 
 {% block content %}
 <div class="max-w-6xl mx-auto p-6">
@@ -25,33 +26,33 @@
                     <img src="{{ project.get_thumbnail }}" class="w-full h-64 object-cover" alt="Project Preview">
                 {% else %}
                     <div class="w-full h-64 bg-gray-100 flex items-center justify-center text-gray-400">
-                        No Image Available
+                        {% trans "No Image Available" %}
                     </div>
                 {% endif %}
                 
                 <div class="p-6">
-                    <h3 class="text-lg font-bold mb-3">Project Description</h3>
+                    <h3 class="text-lg font-bold mb-3">{% trans "Project Description" %}</h3>
                     <p class="text-gray-600 leading-relaxed">{{ project.description }}</p>
                     
                     <div class="mt-6 flex items-center text-sm text-gray-500">
-                        <span class="mr-4"><strong>Completion:</strong> {{ project.expected_completion_date }}</span>
+                        <span class="mr-4"><strong>{% trans "Completion:" %}</strong> {{ project.expected_completion_date }}</span>
                     </div>
                 </div>
             </div>
 
             <div class="bg-gray-50 rounded-xl p-6 border border-gray-200">
-                <h3 class="text-lg font-bold mb-4">Project Actions</h3>
+                <h3 class="text-lg font-bold mb-4">{% trans "Project Actions" %}</h3>
                 <div class="space-y-3">
                     <a href="{% url 'project_edit' project.pk %}" class="block w-full text-center bg-indigo-600 text-white py-2.5 rounded-lg font-medium hover:bg-indigo-700 transition">
-                        Edit Details
+                        {% trans "Edit Details" %}
                     </a>
 
                     <a href="{% url 'project_delete' project.pk %}" class="block w-full text-center text-red-600 py-2.5 rounded-lg font-medium border border-red-100 hover:bg-red-50 transition">
-                        <i class="fas fa-trash-alt mr-2"></i>Delete Project
+                        <i class="fas fa-trash-alt mr-2"></i>{% trans "Delete Project" %}
                     </a>
                     
                     <a href="{% url 'architects_projects' %}" class="block w-full text-center text-gray-500 py-2.5 text-sm">
-                        Back to Projects
+                        {% trans "Back to Projects" %}
                     </a>
                 </div>
             </div>
@@ -60,7 +61,7 @@
         <div class="lg:col-span-1">
             <div class="bg-gray-50 rounded-xl p-6 border border-gray-200 h-full">
                 <h3 class="text-lg font-bold mb-4 flex items-center">
-                    <span class="mr-2">💬</span> Conversation Log
+                    <span class="mr-2">💬</span> {% trans "Conversation Log" %}
                 </h3>
                 
                 <div class="space-y-4 max-h-[500px] overflow-y-auto pr-2">
@@ -74,7 +75,7 @@
                     </div>
                     {% empty %}
                     <div class="text-center py-8">
-                        <p class="text-gray-400 italic">No history yet.</p>
+                        <p class="text-gray-400 italic">{% trans "No history yet." %}</p>
                     </div>
                     {% endfor %}
                 </div>
