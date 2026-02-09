@@ -15,6 +15,7 @@
 </p>
 <div style="border: 1px solid #000; margin-bottom: 20px;">
     {% if document.upload.url %}
+        URL3: {% url 'pdf_proxy' document.id %}
         <iframe
         src="{% static 'pdfjs/web/viewer.html' %}?file={% url 'pdf_proxy' document.id %}"
         width="100%"

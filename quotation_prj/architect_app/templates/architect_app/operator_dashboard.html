@@ -1,0 +1,13 @@
+{% extends "architect_app/baseArchitect.html" %}
+
+{% load i18n %}
+
+{% block content %}
+  <h1>{% trans "Operator Control Room" %}</h1>
+  <table>
+      <tr><th>{% trans "User" %}</th><th>{% trans "Role" %}</th><th>{% trans "Status" %}</th></tr>
+      {% for user in all_users %}
+      <tr><td>{{ user.email }}</td><td>{{ user.role }}</td><td>{% trans "Active" %}</td></tr>
+      {% endfor %}
+  </table>
+{% endblock %}

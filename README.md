@@ -69,6 +69,7 @@ pip install Pillow
 
 ### Create the PDF Generation Page
 Install reportlab for PDF Generation:
+
 ```
 pip install reportlab
 ```
@@ -166,7 +167,7 @@ For the record, superuser created `admin:abc123`
 python manage.py createsuperuser
 ```
 
-### Websire benchmark
+### Website benchmark
 https://www.offri.nl/
 
 ### Built-in Authorization functionalitites

@@ -31,9 +31,9 @@ pdfmetrics.registerFont(TTFont('DejaVuSans', font_path))
 # Register the UTF-8 compatible font
 #pdfmetrics.registerFont(TTFont('DejaVuSans', 'static/fonts/DejaVuSans.ttf'))
 
-def home_view(request):
+def pages_view(request):
     urls = list_all_urls()
-    return render(request, 'quotation_app/home.html', {'urls': urls})
+    return render(request, 'quotation_app/pages.html', {'urls': urls})
 
 def landing_page(request):
     if request.method == 'POST':

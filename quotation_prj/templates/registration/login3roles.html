@@ -1,0 +1,12 @@
+{% extends "architect_app/base_auth.html" %}
+{% load i18n %}
+{% block content %}
+<div class="login-container">
+    <h2>{% trans "Welcome to the Portal" %}</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Login</button>
+    </form>
+</div>
+{% endblock %}

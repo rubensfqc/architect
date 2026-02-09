@@ -12,8 +12,8 @@ class Architect(models.Model):
         on_delete=models.CASCADE,
         related_name='architect_profile'
     )
-    firm_name = models.CharField(max_length=255)
-    license_number = models.CharField(max_length=100, unique=True)
+    firm_name = models.CharField(max_length=255, blank=True)
+    license_number = models.CharField(max_length=100, blank=True)
     phone_number = models.CharField(max_length=20, blank=True)
     logo = models.ImageField(upload_to='architect_logos/', null=True, blank=True)
 
@@ -36,14 +36,26 @@ class ClientProfile(models.Model):
 
     def __str__(self):
         return f"Client: {self.user.email}"
+    
+class Operator(models.Model):
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name='operator_profile'
+    )
+    department = models.CharField(max_length=100)
+    access_level = models.IntegerField(default=1)
+
+    def __str__(self):
+        return f"Operator: {self.user.email}"
 
 class Contract(models.Model):
     # Each contract belongs to ONE architect, only signed contracts before that they are quotes
     class Phases(models.TextChoices):
-        ESTUDO = 'EST', _('Estudo')
-        ANTEPROJETO = 'ANT', _('Anteprojeto')
-        EXECUTIVO = 'EXE', _('Executivo')
-        FINALIZADO = 'FIN', _('Finalizado')
+        ESTUDO = 'EST', _('Schematic design') # Estudo preliminar
+        ANTEPROJETO = 'ANT', _('Design development') # Anteprojeto
+        EXECUTIVO = 'EXE', _('Construction documents') # Executivo
+        FINALIZADO = 'FIN', _('Closure') # Finalizado
 
     architect = models.ForeignKey('Architect', on_delete=models.CASCADE, related_name="contracts")
     client = models.ForeignKey('ClientProfile', on_delete=models.CASCADE, related_name='contracts')
@@ -60,7 +72,7 @@ class Contract(models.Model):
     progress_percentage = models.PositiveIntegerField(
         default=10,
         validators=[MinValueValidator(0), MaxValueValidator(100)],
-        help_text=_("Progresso de 0 a 100")
+        help_text=_("Progress from 0 to 100")
     )
 
     start_date = models.DateField()

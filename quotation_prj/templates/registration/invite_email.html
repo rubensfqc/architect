@@ -1,0 +1,13 @@
+{% load i18n %}
+
+{% blocktrans with name=user.name %}Hi {{ name }},{% endblocktrans %}
+
+{% blocktrans with firm=architect.firm_name %}
+Architect {{ firm }} has invited you to join their project portal.
+{% endblocktrans %}
+
+{% trans "To access your projects, please click the link below to set your account password:" %}
+
+{{ protocol }}://{{ domain }}{% url 'password_reset_confirm' uidb64=uid token=token %}
+
+{% trans "If you did not expect this invitation, you can safely ignore this email." %}

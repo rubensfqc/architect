@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+{% load i18n %}
+
+<head>
+    <title>{% block title %}wiserarch{% endblock %}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+        body {
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #f8fafc;
+            color: #0f172a;
+        }
+        header {
+            padding: 24px 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            /* Ensuring header stays above background if needed */
+            position: relative;
+            z-index: 10;
+        }
+        header a {
+            text-decoration: none;
+            color: #0f172a;
+            margin-left: 20px;
+            font-weight: 500;
+        }
+
+        /* --- Updated Hero Section with Background --- */
+        .hero {
+            position: relative;
+            max-width: 100%;
+            /* Increased top/bottom padding to 180px to show more image verticality */
+            padding: 220px 24px; 
+            text-align: center;
+            
+            /* Lowered opacity from 0.85 to 0.5 to make image more visible */
+            background-image: linear-gradient(rgba(15, 23, 42, 0.5), rgba(15, 23, 42, 0.5)), 
+                            url('https://img1.wsimg.com/isteam/getty/1883285957/:/rs=w:1920,m');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            
+            /* If using a dark overlay, make text white for contrast */
+            color: white; 
+        }
+
+        /* Ensure the paragraph text inside the hero also adapts to the dark background */
+        .hero p {
+            color: #e2e8f0 !important; 
+        }
+        /* --- End Background Changes --- */
+
+        .cta-buttons a {
+            display: inline-block;
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            margin: 0 8px;
+            font-weight: 600;
+        }
+        .btn-primary {
+            background: #2563eb;
+            color: white;
+        }
+        .btn-secondary {
+            border: 1px solid #cbd5f5;
+            color: #2563eb;
+            background: rgba(255, 255, 255, 0.8);
+        }
+        footer {
+            text-align: center;
+            padding: 32px;
+            color: #64748b;
+            font-size: 14px;
+        }
+    </style>
+</head>
+
+<body>
+<header>
+<a href="{% url 'home' %}" class="logo-link" style="display: flex; align-items: center; gap: 8px; text-decoration: none; color: inherit;">
+        <div style="width: 192px; height: 32px; display: flex; align-items: center; justify-content: center;">
+            {% include "website_app/logo.svg" %}
+        </div>
+    </a>
+    <nav>
+        <a href="{% url 'pages' %}">{% trans "Features" %}</a>
+        <a href="{% url 'landing' %}">{% trans "Pricing" %}</a> 
+        <a href="{% url 'login' %}">{% trans "Login" %}</a>
+    </nav>
+</header>
+
+{% block content %}{% endblock %}
+
+<footer>
+ {% blocktrans with year=year|default:2026 name=company_name|default:"wiserarch.com" %}
+        &copy; {{ year }} {{ name }}. All rights reserved.
+    {% endblocktrans %}
+</footer>
+
+</body>
+</html>

@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}ArchFlow{% endblock %}</title>
+    <title>{% block title %}wiserarch{% endblock %}</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>body { font-family: 'Inter', sans-serif; }</style>
@@ -17,7 +17,7 @@
         {% if user.architect_profile.logo %}
             <img src="{{ user.architect_profile.logo.url }}" alt="{{ user.architect_profile.firm_name }}" class="h-12 w-auto mb-2 object-contain">
         {% else %}
-            <div class="text-xl font-bold tracking-tight">Arch<span class="text-blue-500">FLOW</span></div>
+            <div class="text-xl font-bold tracking-tight">wiser<span class="text-blue-500">arch</span></div>
         {% endif %}
 
         <p class="text-xs text-gray-400 mt-2">{{ user.architect_profile.firm_name }}</p>
@@ -34,11 +34,12 @@
         {% if user.architect_profile.logo %}
             <img src="{{ user.architect_profile.logo.url }}" alt="{{ user.architect_profile.firm_name }}" class="h-12 w-auto mb-2 object-contain">
         {% else %}
-            <div class="text-xl font-bold tracking-tight">Arch<span class="text-blue-500">FLOW</span></div>
+            <div class="text-xl font-bold tracking-tight">wiser<span class="text-blue-500">arch</span></div>
         {% endif %}
         
         <p class="text-xl text-gray-400 mt-2">{{ user.architect_profile.firm_name }}</p>
         </div>
+        <div class="p-4 border-t border-gray-800">
         <nav class="space-y-4">
             <a href="{% url 'architects_dashboard' %}" class="block py-2.5 px-4 rounded hover:bg-gray-800 transition text-gray-400">
                 {% trans "Dashboard" %}
@@ -50,35 +51,73 @@
                 {% trans "Clients" %}
             </a>
             <a href="{% url 'architects_contracts' %}" class="block py-2.5 px-4 rounded hover:bg-gray-800 transition text-gray-400">
-                {% trans "Financial" %}
+                {% trans "Contracts" %}
             </a>
-            
-            <a href="{% url 'update_seller' %}" class="block py-2.5 px-4 rounded hover:bg-gray-800 transition text-gray-400">
+            <a href="{% url 'architect_settings' %}" class="block py-2.5 px-4 rounded hover:bg-gray-800 transition text-gray-400">
                 {% trans "Settings" %}
             </a>
-
+</div>
             <div class="p-4 border-t border-gray-800">
+          
             <form action="{% url 'logout' %}" method="post">
                 {% csrf_token %}
-                <button type="submit" class="w-full text-left py-2.5 px-4 rounded text-red-400 hover:bg-red-900/20 transition flex items-center">
-                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <div class="flex justify-center w-full">
+                <button type="submit" class="w-full text-center py-1.5 px-3 text-sm rounded text-red-400 hover:bg-red-900/20 transition flex items-center">
+                    <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
                     </svg>
                     {% trans "Logout" %}
                 </button>
-            </form>
-            <div class="mt-4 text-center">
-                    <p class="text-xs text-gray-500">
-                        Powered by 
-                        <a href="https://www.plat4u.com.br" target="_blank" class="hover:text-blue-400 transition underline decoration-gray-700">
-                            Plat4U
-                        </a>
-                    </p>
                 </div>
+            </form>
+            <footer style="font-size: 0.7rem; opacity: 0.6; text-align: center; margin-top: 20px;">
+                <p>
+                    {% trans "powered by" %} 
+                    <a href="http://www.wiserarch.com" style="text-decoration: none; color: inherit;">
+                        <b>wiserarch.com</b>
+                    </a>
+                </p>
+            </footer>
+            </div>
         </div>
         </nav>
 
     </aside>
+
+    {% if messages %}
+    <div class="fixed top-5 right-5 z-50 space-y-4">
+        {% for message in messages %}
+        <div id="toast-{{ forloop.counter }}" 
+            class="flex items-center w-full max-w-xs p-4 text-gray-500 bg-white rounded-lg shadow-xl border-l-4 
+                    {% if message.tags == 'success' %}border-green-500 text-green-800{% else %}border-blue-500 text-blue-800{% endif %}" 
+            role="alert">
+            <div class="inline-flex items-center justify-center flex-shrink-0 w-8 h-8 rounded-lg">
+                {% if message.tags == 'success' %}
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                {% else %}
+                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+                {% endif %}
+            </div>
+            <div class="ml-3 text-sm font-normal">{{ message }}</div>
+            <button type="button" onclick="this.parentElement.remove()" class="ml-auto -mx-1.5 -my-1.5 bg-white text-gray-400 hover:text-gray-900 rounded-lg p-1.5 inline-flex h-8 w-8">
+                <span class="sr-only">Close</span>
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path></svg>
+            </button>
+        </div>
+
+        <script>
+            setTimeout(() => {
+                let toast = document.getElementById('toast-{{ forloop.counter }}');
+                if (toast) {
+                    toast.style.transition = "opacity 0.5s ease";
+                    toast.style.opacity = "0";
+                    setTimeout(() => toast.remove(), 500);
+                }
+            }, 5000); // Hide after 5 seconds
+        </script>
+        {% endfor %}
+    </div>
+    {% endif %}
 
     <main class="flex-1 p-4 md:p-8">
         {% block content %}{% endblock %}

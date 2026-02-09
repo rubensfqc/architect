@@ -5,9 +5,32 @@ urlpatterns = [
     path('dashboard/', views.architect_dashboard, name='architects_dashboard'),
     path('projects/', views.project_list, name='architects_projects'),
     path('clients/', views.client_list, name='architects_clients'),
+    path('clients/<int:pk>/edit/', views.client_edit, name='client_edit'),
+    path('clients/<int:pk>/delete/', views.client_delete, name='client_delete'),
+    path('clients/<int:pk>/reinvite/', views.client_reinvite, name='client_reinvite'),
     path('contracts/', views.contract_list, name='architects_contracts'),
-    path('client/dashboard/', views.client_dashboard, name='client_dashboard'),
+    #path('client/dashboard/', views.client_dashboard, name='client_dashboard'),
     path('contracts/add/', views.contract_upsert, name='contract_add'),
     path('contracts/edit/<int:pk>/', views.contract_upsert, name='contract_edit'),
     path('contracts/delete/<int:pk>/', views.contract_delete, name='contract_delete'),
+
+    path('project/<int:pk>/', views.ProjectDetailView.as_view(), name='project_detail'),
+    path('project/edit/<int:pk>/', views.project_upsert, name='project_edit'),
+    path('projects/add/', views.project_upsert, name='project_add'),
+    path('projects/delete/<int:pk>/', views.ProjectDeleteView.as_view(), name='project_delete'),
+
+    path('clients/invite/', views.client_invite, name='client_invite'),
+
+    path('settings/', views.architect_settings, name='architect_settings'),
+
+    # The "Traffic Controller" - where users go right after login
+    path('dashboard3roles/', views.dashboard_redirect, name='dashboard_redirect'),
+
+    # Registration Routes
+    path('signup/', views.signup_view, name='rolebased_signup'),
+
+    # Role-Specific Dashboards
+    path('portal/architect/', views.architect_dashboard, name='architect_dashboard'),
+    path('portal/client/', views.client_dashboard, name='client_dashboard'),
+    path('portal/operator/', views.operator_dashboard, name='operator_dashboard'),
 ]

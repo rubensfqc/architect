@@ -1,5 +1,8 @@
 {% extends "architect_app/baseClient.html" %}
-{% block title %}My Projects Dashboard{% endblock %}
+
+{% load i18n %}
+
+{% block title %}{% trans "My Projects Dashboard" %}{% endblock %}
 
 {% block content %}
 <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8">
@@ -8,19 +11,19 @@
             Welcome, {{ client.user.get_full_name|default:client.user.email }}
         </h1>
         <p class="text-sm text-gray-500">
-            Working with <strong>{{ architect.firm_name }}</strong>
+            {% trans "Working with" %} <strong>{{ architect.firm_name }}</strong>
         </p>
     </div>
     <div class="mt-4 md:mt-0">
         <span class="px-3 py-1 rounded-full bg-blue-100 text-blue-700 text-xs font-semibold uppercase">
-            Client Portal
+            {% trans "Client Portal" %}
         </span>
     </div>
 </div>
 
 <section class="mb-12">
-    <h2 class="text-xl font-semibold mb-2">Seus Contratos</h2>
-    <p class="text-gray-500 mb-6 text-sm">Acompanhe aqui a evolução de cada contrato.</p>
+    <h2 class="text-xl font-semibold mb-2">{% trans "Your Contracts" %}</h2>
+    <p class="text-gray-500 mb-6 text-sm">{% trans "Track the progress of each contract here." %}</p>
 
     {% for contract in contracts %}
     <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 mb-6">
@@ -33,10 +36,10 @@
         </div>
 
         <div class="flex justify-between text-[10px] font-medium text-gray-400 mb-2 uppercase tracking-widest">
-            <span class="{% if contract.phase == 'EST' %}text-blue-600 font-bold{% endif %}">Estudo</span>
-            <span class="{% if contract.phase == 'ANT' %}text-blue-600 font-bold{% endif %}">Anteprojeto</span>
-            <span class="{% if contract.phase == 'EXE' %}text-blue-600 font-bold{% endif %}">Executivo</span>
-            <span class="{% if contract.phase == 'FIN' %}text-green-600 font-bold{% endif %}">Finalizado</span>
+            <span class="{% if contract.phase == 'EST' %}text-blue-600 font-bold{% endif %}">{% trans "Schematic Design" %}</span>
+            <span class="{% if contract.phase == 'ANT' %}text-blue-600 font-bold{% endif %}">{% trans "Design Development" %}</span>
+            <span class="{% if contract.phase == 'EXE' %}text-blue-600 font-bold{% endif %}">{% trans "Construction Documents" %}</span>
+            <span class="{% if contract.phase == 'FIN' %}text-green-600 font-bold{% endif %}">{% trans "Completed (As-Built)" %}</span>
         </div>
         
         <div class="w-full bg-gray-100 h-2 rounded-full overflow-hidden">
@@ -46,19 +49,28 @@
         </div>
 
         <div class="mt-2 flex justify-between items-center">
-            <span class="text-[10px] text-gray-400">Início: {{ contract.start_date|date:"d/m/Y" }}</span>
-            <span class="text-xs font-semibold text-blue-600">{{ contract.progress_percentage }}% concluído</span>
+            <span class="text-[10px] text-gray-400">
+                {% blocktrans with start=contract.start_date|date:"SHORT_DATE_FORMAT" %}
+                    Start: {{ start }}
+                {% endblocktrans %}
+            </span>
+
+            <span class="text-xs font-semibold text-blue-600">
+                {% blocktrans with percentage=contract.progress_percentage %}
+                    {{ percentage }}% completed
+                {% endblocktrans %}
+            </span>
         </div>
     </div>
     {% empty %}
     <div class="bg-white p-8 rounded-2xl border border-dashed border-gray-200 text-center">
-        <p class="text-gray-500 italic">Nenhum contrato encontrado para este perfil.</p>
+        <p class="text-gray-500 italic">{% trans "No contracts found for this profile." %}</p>
     </div>
     {% endfor %}
 </section>
 
 </h1>
-<h2 class="text-xl mb-4 text-gray-700">Your Projects</h2>
+<h2 class="text-xl mb-4 text-gray-700">{% trans "Your Projects" %}</h2>
 
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
     {% for project in projects %}
@@ -95,12 +107,12 @@
 
             <div class="space-y-2 mb-5">
                 <div class="flex justify-between text-xs">
-                    <span class="text-gray-400 uppercase font-medium tracking-tight">Contract Reference</span>
+                    <span class="text-gray-400 uppercase font-medium tracking-tight">{% trans "Contract Reference" %}</span>
                     <span class="text-gray-700 font-semibold">{{ project.contract.title|truncatechars:20 }}</span>
                 </div>
                 <div class="flex justify-between text-xs">
                     <span class="text-gray-400 uppercase font-medium tracking-tight">
-                        {% if project.completion_date %} Finished {% else %} Expected {% endif %}
+                        {% if project.completion_date %} {% trans "Finished" %} {% else %} {% trans "Expected" %} {% endif %}
                     </span>
                     <span class="text-gray-700 font-semibold">
                         {% if project.completion_date %}
@@ -112,12 +124,12 @@
                 </div>
             </div>
    
-            <div class="inline-block w-full text-center bg-black text-white py-3 rounded-xl font-medium text-sm hover:bg-gray-800 transition-all active:scale-[0.98]">Visualizar e Aprovar</div>
+            <div class="inline-block w-full text-center bg-black text-white py-3 rounded-xl font-medium text-sm hover:bg-gray-800 transition-all active:scale-[0.98]">{% trans "Visualize & Approve Project" %}</div>
         </div>
         
     </div>
     {% empty %}
-    <p class="text-gray-500">You currently have no projects listed.</p>
+    <p class="text-gray-500">{% trans "You currently have no projects listed." %}</p>
     {% endfor %}
 </div>
 {% endblock %}

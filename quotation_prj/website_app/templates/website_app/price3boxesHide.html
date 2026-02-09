@@ -1,0 +1,93 @@
+{% load i18n %}
+
+<section class="bg-white py-24">
+    <div class="max-w-7xl mx-auto px-6">
+
+        <!-- Section Header -->
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-4xl font-extrabold mb-4">
+                {% trans "Simple, transparent pricing" %}
+            </h2>
+            <p class="text-slate-600 text-lg max-w-2xl mx-auto">
+                {% trans "Choose the plan that fits your stage. Upgrade or cancel anytime." %}
+            </p>
+        </div>
+
+        <!-- Pricing Cards -->
+        <div class="grid gap-8 md:grid-cols-3">
+
+            <!-- Starter Plan -->
+            <div class="rounded-2xl border border-slate-200 p-8 shadow-sm">
+                <h3 class="text-xl font-semibold mb-2">{% trans "4 months" %}</h3>
+                <p class="text-slate-600 mb-6">{% trans "For individuals getting started" %}</p>
+
+                <div class="mb-6">
+                    <span class="text-4xl font-extrabold">R$**,**</span>
+                    <span class="text-slate-500">{% trans "4 month" %}</span>
+                </div>
+
+                <ul class="space-y-3 mb-8 text-slate-600">
+                    <li>{% trans "✓ Up to 10 contracts" %}</li>
+                    <li>{% trans "✓ Basic analytics" %}</li>
+                    <li>{% trans "✓ Email support" %}</li>
+                </ul>
+
+                <a href="#"
+                   class="block text-center rounded-lg border border-slate-300 py-3 font-semibold text-blue-600 hover:bg-slate-100 transition">
+                    {% trans "Get Started" %}
+                </a>
+            </div>
+
+            <!-- Pro Plan (Highlighted) -->
+            <div class="rounded-2xl border-2 border-slate-200 p-8 shadow-sm">
+                <h3 class="text-xl font-semibold mb-2">{% trans "8 months" %}</h3>
+                <p class="text-slate-600 mb-6">{% trans "For growing offices" %}</p>
+
+                <div class="mb-6">
+                    <span class="text-4xl font-extrabold">R$**,**</span>
+                    <span class="text-slate-500">/month</span>
+                </div>
+
+                <ul class="space-y-3 mb-8 text-slate-600">
+                    <li>{% trans "✓ All from previous plan" %}</li>
+                    <li>{% trans "✓ Unlimited projects" %}</li>
+                    <li>{% trans "✓ Advanced analytics" %}</li>
+                    <li>{% trans "✓ Priority support" %}</li>
+                    <li>{% trans "✓ Contractor portal" %}</li>
+                </ul>
+
+                <a href="#"
+                   class="block text-center rounded-lg bg-blue-600 py-3 font-semibold text-white hover:bg-blue-700 transition">
+                    {% trans "15 days free trial" %}
+                </a>
+            </div>
+
+            <!-- Enterprise Plan -->
+            <div class="rounded-2xl border  border-blue-600 p-8 shadow-lg relative">
+                <span class="absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-600 text-white text-sm font-semibold px-4 py-1 rounded-full">
+                    {% trans "Most Popular" %}
+                </span>
+
+                <h3 class="text-xl font-semibold mb-2">{% trans "Annual" %}</h3>
+                <p class="text-slate-600 mb-6">{% trans "For large ambitions" %}</p>
+
+                <div class="mb-6">
+                    <span class="text-4xl font-extrabold">R$**,**</span>
+                </div>
+
+                <ul class="space-y-3 mb-8 text-slate-600">
+                    <li>{% trans "✓ All from previous plans" %}</li>
+                    <li>{% trans "✓ Dedicated account manager" %}</li>
+                    <li>{% trans "✓ Custom integrations" %}</li>
+                    <li>{% trans "✓ SLA & security reviews" %}</li>
+                </ul>
+
+                <a href="#"
+                   class="block text-center rounded-lg border border-slate-300 py-3 font-semibold text-blue-600 hover:bg-slate-100 transition">
+                    {% trans "Contact Sales" %}
+                </a>
+            </div>
+
+        </div>
+    </div>
+</section>
