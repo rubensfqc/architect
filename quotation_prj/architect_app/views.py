@@ -272,10 +272,17 @@ class RoleRequiredMixin(UserPassesTestMixin):
         return self.request.user.role in self.allowed_roles
 
 class ProjectDetailView(LoginRequiredMixin, RoleRequiredMixin, DetailView):
-    allowed_roles = ['ARCHITECT', 'OPERATOR']
+    allowed_roles = ['ARCHITECT', 'OPERATOR', 'CLIENT']
     model = Project
     template_name = 'architect_app/project_detail.html'
     context_object_name = 'project'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        # Fetch all documents related to this project
+        print("Fetching documents for project:", self.object.id)
+        context['documents'] = self.object.project_documents.all()
+        return context
 
 class ProjectUpdateView(LoginRequiredMixin, RoleRequiredMixin, UpdateView):
     allowed_roles = ['ARCHITECT', 'OPERATOR']

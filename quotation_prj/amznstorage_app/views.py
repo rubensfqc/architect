@@ -1,16 +1,13 @@
 # amznstorage_app/views.py
 from django.shortcuts import render, redirect, get_object_or_404
-from .models import Document
+from .models import DocProject, Document
 from django import forms
 import boto3
 from django.conf import settings
 from django.http import StreamingHttpResponse, Http404
+from architect_app.models import Project
+from .forms import DocumentForm, DocProjectForm 
 
-# Simple form for file upload
-class DocumentForm(forms.ModelForm):
-    class Meta:
-        model = Document
-        fields = ['title', 'upload', 'image']
 
 def upload_document(request):
     if request.method == 'POST':
@@ -27,18 +24,20 @@ def upload_document(request):
 
 def document_list(request):
     documents = Document.objects.all()
-    return render(request, 'amznstorage_app/document_list.html', {'documents': documents})
+    docProjects = DocProject.objects.all()
+    return render(request, 'amznstorage_app/document_list.html', {'documents': documents, 'docProjects':docProjects})
 
 def document_detail(request, pk):
     document = get_object_or_404(Document, pk=pk)
     return render(request, 'amznstorage_app/document_detail.html', {'document': document})
 
-
 def pdf_proxy(request, document_id):
     try:
-        document = Document.objects.get(pk=document_id)
-    except Document.DoesNotExist:
-        raise Http404("Document not found")
+        # CRITICAL: Must use the NEW model name here
+        document = DocProject.objects.get(pk=document_id)
+    except DocProject.DoesNotExist:
+        # This is where your 404 is likely coming from
+        raise Http404("Document record not found in database")
 
     s3 = boto3.client(
         "s3",
@@ -48,17 +47,41 @@ def pdf_proxy(request, document_id):
     )
 
     bucket = settings.AWS_STORAGE_BUCKET_NAME
-    key = document.upload.name  # IMPORTANT: S3 key, not URL
+    
+    # This must match the 'upload' field in your DocProject model
+    # It sends the relative path (e.g., 'projects/2024/05/file.pdf') to S3
+    key = document.upload.name 
 
-    obj = s3.get_object(Bucket=bucket, Key=key)
+    try:
+        obj = s3.get_object(Bucket=bucket, Key=key)
+    except s3.exceptions.NoSuchKey:
+        raise Http404("File found in database, but missing in S3 bucket")
 
     response = StreamingHttpResponse(
         obj["Body"].iter_chunks(chunk_size=8192),
         content_type="application/pdf",
     )
-
-    # Change "inline" to "attachment" if you want to force download, 
-    # or keep "inline" to let the browser 'download' attribute handle it.
+    
+    # Helps the browser handle the filename correctly
     response["Content-Disposition"] = f'inline; filename="{document.title}.pdf"'
-    response["Accept-Ranges"] = "bytes"
     return response
+
+# New views to handle project-specific document uploads
+def upload_project_document(request, project_id):
+    project = get_object_or_404(Project, pk=project_id)
+    
+    if request.method == 'POST':
+        form = DocumentForm(request.POST, request.FILES)
+        if form.is_valid():
+            doc = form.save(commit=False)
+            doc.project = project  # Assign the project automatically
+            doc.save()
+            # Redirect back to the project detail page
+            return redirect('project_detail', pk=project.id)
+    else:
+        form = DocumentForm()
+        
+    return render(request, 'architect_app/project_upload.html', {
+        'form': form, 
+        'project': project
+    })

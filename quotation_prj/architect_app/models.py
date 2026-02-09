@@ -149,4 +149,14 @@ class Project(models.Model):
             return self.thumbnail_file.url
         return self.thumbnail_url
     
+    @property
+    def recent_documents(self):
+        """Returns the 5 most recently uploaded documents for this project."""
+        return self.project_documents.order_by('-uploaded_at')[:5]
+
+    @property
+    def has_documents(self):
+        """Returns True if the project has any associated files."""
+        return self.project_documents.exists()
+    
 

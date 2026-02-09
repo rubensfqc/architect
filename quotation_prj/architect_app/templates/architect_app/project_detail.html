@@ -83,4 +83,62 @@
         </div>
     </div>
 </div>
+
+NOVA PARTE:
+
+<div class="project-documents-section">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h3>Project Documents</h3>
+        {% if request.user.role == 'ARCHITECT' or request.user.role == 'OPERATOR' %}
+            <a href="{% url 'upload_project_document' project.id %}" class="btn btn-primary btn-sm">
+                + Upload New File
+            </a>
+        {% endif %}
+    </div>
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>File Name</th>
+                <th>Type</th>
+                <th>Uploaded At</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for doc in documents %}
+                <tr>
+                    <td>{{ doc.title }}</td>
+                    <td>
+                        {% if doc.image %}
+                            <span class="badge bg-info">Image</span>
+                        {% else %}
+                            <span class="badge bg-secondary">Document</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ doc.uploaded_at|date:"M d, Y" }}</td>
+                    <td>
+                        {% if doc.upload.name|lower|slice:"-3:" == "pdf" %}
+                            <a href="{% url 'pdf_proxy' doc.id %}" class="btn btn-outline-dark btn-sm" target="_blank">
+                                View PDF
+                            </a>
+                        {% elif doc.image %}
+                            <a href="{{ doc.image.url }}" class="btn btn-outline-info btn-sm" target="_blank">
+                                View Image
+                            </a>
+                        {% endif %}
+                        
+                        <a href="{{ doc.upload.url }}" class="btn btn-light btn-sm" download>
+                            Download Original
+                        </a>
+                    </td>
+                </tr>
+            {% empty %}
+                <tr>
+                    <td colspan="4" class="text-center text-muted">No documents uploaded yet.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
 {% endblock %}
