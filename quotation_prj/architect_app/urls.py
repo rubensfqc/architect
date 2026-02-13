@@ -18,6 +18,7 @@ urlpatterns = [
     path('project/edit/<int:pk>/', views.project_upsert, name='project_edit'),
     path('projects/add/', views.project_upsert, name='project_add'),
     path('projects/delete/<int:pk>/', views.ProjectDeleteView.as_view(), name='project_delete'),
+    path('projects/document/<int:pk>/', views.project_document_detail, name='project_document_detail'),
 
     path('clients/invite/', views.client_invite, name='client_invite'),
 

@@ -18,7 +18,7 @@ class Architect(models.Model):
     logo = models.ImageField(upload_to='architect_logos/', null=True, blank=True)
 
     def __str__(self):
-        return f"{self.user.email} - {self.firm_name}"
+        return f"{self.user.email}"
 
 class ClientProfile(models.Model):
     user = models.OneToOneField(
